@@ -15,19 +15,28 @@
             @if (Route::has('login'))
                 <div class="d-flex justify-content-end">
                     @auth
-                        <a class="btn btn-light m-1" href="{{ url('/home') }}">Home</a>
+                        <a class="btn-main" href="{{ url('/home') }}"><img src="">Home</a>
                     @else
-                        <a class="btn btn-light m-1" href="{{ route('login') }}">Login</a>
+                        <a class="btn-main" href="{{ route('login') }}">Login</a>
 
                         @if (Route::has('register'))
-                            <a class="btn btn-light m-1" href="{{ route('register') }}">Register</a>
+                <a class="btn-main" href="{{ route('register') }}">
+                    <div>
+                        <div>
+                            <img src="{{asset('./icons/register.svg')}}">
+                        </div>
+                        <div>
+                            <span>Register</span>
+                        </div>
+                    </div>
+                </a>
                         @endif
                     @endauth
                 </div>
             @endif
 
             <div class="content">
-                
+
             </div>
         </div>
     </body>
