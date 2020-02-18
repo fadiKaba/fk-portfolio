@@ -10901,12 +10901,12 @@ a.text-dark:focus {
   display: grid;
   grid-template-columns: 1fr 3fr;
   justify-items: center;
-  margin: 2px;
 }
 
 .btn-main div div:nth-child(1) {
   background-color: purple;
   display: flex;
+  padding: 5px;
 }
 
 .btn-main div div:nth-child(1) img {
@@ -10917,6 +10917,7 @@ a.text-dark:focus {
 .btn-main div div:nth-child(2) {
   background-color: red;
   display: flex;
+  padding: 5px;
 }
 
 @-webkit-keyframes btnBorder {
