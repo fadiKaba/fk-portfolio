@@ -9,27 +9,20 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
+        <!-- script -->
+        <script src="{{ asset('js/app.js') }}" defer></script> 
+
     </head>
     <body class="welcome-body">
-        <div class="">
+        <div class="" id="app">
             @if (Route::has('login'))
                 <div class="d-flex justify-content-end">
                     @auth
                         <a class="btn-main" href="{{ url('/home') }}"><img src="">Home</a>
                     @else
-                        <a class="btn-main" href="{{ route('login') }}">Login</a>
-
+                        <Mainbtn :btn-name="same('Login')" :icon-path="same('{{asset('./icons/login.svg')}}')" :btn-path="same('{{ route('login') }}')"></Mainbtn>
                         @if (Route::has('register'))
-                <a class="btn-main" href="{{ route('register') }}">
-                    <div>
-                        <div>
-                            <img src="{{asset('./icons/register.svg')}}">
-                        </div>
-                        <div>
-                            <span>Register</span>
-                        </div>
-                    </div>
-                </a>
+                        <Mainbtn :btn-name="same('Register')" :icon-path="same('{{asset('./icons/register.svg')}}')" :btn-path="same('{{route('register')}}')"></Mainbtn>
                         @endif
                     @endauth
                 </div>
