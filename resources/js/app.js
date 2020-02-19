@@ -27,11 +27,12 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 import Mainlink from "./components/Mainlink";
-import Cyrcle from "./components/Cyrcle"
+import Cyrcle from "./components/Cyrcle";
+import Foot from "./components/Foot";
 
 const app = new Vue({
     el: '#app',
-    components:{Mainlink,Cyrcle},
+    components:{Mainlink,Cyrcle,Foot},
     methods:{
         same: function(input){
             return input

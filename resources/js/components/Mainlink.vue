@@ -29,6 +29,7 @@ export default {
     margin: 5px 10px;
     padding: 2px;
     text-decoration: none;
+    display: inline-block;
     div{
         border-radius: 20px;
         background-color: #fff;
