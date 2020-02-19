@@ -20,16 +20,16 @@
                     @auth
                         <a class="btn-main" href="{{ url('/home') }}"><img src="">Home</a>
                     @else
-                        <Mainbtn :btn-name="same('Login')" :icon-path="same('{{asset('./icons/login.svg')}}')" :btn-path="same('{{ route('login') }}')"></Mainbtn>
+                        <Mainlink :btn-name="same('Login')" :icon-path="same('{{asset('./icons/login.svg')}}')" :btn-path="same('{{ route('login') }}')"></Mainlink>
                         @if (Route::has('register'))
-                        <Mainbtn :btn-name="same('Register')" :icon-path="same('{{asset('./icons/register.svg')}}')" :btn-path="same('{{route('register')}}')"></Mainbtn>
+                        <Mainlink :btn-name="same('Register')" :icon-path="same('{{asset('./icons/register.svg')}}')" :btn-path="same('{{route('register')}}')"></Mainlink>
                         @endif
                     @endauth
                 </div>
             @endif
 
             <div class="content">
-
+                 <Cyrcle :cyrcle-name="same('Start')" :cyrcle-path="same('google')"></Cyrcle>
             </div>
         </div>
     </body>

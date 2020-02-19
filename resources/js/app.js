@@ -26,11 +26,12 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-import Mainbtn from "./components/Mainbtn";
+import Mainlink from "./components/Mainlink";
+import Cyrcle from "./components/Cyrcle"
 
 const app = new Vue({
     el: '#app',
-    components:{Mainbtn,},
+    components:{Mainlink,Cyrcle},
     methods:{
         same: function(input){
             return input

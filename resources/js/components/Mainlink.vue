@@ -12,7 +12,7 @@
 </template>
 <script>
 export default {
-    name:"Mainbtn",
+    name:"Mainlink",
     props:['iconPath','btnPath', 'btnName'],
     data: function(){
         return{
@@ -28,12 +28,14 @@ export default {
     border-radius: 20px;
     margin: 5px 10px;
     padding: 2px;
+    text-decoration: none;
     div{
         border-radius: 20px;
         background-color: #fff;
         display: grid;
         grid-template-columns: 1fr 3fr;
         justify-items: center;
+        transition: 0.2s;
         div:nth-child(1){
             background-color: #72d484;
             display: flex;
@@ -49,17 +51,19 @@ export default {
             font-weight: 700;
             display: flex;
             padding: 5px;
+            transition: 0.2s;
         }
     }
     &:hover{
         div{
-
+            background-color:#72d484;
             div:nth-child(1){
-                animation: grow 2s ease-in-out;
+                
                 
             }
             div:nth-child(2){
-                animation: shrink 2s ease-in-out;
+                background-color:#72d484;
+                color: #fff;
             }
         }
     }
