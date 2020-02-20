@@ -11,10 +11,10 @@ window.Vue = require('vue');
 
 
 
-
+import Foot from './components/Foot';
 const ad = new Vue({
-    el: '#app',
-    components:{},
+    el: '#adm',
+    components:{Foot},
     methods:{
         same: function(input){
             return input

@@ -20,7 +20,7 @@ Auth::routes();
 Route::group(['middleware' => ['admin']], function(){
 
     Route::get('/admin', 'AdminsController@index')->name('admin');
-
+    Route::resource('/adminusers','AdminusersController');
 });
 
 
