@@ -71,7 +71,13 @@ class AdminusersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|min:3',
+            'email' => 'required|email',
+            'role' => 'require|integer'
+        ]);
+
+       return $request;
     }
 
     /**

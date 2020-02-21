@@ -1,5 +1,20 @@
 @import '~bootstrap/scss/bootstrap';
 
-body{
-    background-color: #72d484;
+
+$color1:#72d484;
+$color2: #fff;
+
+@import 'users';
+
+
+.main-nav{
+    background-color:$color1;
+    ul{
+        li{
+            a{
+                color: $color2;
+            }
+        }
+    }
 }
+

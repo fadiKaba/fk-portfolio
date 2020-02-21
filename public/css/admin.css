@@ -10884,7 +10884,24 @@ a.text-dark:focus {
   }
 }
 
-body {
+.secondary-navbar {
   background-color: #72d484;
+}
+
+.secondary-navbar a {
+  color: #fff;
+}
+
+table thead th {
+  background-color: #72d484;
+  color: #fff;
+}
+
+.main-nav {
+  background-color: #72d484;
+}
+
+.main-nav ul li a {
+  color: #fff;
 }
 

@@ -1,9 +1,3 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
 require('./bootstrap');
 
 window.Vue = require('vue');
@@ -12,9 +6,11 @@ window.Vue = require('vue');
 
 
 import Foot from './components/Foot';
+import Edituserform from './components/Edituserform';
+
 const ad = new Vue({
     el: '#adm',
-    components:{Foot},
+    components:{Foot, Edituserform},
     methods:{
         same: function(input){
             return input
