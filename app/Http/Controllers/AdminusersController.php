@@ -74,10 +74,15 @@ class AdminusersController extends Controller
         $request->validate([
             'name' => 'required|min:3',
             'email' => 'required|email',
-            'role' => 'require|integer'
+            'role' => 'required|integer'
         ]);
-
-       return $request;
+       
+       $user = User::findOrfail($id);
+       $user->name = $request->name;
+       $user->email = $request->email;
+       $user->is_admin = $request->role;
+       $user->save();
+       return $user;
     }
 
     /**
@@ -88,6 +93,6 @@ class AdminusersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return  "rrrrrrrrrrrrrrrrrr";
     }
 }

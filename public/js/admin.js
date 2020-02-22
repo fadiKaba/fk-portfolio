@@ -1965,14 +1965,28 @@ var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
       }
     },
     saveEdit: function saveEdit() {
-      var vm = this;
-      axios.put('adminusers/' + this.userId, {//name: this.uName ,                             
-      }).then(function (response) {
-        vm.success = vm.uName + 'contact is saved';
-      })["catch"](function (error) {
-        var err = error.response.data.errors;
-        vm.errors = err;
-      });
+      var sure = confirm('Are you sur you want to update ' + this.uName);
+
+      if (sure) {
+        var vm = this;
+        axios.put('adminusers/' + this.userId, {
+          id: this.userId,
+          name: this.uName,
+          email: this.uEmail,
+          role: this.uRole
+        }).then(function (response) {
+          vm.success = response.data.name + '\'s contact is saved';
+          console.log(response);
+        })["catch"](function (error) {
+          var err = error.response.data.errors;
+          vm.errors = err;
+        });
+      }
+    },
+    ref: function ref() {
+      if (this.success != '') {
+        location.reload();
+      }
     }
   }
 });
@@ -38137,8 +38151,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("option", { attrs: { value: "1" } }, [_vm._v("Admin")])
               ]
-            ),
-            _vm._v(_vm._s(_vm.uRole) + "\r\n            ")
+            )
           ])
         ])
       ]),
@@ -38148,7 +38161,12 @@ var render = function() {
           "button",
           {
             staticClass: "btn btn-secondary",
-            attrs: { type: "button", "data-dismiss": "modal" }
+            attrs: { type: "button", "data-dismiss": "modal" },
+            on: {
+              click: function($event) {
+                return _vm.ref()
+              }
+            }
           },
           [_vm._v("Close")]
         ),

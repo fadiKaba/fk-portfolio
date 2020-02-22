@@ -28,6 +28,8 @@
                         <th>Email</th>
                         <th>Role</th>
                         <th>Option</th>
+                        <th></th>
+                        <th></th>
                     </tr>
                 </thead>        
                 @foreach($users as $user)
@@ -54,39 +56,67 @@
                                     Edit
                               </button>
                               <a class="dropdown-item" href="#">Another action</a>
-                              <a class="dropdown-item" href="#">Something else here</a>
+                              <button type="button" class="btn btn-danger dropdown-item" data-toggle="modal" data-target="#del{{$user->id}}">
+                                Delete user
+                              </button>
                             </div>
                         </div>
                         <!-- end dropdown -->
                     </td>
-                </tr>
-                <!-- Modal -->
-                <div class="modal fade" id="usmo{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
+                    <!-- Modal Edit -->
+                  <td>
+                    <div class="modal fade" id="usmo{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalCenterTitle">{{$user->name}}</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                          </button>
+                          </div>
+                          <Edituserform 
+                              :user-id="same('{{$user->id}}')"
+                              :user-name="same('{{$user->name}}')" 
+                              :user-email="same('{{$user->email}}')" 
+                              :user-role="
+                              @if($user->is_admin == 1) 
+                              same('Admin')
+                              @else
+                              same('Subscriber')
+                              @endif">
+                          </Edituserform>
+                      </div>
+                      </div>
+                  </div>
+                  <!-- end Modal -->
+                </td>                             
+                 <td>
+                   <!-- Modal Delete-->
+                  <div class="modal fade" id="del{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
                         <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalCenterTitle">{{$user->name}}</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
-                        </button>
+                          </button>
                         </div>
-                        <Edituserform 
-                            :user-id="same('{{$user->id}}')"
-                            :user-name="same('{{$user->name}}')" 
-                            :user-email="same('{{$user->email}}')" 
-                            :user-role="
-                            @if($user->is_admin == 1) 
-                            same('Admin')
-                            @else
-                            same('Subscriber')
-                            @endif">
-                        </Edituserform>
+                        <div class="modal-body text-danger">
+                        Are you sure to delete <span class="text-dark">{{$user->name}}, Email: {{$user->email}}</span> permanently? 
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <form action="{{route('adminusers.destroy',$user->id)}}" method="DELETE">
+                            <button type="submit" class="btn btn-danger">Delete</button>                          
+                          </form>                      
+                        </div>
+                      </div>
                     </div>
-                    </div>
-                </div>
-                <!-- end Modal -->   
-               @endforeach
-            </table>
+                  </div>
+                </td>
+                <!-- end modal -->
+                </tr>            
+               @endforeach             
+            </table>                    
         </div>
           <!-- end tab 1 -->
         <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">...</div>

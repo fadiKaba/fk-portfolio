@@ -17,12 +17,12 @@
                     <!-- <option disable :value="findRole(userRole)">{{userRole}}</option> -->
                     <option value="0">Subscriber</option>
                     <option value="1">Admin</option>
-                </select>{{uRole}}
+                </select>
             </div>
         </form>
     </div> 
     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button @click="ref()" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button @click="saveEdit()" type="button" class="btn btn-primary">Save changes</button>
     </div>
 </div>       
@@ -55,18 +55,30 @@ export default {
             }
         },
         saveEdit: function(){
+            let sure = confirm('Are you sur you want to update ' + this.uName);
+            if(sure){
             let vm = this;
             axios.put('adminusers/'+this.userId, {
-                //name: this.uName ,                             
+                id: this.userId,
+                name: this.uName ,
+                email: this.uEmail,
+                role: this.uRole,                             
                 }).then(function (response){
-                    vm.success = vm.uName + 'contact is saved';
+                    vm.success = response.data.name + '\'s contact is saved';
+                    console.log(response)
                 }).catch(function (error){
                     let err = error.response.data.errors;
                     vm.errors = err;               
                 })
+            }
+            
+        },
+        ref: function(){
+        if(this.success != ''){
+        location.reload()
         }
-    }
-    
+        },
+    },
 }
 </script>
 <style scoped>
