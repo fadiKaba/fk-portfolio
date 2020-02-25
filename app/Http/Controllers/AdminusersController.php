@@ -121,7 +121,8 @@ class AdminusersController extends Controller
     }
     public function search(Request $val)
     {
-       // $users = User::all()->get();
-        return $val; 
+        $users = User::all();
+        $search = User::where('email', 'Like', "%$val->val%")->orWhere('name', 'Like', "%$val->val%")->get();
+        return $search; 
     }
 }

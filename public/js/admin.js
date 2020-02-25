@@ -2064,18 +2064,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Search',
   data: function data() {
     return {
-      sVal: ''
+      sVal: '',
+      results: ''
     };
   },
   methods: {
     startSearch: function startSearch(val) {
+      var _this = this;
+
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/adminusers/search/' + this.sVal).then(function (response) {
-        console.log(response.data);
+        _this.results = response.data;
       });
     }
   }
@@ -38353,41 +38364,61 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("form", { staticClass: "form-inline my-2 my-lg-0 ml-md-5" }, [
-    _c("input", {
-      directives: [
-        {
-          name: "model",
-          rawName: "v-model",
-          value: _vm.sVal,
-          expression: "sVal"
-        }
-      ],
-      staticClass: "form-control mr-sm-2",
-      attrs: { type: "search", placeholder: "Search", "aria-label": "Search" },
-      domProps: { value: _vm.sVal },
-      on: {
-        keyup: function($event) {
-          return _vm.startSearch(_vm.sVal)
-        },
-        input: function($event) {
-          if ($event.target.composing) {
-            return
+  return _c("div", [
+    _c("div", [
+      _c("form", { staticClass: "form-inline my-2 my-lg-0 ml-md-5" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.sVal,
+              expression: "sVal"
+            }
+          ],
+          staticClass: "form-control mr-sm-2",
+          attrs: {
+            type: "search",
+            placeholder: "Search",
+            "aria-label": "Search"
+          },
+          domProps: { value: _vm.sVal },
+          on: {
+            keyup: function($event) {
+              return _vm.startSearch(_vm.sVal)
+            },
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.sVal = $event.target.value
+            }
           }
-          _vm.sVal = $event.target.value
-        }
-      }
-    }),
+        }),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-outline-light my-2 my-sm-0",
+            attrs: { type: "submit" }
+          },
+          [_vm._v("Search")]
+        )
+      ])
+    ]),
     _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass: "btn btn-outline-light my-2 my-sm-0",
-        attrs: { type: "submit" }
-      },
-      [_vm._v("Search")]
-    ),
-    _vm._v("\n    " + _vm._s(_vm.sVal) + "\n")
+    _c("div", [
+      _c(
+        "ul",
+        { staticClass: "list-group list-group-flush" },
+        _vm._l(_vm.results, function(result) {
+          return _c("li", { key: result.id, staticClass: "list-group-item" }, [
+            _vm._v(_vm._s(result.name) + " " + _vm._s(result.email))
+          ])
+        }),
+        0
+      )
+    ])
   ])
 }
 var staticRenderFns = []
@@ -50934,7 +50965,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\project\my-portfolio\resources\js\admin.js */"./resources/js/admin.js");
+module.exports = __webpack_require__(/*! C:\coding\projects\fk-portfolio\resources\js\admin.js */"./resources/js/admin.js");
 
 
 /***/ })

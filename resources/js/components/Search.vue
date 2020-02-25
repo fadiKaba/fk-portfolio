@@ -1,9 +1,17 @@
 <template>
-    <form class="form-inline my-2 my-lg-0 ml-md-5">
-        <input @keyup="startSearch(sVal)" v-model="sVal" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-        {{sVal}}
-    </form>
+   <div>
+       <div>
+           <form class="form-inline my-2 my-lg-0 ml-md-5">
+                <input @keyup="startSearch(sVal)" v-model="sVal" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+           </form>
+       </div>      
+       <div>
+           <ul class="list-group list-group-flush">
+               <li class="list-group-item" v-for="result in results" :key="result.id">{{result.name}} {{result.email}}</li>
+           </ul>
+       </div>
+   </div>   
 </template>
 <script>
 
@@ -13,14 +21,15 @@ export default {
     name:'Search',
     data: function(){
         return {
-            sVal:''
+            sVal:'',
+            results:''
         }
     },
     methods:{
         startSearch: function(val){
             axios.get('/adminusers/search/'+this.sVal).
             then((response)=>{
-                console.log(response.data)
+                this.results = response.data;
             })
         },
     }
