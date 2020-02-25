@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Hash;
 use App\User;
 
 class AdminusersController extends Controller
@@ -36,8 +37,21 @@ class AdminusersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   $newUser = $request->validate([
+        'name' => 'required|min:3',
+        'email' => 'required|unique:users,email|email',
+        'password' => 'required|min:8',
+        'role' => 'required|integer'
+    ]);
+        $hashp = Hash::make($request->password);
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $hashp,
+            'is_admin' => $request->role
+        ]);
+        return redirect()->back()
+        ->with('success',$request->name . ' ' . $request->email . ' created successfully');
     }
 
     /**
@@ -70,14 +84,22 @@ class AdminusersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {   
+        $user = User::findOrfail($id);
+
         $request->validate([
-            'name' => 'required|min:3',
-            'email' => 'required|email',
+            'name' => 'required|min:3',           
             'role' => 'required|integer'
         ]);
+        if($request->email != $user->email){
+            $request->validate(['email' => 'required|email']);
+        }
+        if($request->password != ''){
+            $request->validate(['password' => 'min:8']);
+            $hashu = Hash::make($request->password);
+            $user->password = $hashu;
+        }
        
-       $user = User::findOrfail($id);
        $user->name = $request->name;
        $user->email = $request->email;
        $user->is_admin = $request->role;
@@ -92,7 +114,14 @@ class AdminusersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
+    {   
+        $user = User::findOrFail($id);
+        $user->delete();
+        return  redirect()->back()->with('success',$user->name . ' ' .$user->email. " deleted successfully");
+    }
+    public function search(Request $val)
     {
-        return  "rrrrrrrrrrrrrrrrrr";
+       // $users = User::all()->get();
+        return $val; 
     }
 }

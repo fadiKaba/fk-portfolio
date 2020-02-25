@@ -1,6 +1,6 @@
 @extends('admin/admin-layouts/admin-panel')
 @section('content')
-<div class="container mt-2">
+<div class="container-fluid mt-2">
     <ul class="nav nav-pills mb-3 secondary-navbar p-2" id="pills-tab" role="tablist">
         <li class="nav-item">
           <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Users</a>
@@ -12,10 +12,7 @@
           <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Status</a>
         </li>
         <li class="nav-item">
-            <form class="form-inline my-2 my-lg-0 ml-md-5">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-              </form>
+            <Search></Search>
         </li>
       </ul>
       <div class="tab-content" id="pills-tabContent">
@@ -77,7 +74,8 @@
                           <Edituserform 
                               :user-id="same('{{$user->id}}')"
                               :user-name="same('{{$user->name}}')" 
-                              :user-email="same('{{$user->email}}')" 
+                              :user-email="same('{{$user->email}}')"
+                              :user-password="same('')"
                               :user-role="
                               @if($user->is_admin == 1) 
                               same('Admin')
@@ -105,8 +103,10 @@
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          <form action="{{route('adminusers.destroy',$user->id)}}" method="DELETE">
-                            <button type="submit" class="btn btn-danger">Delete</button>                          
+                          <form action="{{route('adminusers.destroy',$user->id)}}" method="POST">
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>   
+                            @csrf                       
                           </form>                      
                         </div>
                       </div>
@@ -119,7 +119,33 @@
             </table>                    
         </div>
           <!-- end tab 1 -->
-        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">...</div>
+        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+          <div class="container">
+            <form action="{{route('adminusers.store')}}" method="POST">
+              <div class="form-group">
+                <label for="n_name">Name</label>
+                <input type="text" name="name" id="n_name" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="n_email">Email</label>
+                <input type="text" name="email" id="n_email" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="n_pass">Password</label>
+                <input type="text" name="password" id="n_pass" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="n_role">Role</label>
+                <select class="form-control" name="role" id="n_role">
+                  <option value="0">Subscriber</option>
+                  <option value="1">Admin</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary">Add</button>
+              @csrf
+            </form>
+          </div>
+        </div>
         <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...</div>
       </div>
 

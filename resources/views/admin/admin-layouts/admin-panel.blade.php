@@ -43,6 +43,7 @@
               </nav>
               <!-- end navbar -->
         </div>
+        @include('layouts/error')
         <div>
             @yield('content')
         </div>
