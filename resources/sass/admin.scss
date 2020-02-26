@@ -20,4 +20,13 @@ $color2: #fff;
 
 .table-container{
     max-height: 80vh;
+    min-height: 30vh;
+}
+
+.form-container{
+    background-color: $color1;
+    border-radius: 5px;
+    label{
+        color: $color2;
+    }
 }

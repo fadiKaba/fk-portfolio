@@ -10907,5 +10907,15 @@ table thead th {
 
 .table-container {
   max-height: 80vh;
+  min-height: 30vh;
+}
+
+.form-container {
+  background-color: #72d484;
+  border-radius: 5px;
+}
+
+.form-container label {
+  color: #fff;
 }
 

@@ -6607,7 +6607,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\np[data-v-89c0c74e]{\n    background-color:#fff;\n    color:#72d484;\n    font-weight: 700;\n    text-align: center;\n    margin: 0;\n    bottom: 0;\n}\n", ""]);
+exports.push([module.i, "\np[data-v-89c0c74e]{\n    background-color:#fff;\n    color:#72d484;\n    font-weight: 700;\n    text-align: center;\n    padding: 20px 0px;\n}\n", ""]);
 
 // exports
 
@@ -50905,9 +50905,9 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\project\my-portfolio\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! D:\project\my-portfolio\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! D:\project\my-portfolio\resources\sass\admin.scss */"./resources/sass/admin.scss");
+__webpack_require__(/*! C:\coding\projects\fk-portfolio\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\coding\projects\fk-portfolio\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\coding\projects\fk-portfolio\resources\sass\admin.scss */"./resources/sass/admin.scss");
 
 
 /***/ })

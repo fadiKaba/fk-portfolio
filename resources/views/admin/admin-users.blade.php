@@ -1,7 +1,7 @@
 @extends('admin/admin-layouts/admin-panel')
 @section('content')
 <div class="container-fluid mt-2">
-    <ul class="nav nav-pills mb-3 secondary-navbar p-2" id="pills-tab" role="tablist">
+    <ul class="nav nav-pills mb-3 secondary-navbar p-2 rounded" id="pills-tab" role="tablist">
         <li class="nav-item">
           <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Users</a>
         </li>
@@ -12,13 +12,13 @@
           <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Status</a>
         </li>
         <li class="nav-item">
-           <Search>{{ csrf_field() }}</Search>
+           <Search :url="same('/adminusers/search')">{{ csrf_field() }}</Search>
         </li>
       </ul>
       <div class="tab-content" id="pills-tabContent">
           <!-- tab 1 -->
         <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-          <div class="overflow-auto table-container">
+          <div class="overflow-auto table-container rounded-top">
             <table class="table table-light table-striped">
                 <thead>
                     <tr>
@@ -125,19 +125,35 @@
         </div>
           <!-- end tab 1 -->
         <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-          <div class="container">
+          <div class="container form-container p-md-5">
+            <h3 class="text-light">Add new user</h3>
             <form action="{{route('adminusers.store')}}" method="POST">
               <div class="form-group">
                 <label for="n_name">Name</label>
-                <input type="text" name="name" id="n_name" class="form-control">
+                <input 
+                pattern=".{4,25}" 
+                required title="4 characters minimum" 
+                type="text" 
+                name="name" 
+                id="n_name" 
+                class="form-control" 
+                value="{{Request::old('name')}}">
               </div>
               <div class="form-group">
                 <label for="n_email">Email</label>
-                <input type="text" name="email" id="n_email" class="form-control">
+                <input type="email" name="email" id="n_email" class="form-control" value="{{Request::old('email')}}">
               </div>
               <div class="form-group">
                 <label for="n_pass">Password</label>
-                <input type="text" name="password" id="n_pass" class="form-control">
+                <input
+                required 
+                pattern=".{8,25}" 
+                required title="8 characters minimum" 
+                type="text" 
+                name="password" 
+                id="n_pass" 
+                class="form-control" 
+                value="{{Request::old('password')}}">
               </div>
               <div class="form-group">
                 <label for="n_role">Role</label>
@@ -146,12 +162,14 @@
                   <option value="1">Admin</option>
                 </select>
               </div>
-              <button type="submit" class="btn btn-primary">Add</button>
+              <button type="submit" class="btn btn-light">Add</button>
               @csrf
             </form>
           </div>
         </div>
-        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...</div>
+        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+              <p class="font-weight-bold">Users accounts: <span class="text-success">{{count($users)}}</span></p>
+        </div>
       </div>
 </div>
 @endsection

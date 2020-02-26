@@ -25,11 +25,6 @@
                 <slot></slot>            
            </form>
        </div>      
-      <!-- <div>
-           <ul class="list-group list-group-flush">
-               <li class="list-group-item" v-for="result in results" :key="result.id">{{result.email}} {{result.name}}</li>
-           </ul>
-       </div> -->
    </div>   
 </template>
 <script>
@@ -38,6 +33,7 @@ import axios from 'axios';
 
 export default {
     name:'Search',
+    props:['url'],
     data: function(){
         return {
             sVal:'',
@@ -46,7 +42,7 @@ export default {
     },
     methods:{
         startSearch: function(val){
-            axios.get('/adminusers/search/'+this.sVal).
+            axios.get(this.url+ '/' +this.sVal).
             then((response)=>{
                 this.results = response.data;
             })

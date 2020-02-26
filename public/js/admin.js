@@ -1974,7 +1974,7 @@ var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
       if (sure) {
         var vm = this;
-        axios.put('adminusers/' + this.userId, {
+        axios.put('/adminusers/' + this.userId, {
           id: this.userId,
           name: this.uName,
           email: this.uEmail,
@@ -2086,14 +2086,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Search',
+  props: ['url'],
   data: function data() {
     return {
       sVal: '',
@@ -2104,7 +2100,7 @@ __webpack_require__.r(__webpack_exports__);
     startSearch: function startSearch(val) {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/adminusers/search/' + this.sVal).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(this.url + '/' + this.sVal).then(function (response) {
         _this.results = response.data;
       });
     },
@@ -6659,7 +6655,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\np[data-v-89c0c74e]{\n    background-color:#fff;\n    color:#72d484;\n    font-weight: 700;\n    text-align: center;\n    margin: 0;\n    bottom: 0;\n}\n", ""]);
+exports.push([module.i, "\np[data-v-89c0c74e]{\n    background-color:#fff;\n    color:#72d484;\n    font-weight: 700;\n    text-align: center;\n    padding: 20px 0px;\n}\n", ""]);
 
 // exports
 
@@ -51008,7 +51004,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\project\my-portfolio\resources\js\admin.js */"./resources/js/admin.js");
+module.exports = __webpack_require__(/*! C:\coding\projects\fk-portfolio\resources\js\admin.js */"./resources/js/admin.js");
 
 
 /***/ })

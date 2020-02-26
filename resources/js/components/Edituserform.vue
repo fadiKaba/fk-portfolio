@@ -63,7 +63,7 @@ export default {
             let sure = confirm('Are you sur you want to update ' + this.uName);
             if(sure){
             let vm = this;
-            axios.put('adminusers/'+this.userId, {
+            axios.put('/adminusers/'+this.userId, {
                 id: this.userId,
                 name: this.uName ,
                 email: this.uEmail,

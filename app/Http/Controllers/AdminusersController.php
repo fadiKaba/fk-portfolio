@@ -117,7 +117,7 @@ class AdminusersController extends Controller
     {   
         $user = User::findOrFail($id);
         $user->delete();
-        return  redirect()->back()->with('success',$user->name . ' ' .$user->email. " deleted successfully");
+        return  redirect('/adminusers')->with('success',$user->name . ' ' .$user->email. " deleted successfully");
     }
     public function search(Request $val)
     {
