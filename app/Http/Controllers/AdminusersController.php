@@ -15,7 +15,7 @@ class AdminusersController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::paginate(30);
         return view('/admin/admin-users')->with(compact('users'));
         
     }
@@ -124,5 +124,10 @@ class AdminusersController extends Controller
         $users = User::all();
         $search = User::where('email', 'Like', "%$val->val%")->orWhere('name', 'Like', "%$val->val%")->get();
         return $search; 
+    }
+    public function goToSearch(Request $request)
+    {
+        $users = User::where('email', 'LIKE', "%$request->sresult%")->get();
+        return view('/admin/admin-users')->with(compact('users'));
     }
 }

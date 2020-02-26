@@ -12,12 +12,13 @@
           <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Status</a>
         </li>
         <li class="nav-item">
-            <Search></Search>
+           <Search>{{ csrf_field() }}</Search>
         </li>
       </ul>
       <div class="tab-content" id="pills-tabContent">
           <!-- tab 1 -->
         <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+          <div class="overflow-auto table-container">
             <table class="table table-light table-striped">
                 <thead>
                     <tr>
@@ -116,7 +117,11 @@
                 <!-- end modal -->
                 </tr>            
                @endforeach             
-            </table>                    
+            </table> 
+          </div>
+          @if($users instanceof \Illuminate\Pagination\LengthAwarePaginator )
+            {{$users->links('vendor.pagination.simple-bootstrap-4')}}
+          @endif                   
         </div>
           <!-- end tab 1 -->
         <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
@@ -148,8 +153,5 @@
         </div>
         <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...</div>
       </div>
-
-
-    
 </div>
 @endsection
