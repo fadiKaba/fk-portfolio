@@ -21,10 +21,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['admin']], function(){
 
-    Route::get('/admin', 'AdminsController@index')->name('admin');
     Route::resource('/adminusers','AdminusersController');
     Route::get('/adminusers/search/{val}', 'AdminusersController@search')->name('adminuserssearch');
     Route::post('/adminusers/gotosearch', 'AdminusersController@goToSearch')->name('adminusersgotosearch');
+    Route::resource('admin/posts','PostsController');
 });
 
 

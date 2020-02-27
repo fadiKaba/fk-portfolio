@@ -10897,6 +10897,10 @@ table thead th {
   color: #fff;
 }
 
+body {
+  padding-top: 60px;
+}
+
 .main-nav {
   background-color: #72d484;
 }

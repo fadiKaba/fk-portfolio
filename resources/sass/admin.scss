@@ -6,7 +6,9 @@ $color2: #fff;
 
 @import 'users';
 
-
+body{
+    padding-top:60px;
+}
 .main-nav{
     background-color:$color1;
     ul{
