@@ -51,15 +51,16 @@ class PostsController extends Controller
             'post_body' => $request->body,
             'user_id' => Auth::id(),
         ]);
-
-        $imageName = 'img'.time().'.'.$request->image->extension();
-        $request->image->move(public_path('images'),$imageName);
-
-        Image::create([
-            'post_id' => $nPost->id,
-            'url' => $imageName,
-        ]);
-
+        if($request->image != null){
+            $imageName = 'img'.time().'.'.$request->image->extension();
+            $request->image->move(public_path('images'),$imageName);
+    
+            Image::create([
+                'post_id' => $nPost->id,
+                'url' => $imageName,
+            ]);
+        }
+        
         return redirect('/admin/posts');
     }
 
@@ -131,7 +132,17 @@ class PostsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        //
+    {   
+        $post = Post::findOrFail($id);
+
+        if($post->image != null){
+            if(File::exists(public_path('/images/'.$post->image->url))){
+                File::delete(public_path('/images/'.$post->image->url));
+                }
+        }
+        
+        $post->delete();
+
+        return redirect()->back()->with('success','Post successfully deleted');
     }
 }

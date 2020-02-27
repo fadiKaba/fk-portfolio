@@ -37,7 +37,6 @@
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
@@ -46,8 +45,12 @@
                       <span class="text-danger">Are you sure to delete</span> {{$post->post_title}} ?
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Save changes</button>
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                     <form action="{{route('posts.destroy',$post->id)}}" method="POST">
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Yes</button>
+                        @csrf
+                      </form>                
                     </div>
                   </div>
                 </div>
