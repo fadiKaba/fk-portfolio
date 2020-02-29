@@ -143,6 +143,18 @@ class PostsController extends Controller
         
         $post->delete();
 
-        return redirect()->back()->with('success','Post successfully deleted');
+        return redirect('admin/posts')->with('success','Post successfully deleted');
+    }
+
+    public function search(Request $val)
+    {
+        $posts = Post::all();
+        $search = Post::where('post_title', 'Like', "%$val->val%")->get();
+        return $search; 
+    }
+    public function goToSearch(Request $request)
+    {
+        $posts = Post::where('post_title', 'LIKE', "%$request->sresult%")->get();
+        return view('/admin/admin-posts')->with(compact('posts'));
     }
 }

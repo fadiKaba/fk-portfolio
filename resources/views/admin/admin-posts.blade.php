@@ -12,7 +12,7 @@
           <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Status</a>
         </li>
         <li class="nav-item">
-           <Search :url="same('')">{{ csrf_field() }}</Search>
+           <Search :url="same('/posts/search')" :res="same('/posts/gotosearch')">{{ csrf_field() }}</Search>
         </li>
       </ul>
       <div class="tab-content" id="pills-tabContent">

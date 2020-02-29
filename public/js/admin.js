@@ -2089,7 +2089,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Search',
-  props: ['url'],
+  props: ['url', 'res'],
   data: function data() {
     return {
       sVal: '',
@@ -38388,7 +38388,7 @@ var render = function() {
         "form",
         {
           staticClass: "form-inline my-2 my-lg-0 ml-md-5",
-          attrs: { action: "/adminusers/gotosearch", method: "POST" }
+          attrs: { action: _vm.res, method: "POST" }
         },
         [
           _c("input", {
@@ -38438,15 +38438,16 @@ var render = function() {
             _vm._l(_vm.results, function(result) {
               return _c(
                 "option",
-                { key: result.id, domProps: { value: result.email } },
+                {
+                  key: result.id,
+                  domProps: { value: result.email || result.post_title }
+                },
                 [
                   _vm._v(
                     "\n                 " +
-                      _vm._s(result.email) +
-                      " " +
-                      _vm._s(result.name) +
-                      "\n                 "
-                  )
+                      _vm._s(result.email || result.post_title)
+                  ),
+                  _c("span", [_vm._v(_vm._s(result.name))])
                 ]
               )
             }),
@@ -51004,7 +51005,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\coding\projects\fk-portfolio\resources\js\admin.js */"./resources/js/admin.js");
+module.exports = __webpack_require__(/*! D:\project\my-portfolio\resources\js\admin.js */"./resources/js/admin.js");
 
 
 /***/ })

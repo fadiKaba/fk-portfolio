@@ -30,7 +30,9 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-$outerCyrcleWH: 250px;
+$colors:rgb(181, 204, 119);
+
+$outerCyrcleWH: 240px;
 $innerCyrcleWH: 230px;
 
 .cyrcle{
@@ -42,10 +44,10 @@ $innerCyrcleWH: 230px;
         justify-content: center;
         width:$outerCyrcleWH;
         height: $outerCyrcleWH;
-        background-color: #fff;
+        background-color: #fff;     
         margin:auto;
         border-radius: 50%;    
-        box-shadow: 0 0 0pt 2pt #97daa3;
+        box-shadow: 0 0 0pt 2pt $colors;
         transition: 0.2s;  
         .inner-cyrcle{
             display: flex;
@@ -55,11 +57,11 @@ $innerCyrcleWH: 230px;
           height: $innerCyrcleWH; 
           border: 10px #fff dashed;
           border-radius: 50%;
-          background-color: #72d484;
+          background-color: #A4CB38;
           transition: 0.7s;
           span{
               background-color: #fff;
-              color: #72d484;
+              color: #A4CB38;
               font-weight: 700;
               text-decoration: none;
               padding: 25px; 
@@ -70,15 +72,17 @@ $innerCyrcleWH: 230px;
           }   
         }
         &:hover{
-            box-shadow: 0 0 0pt 20pt #97daa3;
+            box-shadow: 0 0 0pt 20pt $colors;
             .inner-cyrcle{
                 transform: rotateZ(90deg);
+                background-color: transparent;
                 span{
                 transform: scale(1) rotateZ(-90deg);
                 }
             }
         }
     }
+    
     
 }
 
@@ -91,21 +95,36 @@ $innerCyrcleWH: 230px;
 
 @keyframes borderShadow{
     0%{
-      box-shadow: 0 0 0pt 20pt #97daa3;
+      box-shadow: 0 0 0pt 20pt $colors;
     }
     30%{
-      box-shadow: 0 0 0pt 10pt #97daa3;
+      box-shadow: 0 0 0pt 10pt $colors;
     }
     60%{
-      box-shadow: 0 0 0pt 30pt #97daa3;
+      box-shadow: 0 0 0pt 30pt $colors;
     }
     80%{
-      box-shadow: 0 0 0pt 15pt #97daa3; 
+      box-shadow: 0 0 0pt 15pt $colors; 
     }
     100%{
-      box-shadow: 0 0 0pt 20pt #97daa3;
+      box-shadow: 0 0 0pt 20pt $colors;
     }   
 }
+
+
+
+
+@media screen and (min-width:600px){
+  .cyrcle > .outer-cyrcle {
+        background-image:url("/wallpapers/city-round.jpg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 400px;
+        height: 400px;
+  }
+}
+
 @media screen and (max-width: 600px){
     .cyrcle > .outer-cyrcle > #gear > span{
         transform: scale(1) rotateZ(0deg);

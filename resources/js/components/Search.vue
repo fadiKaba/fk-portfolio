@@ -1,7 +1,7 @@
 <template>
    <div>
        <div>
-           <form class="form-inline my-2 my-lg-0 ml-md-5" action="/adminusers/gotosearch" method="POST">
+           <form class="form-inline my-2 my-lg-0 ml-md-5" :action="res" method="POST">
                 <input 
                 autocomplete="off" 
                 list="search-result" 
@@ -17,9 +17,9 @@
                     <option 
                     v-for="result in results" 
                     :key="result.id"
-                    :value="result.email"
+                    :value="result.email||result.post_title"
                     >
-                    {{result.email}} {{result.name}}
+                    {{result.email || result.post_title}}<span>{{result.name}}</span>
                     </option>
                 </datalist> 
                 <slot></slot>            
@@ -33,11 +33,11 @@ import axios from 'axios';
 
 export default {
     name:'Search',
-    props:['url'],
+    props:['url','res'],
     data: function(){
         return {
             sVal:'',
-            results:''
+            results:'',
         }
     },
     methods:{
