@@ -10892,3 +10892,11 @@ a.text-dark:focus {
   color: #fff;
 }
 
+body #app nav {
+  background-color: #0E7F43;
+}
+
+body #app nav a {
+  color: #fff;
+}
+

@@ -30,6 +30,8 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+$color1:#0E7F43;
+$color2:#fff;
 $colors:rgb(181, 204, 119);
 
 $outerCyrcleWH: 240px;
@@ -57,12 +59,13 @@ $innerCyrcleWH: 230px;
           height: $innerCyrcleWH; 
           border: 10px #fff dashed;
           border-radius: 50%;
-          background-color: #A4CB38;
+          background-color: $color1;
           transition: 0.7s;
           span{
               background-color: #fff;
-              color: #A4CB38;
-              font-weight: 700;
+              color: $color1;
+              font-weight: bolder;
+              font-size: 1.2rem;
               text-decoration: none;
               padding: 25px; 
               transform: scale(0) rotateZ(-90deg);

@@ -22,9 +22,10 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-
+$color1:#0E7F43;
+$color2:#fff;
 .btn-main{
-    background-color: #fff;
+    background-color: $color2;
     border-radius: 20px;
     margin: 5px 10px;
     padding: 2px;
@@ -32,13 +33,13 @@ export default {
     display: inline-block;
     div{
         border-radius: 20px;
-        background-color: #fff;
+        background-color: $color2;
         display: grid;
         grid-template-columns: 1fr 3fr;
         justify-items: center;
         transition: 0.2s;
         div:nth-child(1){
-            background-color: #72d484;
+            background-color: $color1;
             display: flex;
             padding: 5px;
             img{
@@ -47,8 +48,8 @@ export default {
             }
         }
         div:nth-child(2){
-            background-color: #fff;
-            color: #72d484;
+            background-color: $color2;
+            color: $color1;
             font-weight: 700;
             display: flex;
             padding: 5px;
@@ -57,14 +58,14 @@ export default {
     }
     &:hover{
         div{
-            background-color:#72d484;
+            background-color:$color1;
             div:nth-child(1){
                 
                 
             }
             div:nth-child(2){
-                background-color:#72d484;
-                color: #fff;
+                background-color:$color1;
+                color: $color2;
             }
         }
     }

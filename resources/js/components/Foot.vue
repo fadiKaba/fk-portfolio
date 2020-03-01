@@ -10,10 +10,14 @@ export default {
     name:'Foot',
 }
 </script>
-<style scoped>
+<style lang="scss" scoped>
+
+$color1:#0E7F43;
+$color2:#fff;
+
     p{
-        background-color:#fff;
-        color:#72d484;
+        background-color:$color2;
+        color:$color1;
         font-weight: 700;
         text-align: center;
         padding: 20px 0px;

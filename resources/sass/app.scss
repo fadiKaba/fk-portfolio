@@ -8,3 +8,14 @@
 @import '~bootstrap/scss/bootstrap';
 
 @import 'welcome';
+
+body{
+    #app{
+        nav{
+            background-color: $color1;
+            a{
+                color:$color2;
+            }
+        }
+    }
+}
