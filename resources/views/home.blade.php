@@ -1,32 +1,33 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row justify-content-center">
-        <div class="col-md-10">
-                <div>
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-                    <div>
-                        @if(count($posts) > 0)
-                        @foreach($posts as $post)
-                        <div class="card mb-3">
-                            @if($post->image)
-                            <img src="./images/{{$post->image->url}}" class="card-img-top" alt="...">
-                            @endif
-                            <div class="card-body">
-                                <h5 class="card-title">{{$post->post_title}}</h5>
-                                <p class="card-text">{{$post->post_body}}</p>
-                            </div>
-                        </div>
-                        @endforeach
-                        @endif
-                    </div>
-                </div>
+        <div class="col-md-3">
+            @if(count($posts) > 1)
+            @for($i = 1; $i < count($posts); $i++)
+            <Minipost
+            :src="same('{{$posts[$i]->image != null ? $posts[$i]->image->url : ''}}')"
+            :title='same("{{$posts[$i]->post_title}}")'
+            :body="same('{{$posts[$i]->post_body}}')">
+            </Minipost>
+            @endfor
+            @endif
         </div>
+        <div class="col-md-6">
+            @if(count($posts) > 0)
+            <Mainpost 
+            :src="same('{{$posts[0]->image != null ? $posts[0]->image->url : ''}}')" 
+            :title="same('{{$posts[0]->post_title}}')" 
+            :body="same('{{$posts[0]->post_body}}')">
+            </Mainpost>
+            @endif
+         </div> 
     </div>
 </div>
 @endsection
+
+
+
+
+

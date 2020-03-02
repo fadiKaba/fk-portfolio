@@ -29,10 +29,12 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 import Mainlink from "./components/Mainlink";
 import Cyrcle from "./components/Cyrcle";
 import Foot from "./components/Foot";
+import Mainpost from "./components/Mainpost";
+import Minipost from "./components/Minipost";
 
 const app = new Vue({
     el: '#app',
-    components:{Mainlink,Cyrcle,Foot},
+    components:{Mainlink,Cyrcle,Foot, Mainpost, Minipost},
     methods:{
         same: function(input){
             return input
