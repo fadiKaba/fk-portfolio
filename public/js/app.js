@@ -2064,7 +2064,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Mainpost',
@@ -6802,7 +6801,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".card .btn-container div[data-v-3fbeca78]:nth-child(1) {\n  background-color: #0E7F43;\n}\n.card .btn-container div[data-v-3fbeca78]:nth-child(2) {\n  background-color: rgba(164, 203, 56, 0.596);\n}\n.card .foot div[data-v-3fbeca78] {\n  background-color: #0E7F43;\n}", ""]);
+exports.push([module.i, ".card .btn-container div[data-v-3fbeca78]:nth-child(1) {\n  background-color: #0E7F43;\n}\n.card .btn-container div[data-v-3fbeca78]:nth-child(2) {\n  background-color: #A4CB38;\n}\n.card .foot div[data-v-3fbeca78] {\n  background-color: #0E7F43;\n}", ""]);
 
 // exports
 
@@ -38528,11 +38527,15 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "card mb-2" }, [
-    _vm._m(0),
+  return _c("div", { staticClass: "card mb-0 rounded-0" }, [
+    _c("div", { staticClass: "foot row w-100 mx-auto" }, [
+      _c("div", { staticClass: "col-12 py-2  shadow" }, [
+        _c("h3", { staticClass: "text-light" }, [_vm._v(_vm._s(_vm.title))])
+      ])
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "row no-gutters" }, [
-      _c("div", { staticClass: "col-md-4" }, [
+      _c("div", { staticClass: "col-md-4 m-md-4" }, [
         _vm.src != ""
           ? _c("img", {
               staticClass: "card-img-top",
@@ -38541,17 +38544,11 @@ var render = function() {
           : _vm._e()
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "col-md-8" }, [
+      _c("div", { staticClass: "col-md-7" }, [
         _c("div", { staticClass: "card-body" }, [
-          _c("h5", { staticClass: "card-title" }, [_vm._v(_vm._s(_vm.title))]),
+          _c("p", { staticClass: "card-text" }, [_vm._v(_vm._s(_vm.body))]),
           _vm._v(" "),
-          _c("p", { staticClass: "card-text" }, [
-            _vm._v(
-              "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
-            )
-          ]),
-          _vm._v(" "),
-          _vm._m(1),
+          _vm._m(0),
           _vm._v(" "),
           _c("div", { staticClass: "btn-container row" }, [
             _c(
@@ -38588,16 +38585,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "foot row w-100 mx-auto" }, [
-      _c("div", { staticClass: "col-12 rounded-top py-2" }, [
-        _c("h3", {}, [_vm._v("updated at 2:66")])
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -51704,9 +51691,9 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\project\my-portfolio\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! D:\project\my-portfolio\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! D:\project\my-portfolio\resources\sass\admin.scss */"./resources/sass/admin.scss");
+__webpack_require__(/*! C:\coding\projects\fk-portfolio\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\coding\projects\fk-portfolio\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\coding\projects\fk-portfolio\resources\sass\admin.scss */"./resources/sass/admin.scss");
 
 
 /***/ })

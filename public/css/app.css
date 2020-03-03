@@ -10892,6 +10892,10 @@ a.text-dark:focus {
   color: #fff;
 }
 
+body {
+  background-color: #A4CB38;
+}
+
 body #app nav {
   background-color: #0E7F43;
 }
@@ -10901,11 +10905,25 @@ body #app nav a {
 }
 
 body #app .left-column {
-  background-color: rgba(164, 203, 56, 0.596);
+  background-color: #0E7F43;
 }
 
 body #app .left-column h1 {
+  background-color: #fff;
+  color: #0E7F43;
+}
+
+body #app .left-column div:nth-child(2) {
+  background-color: #fff;
+}
+
+body #app .left-column .search-container-home {
   background-color: #0E7F43;
-  color: #fff;
+}
+
+@media screen and (max-width: 600px) {
+  body #app .posts-container {
+    height: auto;
+  }
 }
 

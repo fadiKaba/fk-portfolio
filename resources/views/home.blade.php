@@ -3,18 +3,18 @@
 @section('content')
 <div class="container-fluid">
     <div class="row justify-content-center">
-        <div class="col-md-3 left-column px-0 ">
+        <div class="col-md-3 left-column px-0 my-2">
             <div>
-                <h1 class="px-2 py-1 rounded-top">My website</h1>
+                <h1 class="px-2 py-1">My website</h1>
             </div>
-            <div class="my-2">
+            <div class="mb-2">
                 <img src="{{asset('/wallpapers/city-green.png')}}" alt="city" width="100%">
             </div>
-            <div>
+            <div class="search-container-home p-2">
                 <Search></Search>
             </div>       
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 posts-container my-2 ">
             @if(count($posts) > 0)
             @foreach($posts as $post)
             <Mainpost 

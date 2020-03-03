@@ -1,18 +1,17 @@
 <template>
-        <div class="card mb-2">
+        <div class="card mb-0 rounded-0">
             <div class="foot row w-100 mx-auto">
-                <div class="col-12 rounded-top py-2">
-                    <h3 class="">updated at 2:66</h3>
+                <div class="col-12 py-2  shadow">
+                    <h3 class="text-light">{{title}}</h3>
                 </div>                  
             </div>           
             <div class="row no-gutters">
-                <div class="col-md-4">
+                <div class="col-md-4 m-md-4">
                     <img v-if="src != ''" :src="'./images/' + src" class="card-img-top" alt="">
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-7">
                     <div class="card-body">
-                        <h5 class="card-title">{{title}}</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <p class="card-text">{{body}}</p>
                         <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                         <div class="btn-container row">
                             <div class="col-4">
@@ -53,7 +52,7 @@ export default {
             background-color: #0E7F43;
             }
             div:nth-child(2){
-            background-color: rgba(164, 203, 56, 0.596);
+            background-color: #A4CB38;;
             }
         }
         .foot{
