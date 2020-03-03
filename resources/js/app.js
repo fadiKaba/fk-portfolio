@@ -31,10 +31,11 @@ import Cyrcle from "./components/Cyrcle";
 import Foot from "./components/Foot";
 import Mainpost from "./components/Mainpost";
 import Minipost from "./components/Minipost";
+import Search from "./components/Search";
 
 const app = new Vue({
     el: '#app',
-    components:{Mainlink,Cyrcle,Foot, Mainpost, Minipost},
+    components:{Mainlink,Cyrcle,Foot, Mainpost, Minipost, Search},
     methods:{
         same: function(input){
             return input

@@ -10,10 +10,18 @@
 @import 'welcome';
 
 body{
+    
     #app{
         nav{
             background-color: $color1;
             a{
+                color:$color2;
+            }
+        }
+        .left-column{
+            background-color:rgba(164, 203, 56, 0.596);
+            h1{
+                background-color: $color1;
                 color:$color2;
             }
         }

@@ -10900,3 +10900,12 @@ body #app nav a {
   color: #fff;
 }
 
+body #app .left-column {
+  background-color: rgba(164, 203, 56, 0.596);
+}
+
+body #app .left-column h1 {
+  background-color: #0E7F43;
+  color: #fff;
+}
+

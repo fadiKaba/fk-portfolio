@@ -1,5 +1,5 @@
 <template>
-    <div class="card">
+    <div class="card mb-2">
         <img v-if="src != ''" :src="'./images/'+ src" class="card-img-top" alt="Post-Img">
         <div class="card-body">
             <h5 class="card-title">{{title}}</h5>

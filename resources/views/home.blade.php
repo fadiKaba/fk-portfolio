@@ -3,24 +3,26 @@
 @section('content')
 <div class="container-fluid">
     <div class="row justify-content-center">
-        <div class="col-md-3">
-            @if(count($posts) > 1)
-            @for($i = 1; $i < count($posts); $i++)
-            <Minipost
-            :src="same('{{$posts[$i]->image != null ? $posts[$i]->image->url : ''}}')"
-            :title='same("{{$posts[$i]->post_title}}")'
-            :body="same('{{$posts[$i]->post_body}}')">
-            </Minipost>
-            @endfor
-            @endif
+        <div class="col-md-3 left-column px-0 ">
+            <div>
+                <h1 class="px-2 py-1 rounded-top">My website</h1>
+            </div>
+            <div class="my-2">
+                <img src="{{asset('/wallpapers/city-green.png')}}" alt="city" width="100%">
+            </div>
+            <div>
+                <Search></Search>
+            </div>       
         </div>
         <div class="col-md-6">
             @if(count($posts) > 0)
+            @foreach($posts as $post)
             <Mainpost 
-            :src="same('{{$posts[0]->image != null ? $posts[0]->image->url : ''}}')" 
-            :title="same('{{$posts[0]->post_title}}')" 
-            :body="same('{{$posts[0]->post_body}}')">
+            :src="{{json_encode($post->image != null ? $post->image->url : '')}}" 
+            :title="{{json_encode($post->post_title)}}" 
+            :body="{{json_encode($post->post_body)}}">
             </Mainpost>
+            @endforeach
             @endif
          </div> 
     </div>
