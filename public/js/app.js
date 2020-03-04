@@ -2091,6 +2091,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Mainpost',
@@ -2101,16 +2106,38 @@ __webpack_require__.r(__webpack_exports__);
     body: String,
     loged: Boolean,
     userId: [String, Number],
-    postId: [String, Number]
+    postId: [String, Number],
+    likeC: Array
+  },
+  data: function data() {
+    return {
+      likes: this.likeC.length - 1
+    };
+  },
+  mounted: function mounted() {
+    console.log();
   },
   methods: {
     same: function same(val) {
       return val;
     },
     like: function like(userId, postId) {
-      console.log(this.loged);
+      var _this = this;
+
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("posts/like/".concat(this.userId, "/").concat(this.postId)).then(function (respone) {
-        console.log(respone);
+        if (respone.data == 'like') {
+          _this.likes += 1;
+
+          _this.likeC.push(_this.userId.toString());
+        } else {
+          _this.likes -= 1;
+
+          var ind = _this.likeC.indexOf(_this.userId.toString());
+
+          if (ind > -1) {
+            _this.likeC.splice(ind, 1);
+          }
+        }
       })["catch"](function (err) {
         return console.log(err);
       });
@@ -6853,7 +6880,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".card .btn-container div[data-v-3fbeca78]:nth-child(1) {\n  background-color: #0E7F43;\n}\n.card .btn-container div[data-v-3fbeca78]:nth-child(2) {\n  background-color: #A4CB38;\n}\n.card .foot div[data-v-3fbeca78] {\n  background-color: #0E7F43;\n}", ""]);
+exports.push([module.i, ".card .foot div[data-v-3fbeca78] {\n  background-color: #0E7F43;\n}", ""]);
 
 // exports
 
@@ -38621,7 +38648,7 @@ var render = function() {
                     _c(
                       "button",
                       {
-                        staticClass: "btn text-light",
+                        staticClass: "btn btn-link text-decoration-none",
                         on: {
                           click: function($event) {
                             return _vm.like(_vm.userId, _vm.postId)
@@ -38629,29 +38656,47 @@ var render = function() {
                         }
                       },
                       [
-                        _c("img", {
-                          attrs: {
-                            src: _vm.same("../icons/like.svg"),
-                            alt: "",
-                            width: "25px"
-                          }
-                        }),
-                        _vm._v(" Like\n                            ")
+                        _vm.likeC.includes(_vm.userId.toString())
+                          ? _c("img", {
+                              attrs: {
+                                src: _vm.same("../icons/unlike.svg"),
+                                alt: "",
+                                width: "25px"
+                              }
+                            })
+                          : _c("img", {
+                              attrs: {
+                                src: _vm.same("../icons/like.svg"),
+                                alt: "",
+                                width: "25px"
+                              }
+                            }),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "badge badge-light" }, [
+                          _vm._v(_vm._s(_vm.likes) + " ")
+                        ])
                       ]
                     )
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-8" }, [
-                    _c("button", { staticClass: "btn text-light" }, [
-                      _c("img", {
-                        attrs: {
-                          src: _vm.same("../icons/comment.svg"),
-                          alt: "",
-                          width: "25px"
-                        }
-                      }),
-                      _vm._v(" Comments\n                            ")
-                    ])
+                    _c(
+                      "button",
+                      { staticClass: "btn btn-link text-decoration-none" },
+                      [
+                        _c("img", {
+                          attrs: {
+                            src: _vm.same("../icons/comment.svg"),
+                            alt: "",
+                            width: "25px"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "badge badge-light" }, [
+                          _vm._v("4")
+                        ])
+                      ]
+                    )
                   ])
                 ])
               : _vm._e(),
@@ -38662,7 +38707,7 @@ var render = function() {
                     _c(
                       "button",
                       {
-                        staticClass: "btn text-light",
+                        staticClass: "btn btn-link text-decoration-none",
                         attrs: {
                           type: "button",
                           "data-toggle": "modal",
@@ -38677,7 +38722,10 @@ var render = function() {
                             width: "25px"
                           }
                         }),
-                        _vm._v(" Like\n                            ")
+                        _vm._v(" "),
+                        _c("span", { staticClass: "badge badge-light" }, [
+                          _vm._v(_vm._s(_vm.likes))
+                        ])
                       ]
                     )
                   ]),
@@ -38686,7 +38734,7 @@ var render = function() {
                     _c(
                       "button",
                       {
-                        staticClass: "btn text-light",
+                        staticClass: "btn btn-link text-decoration-none",
                         attrs: {
                           "data-toggle": "modal",
                           "data-target": "#notloged"
@@ -38700,7 +38748,10 @@ var render = function() {
                             width: "25px"
                           }
                         }),
-                        _vm._v(" Comments\n                            ")
+                        _vm._v(" "),
+                        _c("span", { staticClass: "badge badge-light" }, [
+                          _vm._v("4")
+                        ])
                       ]
                     )
                   ])
@@ -51892,9 +51943,9 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\project\my-portfolio\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! D:\project\my-portfolio\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! D:\project\my-portfolio\resources\sass\admin.scss */"./resources/sass/admin.scss");
+__webpack_require__(/*! C:\coding\projects\fk-portfolio\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\coding\projects\fk-portfolio\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\coding\projects\fk-portfolio\resources\sass\admin.scss */"./resources/sass/admin.scss");
 
 
 /***/ })

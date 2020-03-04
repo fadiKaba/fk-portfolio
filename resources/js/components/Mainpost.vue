@@ -16,25 +16,30 @@
                         <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                         <div v-if="loged == true" class="btn-container row">
                             <div class="col-4">
-                                <button class="btn text-light" @click="like(userId,postId)">
-                                    <img :src="same('../icons/like.svg')" alt="" width="25px"> Like
+                                <button class="btn btn-link text-decoration-none" @click="like(userId,postId)">
+                                    <img v-if="likeC.includes(userId.toString())" :src="same('../icons/unlike.svg')" alt="" width="25px">
+                                    <img v-else :src="same('../icons/like.svg')" alt="" width="25px"> 
+                                    <span class="badge badge-light">{{likes}} </span>                              
                                 </button>
                             </div>
                             <div class="col-8">
-                                <button class="btn text-light">
-                                    <img :src="same('../icons/comment.svg')" alt="" width="25px"> Comments
+                                <button class="btn btn-link text-decoration-none">
+                                    <img :src="same('../icons/comment.svg')" alt="" width="25px">
+                                    <span class="badge badge-light">4</span>
                                 </button>
                             </div>
                         </div>
                         <div v-if="loged == false" class="btn-container row">
                             <div class="col-4">
-                                <button class="btn text-light" type="button" data-toggle="modal" data-target="#notloged">
-                                    <img :src="same('../icons/like.svg')" alt="" width="25px"> Like
+                                <button class="btn btn-link text-decoration-none" type="button" data-toggle="modal" data-target="#notloged">
+                                    <img :src="same('../icons/like.svg')" alt="" width="25px"> 
+                                    <span class="badge badge-light">{{likes}}</span>
                                 </button>
                             </div>
                             <div class="col-8">
-                                <button class="btn text-light" data-toggle="modal" data-target="#notloged">
-                                    <img :src="same('../icons/comment.svg')" alt="" width="25px"> Comments
+                                <button class="btn btn-link text-decoration-none" data-toggle="modal" data-target="#notloged">
+                                    <img :src="same('../icons/comment.svg')" alt="" width="25px"> 
+                                    <span class="badge badge-light">4</span>
                                 </button>
                             </div>
                         </div>
@@ -58,18 +63,35 @@ export default {
         loged: Boolean,
         userId:[String, Number],
         postId:[String, Number],
+        likeC:Array,
+    },
+    data: function(){
+        return {
+            likes: this.likeC.length -1
+        }
+    },
+    mounted: function(){
+        console.log();
     },
     methods:{
         same: function(val){
             return val
         },
         like: function(userId, postId){
-            console.log(this.loged);
         axios.post(`posts/like/${this.userId}/${this.postId}`)
         .then( (respone) => {
-            console.log(respone)
+            if(respone.data == 'like'){
+                this.likes +=1
+                this.likeC.push(this.userId.toString())
+            }else{
+                this.likes -=1
+                let ind = this.likeC.indexOf(this.userId.toString())
+                if(ind > -1){
+                    this.likeC.splice(ind, 1);
+                }
+            }
         }).catch(err => console.log(err))
-        }
+        },
     }
 }
 </script>
@@ -77,10 +99,10 @@ export default {
 .card{
         .btn-container{
             div:nth-child(1){
-            background-color: #0E7F43;
+           // background-color: #0E7F43;
             }
             div:nth-child(2){
-            background-color: #A4CB38;;
+           // background-color: #A4CB38;
             }
         }
         .foot{

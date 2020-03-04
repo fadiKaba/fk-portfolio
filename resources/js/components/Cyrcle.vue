@@ -41,6 +41,7 @@ export default {
 <style lang="scss" scoped>
 $color1:#0E7F43;
 $color2:#fff;
+$color4:#5B5C54;
 $colors:rgb(181, 204, 119);
 
 $outerCyrcleWH: 240px;

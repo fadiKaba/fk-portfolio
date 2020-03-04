@@ -10897,7 +10897,7 @@ body {
 }
 
 body #app nav {
-  background-color: #0E7F43;
+  background-color: #5B5C54;
 }
 
 body #app nav a {
@@ -10905,12 +10905,12 @@ body #app nav a {
 }
 
 body #app .left-column {
-  background-color: #0E7F43;
+  background-color: #5B5C54;
 }
 
 body #app .left-column h1 {
   background-color: #fff;
-  color: #0E7F43;
+  color: #5B5C54;
 }
 
 body #app .left-column div:nth-child(2) {
@@ -10918,7 +10918,7 @@ body #app .left-column div:nth-child(2) {
 }
 
 body #app .left-column .search-container-home {
-  background-color: #0E7F43;
+  background-color: #5B5C54;
 }
 
 @media screen and (max-width: 600px) {

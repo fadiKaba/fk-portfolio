@@ -158,6 +158,23 @@ class PostsController extends Controller
         return view('/admin/admin-posts')->with(compact('posts'));
     }
     public function like($userId, $postId){
-        return $userId .' '.$postId;
+        
+       $post = Post::findOrFail($postId);
+        
+       $postArr = explode(",", $post->likes);
+
+       if(!in_array($userId, $postArr)){
+           array_push($postArr, $userId);
+           $postStr = implode(",", $postArr);
+           $post->likes = $postStr;
+           $post->save();
+           return 'like';
+       }
+       $index = array_search($userId, $postArr);
+       unset($postArr[$index]);
+       $postStr = implode(',', $postArr);
+       $post->likes = $postStr;
+       $post->save();
+        return 'unlike';
     }
 }
