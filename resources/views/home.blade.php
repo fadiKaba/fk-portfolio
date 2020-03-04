@@ -10,7 +10,7 @@
             <div class="mb-2">
                 <img src="{{asset('/wallpapers/city-green.png')}}" alt="city" width="100%">
             </div>
-            <div class="search-container-home p-2">
+            <div class="search-container-home">
                 <Search></Search>
             </div>       
         </div>
@@ -20,11 +20,15 @@
             <Mainpost 
             :src="{{json_encode($post->image != null ? $post->image->url : '')}}" 
             :title="{{json_encode($post->post_title)}}" 
-            :body="{{json_encode($post->post_body)}}">
+            :body="{{json_encode($post->post_body)}}"
+            :loged="{{json_encode(Auth::check())}}"
+            :user-id="{{json_encode(Auth::id())}}"
+            :post-id="{{json_encode($post->id)}}">           
             </Mainpost>
             @endforeach
             @endif
          </div> 
+         <Modal :modal-id="{{json_encode('notloged')}}" :modal-text="{{json_encode('You need to login')}}"></Modal>
     </div>
 </div>
 @endsection

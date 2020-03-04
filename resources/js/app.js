@@ -32,10 +32,11 @@ import Foot from "./components/Foot";
 import Mainpost from "./components/Mainpost";
 import Minipost from "./components/Minipost";
 import Search from "./components/Search";
+import Modal from './components/Modal';
 
 const app = new Vue({
     el: '#app',
-    components:{Mainlink,Cyrcle,Foot, Mainpost, Minipost, Search},
+    components:{Mainlink,Cyrcle,Foot, Mainpost, Minipost, Search, Modal},
     methods:{
         same: function(input){
             return input

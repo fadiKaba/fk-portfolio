@@ -3,11 +3,13 @@
         <div  :class="ann" @mousemove="ann = 'outer-cyrcle'" @mouseout="ann = 'outer-cyrcle borderShad'">
             <div id="gear" class="inner-cyrcle">
                 <span @click="returnBack(cyrclePath)">{{cyrcleName}}</span>
+                <span @click="returnBack(cyrclePath)">{{cyrcleName}}</span>
             </div>
         </div>
     </div>
 </template>
 <script>
+
 export default {
     name:'Cyrcle',
     props:['cyrcleName','cyrclePath'],
@@ -15,6 +17,13 @@ export default {
         return{
             ann:'outer-cyrcle borderShad'
         }
+    },
+    mounted:function(){
+        $(window).bind("pageshow", function(event) {
+        if (event.originalEvent.persisted) {
+            window.location.reload(); 
+                }  
+            });
     },
     methods:{
         returnBack: function(urlH){
@@ -61,7 +70,13 @@ $innerCyrcleWH: 230px;
           border-radius: 50%;
           background-color: $color1;
           transition: 0.7s;
-          span{
+          span:nth-child(1){
+              color: #fff;
+              font-weight: bold;
+              font-size: 1.2rem;
+          }
+          span:nth-child(2){
+              display: none;
               background-color: #fff;
               color: $color1;
               font-weight: bolder;
@@ -79,7 +94,11 @@ $innerCyrcleWH: 230px;
             .inner-cyrcle{
                 transform: rotateZ(90deg);
                 background-color: transparent;
-                span{
+                span:nth-child(1){
+                display: none;
+                }
+                span:nth-child(2){
+                display: block;
                 transform: scale(1) rotateZ(-90deg);
                 }
             }
@@ -114,7 +133,14 @@ $innerCyrcleWH: 230px;
     }   
 }
 
+@keyframes border{
+    0%{
 
+    }
+    100%{
+
+    }
+}
 
 
 @media screen and (min-width:600px){

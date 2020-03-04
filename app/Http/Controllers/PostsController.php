@@ -157,4 +157,7 @@ class PostsController extends Controller
         $posts = Post::where('post_title', 'LIKE', "%$request->sresult%")->get();
         return view('/admin/admin-posts')->with(compact('posts'));
     }
+    public function like($userId, $postId){
+        return $userId .' '.$postId;
+    }
 }

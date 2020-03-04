@@ -30,6 +30,11 @@ Route::group(['middleware' => ['admin']], function(){
     Route::post('/posts/gotosearch', 'PostsController@goToSearch')->name('postsgotosearch');
 });
 
+Route::group(['middleware' => ['auth']], function(){
+
+   Route::post('/posts/like/{userId}/{postId}','PostsController@like')->name('like');
+
+});
 
 
 
