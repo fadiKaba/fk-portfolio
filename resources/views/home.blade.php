@@ -22,9 +22,10 @@
             :title="{{json_encode($post->post_title)}}" 
             :body="{{json_encode($post->post_body)}}"
             :loged="{{json_encode(Auth::check())}}"
-            :user-id="{{json_encode(Auth::id())}}"
+            :user="{{json_encode(Auth::user())}}"
             :post-id="{{json_encode($post->id)}}"
-            :like-c="{{json_encode(explode(',',$post->likes))}}">           
+            :like-c="{{json_encode(explode(',',$post->likes))}}"
+            :comments="{{json_encode($post->comment)}}">           
             </Mainpost>
             @endforeach
             @endif

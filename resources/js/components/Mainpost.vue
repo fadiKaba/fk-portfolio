@@ -16,16 +16,22 @@
                         <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                         <div v-if="loged == true" class="btn-container row">
                             <div class="col-4">
-                                <button class="btn btn-link text-decoration-none" @click="like(userId,postId)">
-                                    <img v-if="likeC.includes(userId.toString())" :src="same('../icons/unlike.svg')" alt="" width="25px">
+                                <button class="btn btn-link text-decoration-none" @click="like(user.id,postId)">
+                                    <img v-if="likeC.includes(user.id.toString())" :src="same('../icons/unlike.svg')" alt="" width="25px">
                                     <img v-else :src="same('../icons/like.svg')" alt="" width="25px"> 
                                     <span class="badge badge-light">{{likes}} </span>                              
                                 </button>
                             </div>
                             <div class="col-8">
-                                <button class="btn btn-link text-decoration-none">
+                                <button 
+                                class="btn btn-link text-decoration-none"
+                                data-toggle="collapse" 
+                                :href="'#comment'+ postId.toString()" 
+                                role="button" 
+                                aria-expanded="false" 
+                                aria-controls="collapseExample">
                                     <img :src="same('../icons/comment.svg')" alt="" width="25px">
-                                    <span class="badge badge-light">4</span>
+                                    <span class="badge badge-light">{{comments.length}}</span>
                                 </button>
                             </div>
                         </div>
@@ -39,11 +45,16 @@
                             <div class="col-8">
                                 <button class="btn btn-link text-decoration-none" data-toggle="modal" data-target="#notloged">
                                     <img :src="same('../icons/comment.svg')" alt="" width="25px"> 
-                                    <span class="badge badge-light">4</span>
+                                    <span class="badge badge-light">{{comments.length}}</span>
                                 </button>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="collapse" :id="'comment'+ postId.toString()">
+                <div class="card card-body">
+                    <Comment :user="user" :post-id="postId" :comments="same(comments)"></Comment>
                 </div>
             </div>
        </div>
@@ -52,26 +63,28 @@
 <script>
 
 import axios from 'axios';
+import Comment from './Comment';
 
 export default {
     name:'Mainpost',
-    components:{},
+    components:{Comment,},
     props:{
         src: String,
         title: String,
         body: String,
         loged: Boolean,
-        userId:[String, Number],
+        user:[String, Number, Object],
         postId:[String, Number],
         likeC:Array,
+        comments:[String,Object,Array]
     },
     data: function(){
         return {
             likes: this.likeC.length -1
         }
     },
-    mounted: function(){
-        console.log();
+    mounted: function(){      
+         // console.log(this.user);           
     },
     methods:{
         same: function(val){
@@ -82,10 +95,10 @@ export default {
         .then( (respone) => {
             if(respone.data == 'like'){
                 this.likes +=1
-                this.likeC.push(this.userId.toString())
+                this.likeC.push(this.user.id.toString())
             }else{
                 this.likes -=1
-                let ind = this.likeC.indexOf(this.userId.toString())
+                let ind = this.likeC.indexOf(this.user.id.toString())
                 if(ind > -1){
                     this.likeC.splice(ind, 1);
                 }

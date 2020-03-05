@@ -33,6 +33,7 @@ Route::group(['middleware' => ['admin']], function(){
 Route::group(['middleware' => ['auth']], function(){
 
    Route::post('/posts/like/{userId}/{postId}','PostsController@like')->name('like');
+   Route::post('/comments/add/{userId}/{post_id}','CommentsController@store')->name('newcomment');
 
 });
 
