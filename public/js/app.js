@@ -1944,31 +1944,56 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Comment',
-  props: ['user', 'userName', 'postId', 'comments'],
+  props: ['auth', 'post', 'comments'],
   data: function data() {
     return {
       body: '',
       comts: this.comments
     };
   },
-  mounted: function mounted() {//console.log(this.comments);
+  mounted: function mounted() {
+    this.comts.sort(function (a, b) {
+      return b['id'] - a['id'];
+    });
   },
   methods: {
     addComment: function addComment() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("comments/add/".concat(this.user.id, "/").concat(this.postId), {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("comments/add/".concat(this.auth.id, "/").concat(this.post.id), {
         'body': this.body
       }).then(function (response) {
         _this.body = '';
 
-        _this.comts.unshift(response.data);
-
-        console.log(response.data);
+        _this.comts.unshift(response.data[0]);
+      })["catch"](function (err) {
+        return console.log(err);
       });
+    },
+    deleteComment: function deleteComment(id) {
+      var _this2 = this;
+
+      var yes = confirm('Delete your comment?');
+
+      if (yes) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("/comment/destroy/".concat(id)).then(function (response) {
+          var comIndex = _this2.comments.findIndex(function (x) {
+            return x.id === id;
+          });
+
+          _this2.comments.splice(comIndex, 1);
+        });
+      }
     }
   }
 });
@@ -2196,8 +2221,8 @@ __webpack_require__.r(__webpack_exports__);
     title: String,
     body: String,
     loged: Boolean,
-    user: [String, Number, Object],
-    postId: [String, Number],
+    auth: [String, Number, Object],
+    post: [String, Number, Object],
     likeC: Array,
     comments: [String, Object, Array]
   },
@@ -2212,18 +2237,18 @@ __webpack_require__.r(__webpack_exports__);
     same: function same(val) {
       return val;
     },
-    like: function like(userId, postId) {
+    like: function like(authId, postId) {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("posts/like/".concat(this.userId, "/").concat(this.postId)).then(function (respone) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("posts/like/".concat(authId, "/").concat(postId)).then(function (respone) {
         if (respone.data == 'like') {
           _this.likes += 1;
 
-          _this.likeC.push(_this.user.id.toString());
+          _this.likeC.push(authId.toString());
         } else {
           _this.likes -= 1;
 
-          var ind = _this.likeC.indexOf(_this.user.id.toString());
+          var ind = _this.likeC.indexOf(authId.toString());
 
           if (ind > -1) {
             _this.likeC.splice(ind, 1);
@@ -38637,30 +38662,43 @@ var render = function() {
             _c(
               "a",
               { staticClass: "font-weight-bold d-block", attrs: { href: "#" } },
-              [_vm._v(_vm._s(_vm.user.name))]
+              [_vm._v(_vm._s(com.user.name))]
             ),
             _vm._v("\n                " + _vm._s(com.body) + "\n            ")
           ]),
           _vm._v(" "),
-          _vm._m(0, true)
+          _c("div", { staticClass: "mb-2" }, [
+            _c("button", { staticClass: "btn btn-link mt-0 p-0" }, [
+              _vm._v("Like")
+            ]),
+            _vm._v(" "),
+            com.user_id == _vm.auth.id
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-link text-danger mt-0 p-0",
+                    attrs: { "data-toggle": "popover" },
+                    on: {
+                      click: function($event) {
+                        return _vm.deleteComment(com.id)
+                      }
+                    }
+                  },
+                  [_vm._v("Delete\n              ")]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _c("span", { staticClass: "text-muted ml-3" }, [
+              _vm._v("4 hours ago")
+            ])
+          ])
         ])
       }),
       0
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mb-2" }, [
-      _c("button", { staticClass: "btn btn-link mt-0 p-0" }, [_vm._v("Like")]),
-      _vm._v(" "),
-      _c("span", { staticClass: "text-muted ml-3" }, [_vm._v("4 hours ago")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -38891,12 +38929,12 @@ var render = function() {
                         staticClass: "btn btn-link text-decoration-none",
                         on: {
                           click: function($event) {
-                            return _vm.like(_vm.user.id, _vm.postId)
+                            return _vm.like(_vm.auth.id, _vm.post.id)
                           }
                         }
                       },
                       [
-                        _vm.likeC.includes(_vm.user.id.toString())
+                        _vm.likeC.includes(_vm.auth.id.toString())
                           ? _c("img", {
                               attrs: {
                                 src: _vm.same("../icons/unlike.svg"),
@@ -38926,7 +38964,7 @@ var render = function() {
                         staticClass: "btn btn-link text-decoration-none",
                         attrs: {
                           "data-toggle": "collapse",
-                          href: "#comment" + _vm.postId.toString(),
+                          href: "#comment" + _vm.post.id.toString(),
                           role: "button",
                           "aria-expanded": "false",
                           "aria-controls": "collapseExample"
@@ -39014,7 +39052,7 @@ var render = function() {
         "div",
         {
           staticClass: "collapse",
-          attrs: { id: "comment" + _vm.postId.toString() }
+          attrs: { id: "comment" + _vm.post.id.toString() }
         },
         [
           _c(
@@ -39023,8 +39061,8 @@ var render = function() {
             [
               _c("Comment", {
                 attrs: {
-                  user: _vm.user,
-                  "post-id": _vm.postId,
+                  auth: _vm.auth,
+                  post: _vm.post,
                   comments: _vm.same(_vm.comments)
                 }
               })
@@ -51498,6 +51536,9 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 
 
 
+$(function () {
+  $('[data-toggle="popover"]').popover();
+});
 var app = new Vue({
   el: '#app',
   components: {
@@ -52303,9 +52344,9 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\projects\fk-portfolio\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! D:\projects\fk-portfolio\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! D:\projects\fk-portfolio\resources\sass\admin.scss */"./resources/sass/admin.scss");
+__webpack_require__(/*! C:\coding\projects\fk-portfolio\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\coding\projects\fk-portfolio\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\coding\projects\fk-portfolio\resources\sass\admin.scss */"./resources/sass/admin.scss");
 
 
 /***/ })

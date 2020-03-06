@@ -21,13 +21,20 @@
         <div>
             <div class="comment-container" v-for="com in comts" :key="com.id">
                 <div class="p-1 p-md-2 m-0">
-                    <a class="font-weight-bold d-block" href="#">{{user.name}}</a>
+                    <a class="font-weight-bold d-block" href="#">{{com.user.name}}</a>
                     {{com.body}}
                 </div>
                 <div class="mb-2">
                   <button class="btn btn-link mt-0 p-0">Like</button> 
+                  <button 
+                  class="btn btn-link text-danger mt-0 p-0"
+                  v-if="com.user_id == auth.id"
+                  @click="deleteComment(com.id)"
+                  data-toggle="popover"
+                  >Delete
+                  </button>
                   <span class="text-muted ml-3">4 hours ago</span> 
-                </div>               
+                </div>        
             </div>
         </div>
     </div>
@@ -38,7 +45,7 @@ import axios from 'axios';
 
 export default {
     name:'Comment',
-    props:['user', 'userName', 'postId', 'comments'],
+    props:['auth', 'post', 'comments'],
     data: function(){
         return{
             body:'',
@@ -46,19 +53,32 @@ export default {
         }
     },
     mounted: function(){
-     //console.log(this.comments);
+     this.comts.sort((a, b)=>{
+             return b['id'] - a['id']
+     });
     },
     methods:{
         addComment: function(){
-            axios.post(`comments/add/${this.user.id}/${this.postId}`,{
+            axios.post(`comments/add/${this.auth.id}/${this.post.id}`,{
                 'body': this.body,
             })
             .then((response)=>{
                 this.body = '';
-                this.comts.unshift(response.data);
-                console.log(response.data)
+                this.comts.unshift(response.data[0]);
             })
-        }
+            .catch(err => console.log(err))
+        },
+        deleteComment: function(id){
+          let yes = confirm('Delete your comment?');
+          if(yes){
+            axios.delete(`/comment/destroy/${id}`)
+            .then((response)=>{
+                let comIndex = this.comments.findIndex(x => x.id === id);
+                this.comments.splice(comIndex,1);
+            })
+          }
+          
+        },
     }
 }
 </script>

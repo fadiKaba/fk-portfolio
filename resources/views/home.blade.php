@@ -13,7 +13,7 @@
             <div class="search-container-home">
                 <Search></Search>
             </div>       
-        </div>
+        </div>            
         <div class="col-md-6 posts-container my-2 ">
             @if(count($posts) > 0)
             @foreach($posts as $post)
@@ -22,10 +22,10 @@
             :title="{{json_encode($post->post_title)}}" 
             :body="{{json_encode($post->post_body)}}"
             :loged="{{json_encode(Auth::check())}}"
-            :user="{{json_encode(Auth::user())}}"
-            :post-id="{{json_encode($post->id)}}"
+            :auth="{{json_encode(Auth::user())}}"
+            :post="{{json_encode($post)}}"
             :like-c="{{json_encode(explode(',',$post->likes))}}"
-            :comments="{{json_encode($post->comment)}}">           
+            :comments="{{json_encode($post->comment()->with('user')->get())}}">           
             </Mainpost>
             @endforeach
             @endif

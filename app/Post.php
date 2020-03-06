@@ -11,7 +11,7 @@ class Post extends Model
 {   protected $fillable = ['post_title', 'post_body','user_id'];
 
     public function user(){
-        return $this->belongTo(User::class);
+        return $this->belongsTo(User::class);
     }
     public function image(){
         return $this->hasOne(Image::class);

@@ -16,8 +16,8 @@
                         <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                         <div v-if="loged == true" class="btn-container row">
                             <div class="col-4">
-                                <button class="btn btn-link text-decoration-none" @click="like(user.id,postId)">
-                                    <img v-if="likeC.includes(user.id.toString())" :src="same('../icons/unlike.svg')" alt="" width="25px">
+                                <button class="btn btn-link text-decoration-none" @click="like(auth.id,post.id)">
+                                    <img v-if="likeC.includes(auth.id.toString())" :src="same('../icons/unlike.svg')" alt="" width="25px">
                                     <img v-else :src="same('../icons/like.svg')" alt="" width="25px"> 
                                     <span class="badge badge-light">{{likes}} </span>                              
                                 </button>
@@ -26,7 +26,7 @@
                                 <button 
                                 class="btn btn-link text-decoration-none"
                                 data-toggle="collapse" 
-                                :href="'#comment'+ postId.toString()" 
+                                :href="'#comment'+ post.id.toString()" 
                                 role="button" 
                                 aria-expanded="false" 
                                 aria-controls="collapseExample">
@@ -52,9 +52,9 @@
                     </div>
                 </div>
             </div>
-            <div class="collapse" :id="'comment'+ postId.toString()">
+            <div class="collapse" :id="'comment'+ post.id.toString()">
                 <div class="card card-body">
-                    <Comment :user="user" :post-id="postId" :comments="same(comments)"></Comment>
+                    <Comment :auth="auth" :post="post" :comments="same(comments)"></Comment>
                 </div>
             </div>
        </div>
@@ -73,8 +73,8 @@ export default {
         title: String,
         body: String,
         loged: Boolean,
-        user:[String, Number, Object],
-        postId:[String, Number],
+        auth:[String, Number, Object],
+        post:[String, Number, Object],
         likeC:Array,
         comments:[String,Object,Array]
     },
@@ -90,15 +90,15 @@ export default {
         same: function(val){
             return val
         },
-        like: function(userId, postId){
-        axios.post(`posts/like/${this.userId}/${this.postId}`)
+        like: function(authId, postId){
+        axios.post(`posts/like/${authId}/${postId}`)
         .then( (respone) => {
             if(respone.data == 'like'){
                 this.likes +=1
-                this.likeC.push(this.user.id.toString())
+                this.likeC.push(authId.toString())
             }else{
                 this.likes -=1
-                let ind = this.likeC.indexOf(this.user.id.toString())
+                let ind = this.likeC.indexOf(authId.toString())
                 if(ind > -1){
                     this.likeC.splice(ind, 1);
                 }

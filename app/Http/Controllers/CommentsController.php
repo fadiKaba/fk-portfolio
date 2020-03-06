@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Comment;
+use App\User;
 
 class CommentsController extends Controller
 {
@@ -18,6 +19,11 @@ class CommentsController extends Controller
             'body' => $request->body,
         ]);
 
+        return json_encode(Comment::where('id',$comment->id)->with('user')->get());
+    }
+    public function destroy($id){
+        $comment = Comment::findOrfail($id);
+        $comment->delete();
         return json_encode($comment);
     }
 }

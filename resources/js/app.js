@@ -34,6 +34,10 @@ import Minipost from "./components/Minipost";
 import Search from "./components/Search";
 import Modal from './components/Modal';
 
+$(function () {
+    $('[data-toggle="popover"]').popover()
+  })
+
 const app = new Vue({
     el: '#app',
     components:{Mainlink,Cyrcle,Foot, Mainpost, Minipost, Search, Modal},
