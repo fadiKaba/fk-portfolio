@@ -1949,8 +1949,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Comment',
@@ -38658,6 +38656,14 @@ var render = function() {
       "div",
       _vm._l(_vm.comts, function(com) {
         return _c("div", { key: com.id, staticClass: "comment-container" }, [
+          com.likes != null && com.likes != ""
+            ? _c("span", [
+                _vm._v(
+                  _vm._s(com.likes.split(",").includes(_vm.auth.id.toString()))
+                )
+              ])
+            : _vm._e(),
+          _vm._v(" "),
           _c("div", { staticClass: "p-1 p-md-2 m-0" }, [
             _c(
               "a",
@@ -38668,16 +38674,15 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "mb-2" }, [
-            _c("button", { staticClass: "btn btn-link mt-0 p-0" }, [
-              _vm._v("Like")
+            _c("span", { staticClass: "text-muted ml-3" }, [
+              _vm._v("4 hours ago")
             ]),
             _vm._v(" "),
             com.user_id == _vm.auth.id
               ? _c(
                   "button",
                   {
-                    staticClass: "btn btn-link text-danger mt-0 p-0",
-                    attrs: { "data-toggle": "popover" },
+                    staticClass: "btn btn-link mt-0 ml-2 p-0",
                     on: {
                       click: function($event) {
                         return _vm.deleteComment(com.id)
@@ -38686,11 +38691,7 @@ var render = function() {
                   },
                   [_vm._v("Delete\n              ")]
                 )
-              : _vm._e(),
-            _vm._v(" "),
-            _c("span", { staticClass: "text-muted ml-3" }, [
-              _vm._v("4 hours ago")
-            ])
+              : _vm._e()
           ])
         ])
       }),
@@ -38905,16 +38906,18 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "row no-gutters" }, [
-        _c("div", { staticClass: "col-md-4 m-md-4" }, [
-          _vm.src != ""
-            ? _c("img", {
-                staticClass: "card-img-top",
-                attrs: { src: "./images/" + _vm.src, alt: "" }
-              })
-            : _vm._e()
-        ]),
+        _vm.src != ""
+          ? _c("div", { staticClass: "col-md-4 m-md-4" }, [
+              _vm.src != ""
+                ? _c("img", {
+                    staticClass: "card-img-top",
+                    attrs: { src: "./images/" + _vm.src, alt: "" }
+                  })
+                : _vm._e()
+            ])
+          : _vm._e(),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-7" }, [
+        _c("div", { class: _vm.src == "" ? "col-md-12" : "col-md-7" }, [
           _c("div", { staticClass: "card-body" }, [
             _c("p", { staticClass: "card-text" }, [_vm._v(_vm._s(_vm.body))]),
             _vm._v(" "),

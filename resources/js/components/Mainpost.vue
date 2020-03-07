@@ -7,10 +7,10 @@
                 </div>                  
             </div>           
             <div class="row no-gutters">
-                <div class="col-md-4 m-md-4">
+                <div class="col-md-4 m-md-4" v-if="src != ''">
                     <img v-if="src != ''" :src="'./images/' + src" class="card-img-top" alt="">
                 </div>
-                <div class="col-md-7">
+                <div :class="src == '' ?'col-md-12': 'col-md-7'">
                     <div class="card-body">
                         <p class="card-text">{{body}}</p>
                         <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>

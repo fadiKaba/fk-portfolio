@@ -19,21 +19,19 @@
             </div>
         </div>
         <div>
-            <div class="comment-container" v-for="com in comts" :key="com.id">
+            <div class="comment-container" v-for="com in comts" :key="com.id"><span v-if="com.likes != null && com.likes != ''">{{com.likes.split(',').includes(auth.id.toString())}}</span>
                 <div class="p-1 p-md-2 m-0">
                     <a class="font-weight-bold d-block" href="#">{{com.user.name}}</a>
                     {{com.body}}
                 </div>
                 <div class="mb-2">
-                  <button class="btn btn-link mt-0 p-0">Like</button> 
+                  <span class="text-muted ml-3">4 hours ago</span>
                   <button 
-                  class="btn btn-link text-danger mt-0 p-0"
+                  class="btn btn-link mt-0 ml-2 p-0"
                   v-if="com.user_id == auth.id"
                   @click="deleteComment(com.id)"
-                  data-toggle="popover"
                   >Delete
-                  </button>
-                  <span class="text-muted ml-3">4 hours ago</span> 
+                  </button> 
                 </div>        
             </div>
         </div>
