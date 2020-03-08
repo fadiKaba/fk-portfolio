@@ -1951,6 +1951,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Comment',
@@ -1962,8 +1965,6 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    console.log(this.comt);
-
     if (this.comt.likes != null && this.comt.likes != '') {
       this.comtArr = this.comt.likes.split(',');
     }
@@ -1983,10 +1984,22 @@ __webpack_require__.r(__webpack_exports__);
           var ind = _this.comtArr.indexOf(_this.auth.id.toString());
 
           _this.comtArr.splice(ind, 1);
-        }
+        } // console.log(response)
 
-        console.log(response);
       });
+    },
+    deleteC: function deleteC(userId, commentId) {
+      var _this2 = this;
+
+      var ask = confirm('Delete your comment');
+
+      if (ask) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("/comment/destroy/".concat(userId, "/").concat(commentId)).then(function (response) {
+          _this2.$emit('delItem', response.data);
+        })["catch"](function (err) {
+          return console.log(err);
+        });
+      }
     }
   }
 });
@@ -2224,6 +2237,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2286,9 +2300,16 @@ __webpack_require__.r(__webpack_exports__);
         _this2.newC = '';
 
         _this2.comments.unshift(response.data[0]);
-
-        console.log(response.data);
       });
+    },
+    getDelItem: function getDelItem(val) {
+      var ind = this.comments.findIndex(function (x) {
+        return x.id == val;
+      });
+      var co = this.comments;
+      this.comments.splice(ind, 1);
+      console.log(ind);
+      console.log(this.comments);
     }
   }
 });
@@ -38714,9 +38735,21 @@ var render = function() {
                 ]
               ),
           _vm._v(" "),
-          _c("button", { staticClass: "btn btn-link mt-0 ml-2 p-0" }, [
-            _vm._v("Delete\n                ")
-          ])
+          _vm.auth.id == _vm.comt.user_id || _vm.auth.is_admin == 1
+            ? _c(
+                "button",
+                {
+                  staticClass: "btn btn-link mt-0 ml-2 p-0",
+                  attrs: { id: "example" },
+                  on: {
+                    click: function($event) {
+                      return _vm.deleteC(_vm.auth.id, _vm.comt.id)
+                    }
+                  }
+                },
+                [_vm._v("Delete\n                ")]
+              )
+            : _vm._e()
         ])
       ])
     ])
@@ -39141,7 +39174,8 @@ var render = function() {
               _vm._l(_vm.comments, function(comt) {
                 return _c("Comment", {
                   key: comt.id,
-                  attrs: { comt: comt, auth: _vm.auth }
+                  attrs: { comt: comt, auth: _vm.auth },
+                  on: { delItem: _vm.getDelItem }
                 })
               })
             ],

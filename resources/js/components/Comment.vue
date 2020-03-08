@@ -31,6 +31,9 @@
                         </span>
                     </button>
                     <button 
+                    id="example"
+                    v-if="auth.id == comt.user_id || auth.is_admin == 1" 
+                    @click="deleteC(auth.id, comt.id)"          
                     class="btn btn-link mt-0 ml-2 p-0"
                     >Delete
                     </button>  
@@ -52,7 +55,7 @@ export default {
         likeStr: 'Like',
         }
     },
-    mounted: function(){console.log(this.comt)
+    mounted: function(){
        if(this.comt.likes != null && this.comt.likes != ''){
            this.comtArr = this.comt.likes.split(',');
        }
@@ -69,9 +72,18 @@ export default {
                 let ind = this.comtArr.indexOf(this.auth.id.toString());
                 this.comtArr.splice(ind, 1)
             }
-            console.log(response)
+           // console.log(response)
         })
-        }
+        },
+        deleteC: function(userId, commentId){
+           let ask = confirm('Delete your comment');
+           if(ask){
+               axios.delete(`/comment/destroy/${userId}/${commentId}`)
+               .then((response)=>{
+                  this.$emit('delItem', response.data)
+               }).catch(err => console.log(err))
+           }
+        },
     }
  
 }

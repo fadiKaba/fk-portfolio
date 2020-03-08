@@ -76,6 +76,7 @@
                     v-for="comt in comments" 
                     :key="comt.id" :comt="comt"
                     :auth="auth"
+                    v-on:delItem="getDelItem"
                     ></Comment>
                 </div>
             </div>
@@ -135,8 +136,14 @@ export default {
            }).then((response) => {
                this.newC = '';
                this.comments.unshift(response.data[0])
-               console.log(response.data)
            })
+        },
+        getDelItem: function(val){
+            let ind = this.comments.findIndex( x => x.id == val);
+            let co = this.comments;
+            this.comments.splice(ind, 1);
+            console.log(ind)
+            console.log(this.comments)
         }
     }
 }
