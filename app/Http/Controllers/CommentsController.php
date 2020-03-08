@@ -21,28 +21,28 @@ class CommentsController extends Controller
 
         return json_encode(Comment::where('id',$comment->id)->with('user')->get());
     }
-    public function destroy($id){
-        $comment = Comment::findOrfail($id);
+    public function destroy($userId, $commentId){
+        $comment = Comment::findOrfail($commentId);
         $comment->delete();
-        return json_encode($comment);
+        return json_encode($commentId);
     }
-    // public function like($userId, $commentId){
-    //     $comment = Comment::findOrFail($commentId);
+    public function like($userId, $commentId){
+        $comment = Comment::findOrFail($commentId);
         
-    //    $commentArr = explode(",", $comment->likes);
+       $commentArr = explode(",", $comment->likes);
 
-    //    if(!in_array($userId, $commentArr)){
-    //        array_push($commentArr, $userId);
-    //        $commentStr = implode(",", $commentArr);
-    //        $comment->likes = $commentStr;
-    //        $comment->save();
-    //        return 'like';
-    //    }
-    //    $index = array_search($userId, $commentArr);
-    //    unset($commentArr[$index]);
-    //    $commentStr = implode(',', $commentArr);
-    //    $comment->likes = $commentStr;
-    //    $comment->save();
-    //     return 'unlike';
-    // }
+       if(!in_array($userId, $commentArr)){
+           array_push($commentArr, $userId);
+           $commentStr = implode(",", $commentArr);
+           $comment->likes = $commentStr;
+           $comment->save();
+           return 'like';
+       }
+       $index = array_search($userId, $commentArr);
+       unset($commentArr[$index]);
+       $commentStr = implode(',', $commentArr);
+       $comment->likes = $commentStr;
+       $comment->save();
+        return 'unlike';
+    }
 }

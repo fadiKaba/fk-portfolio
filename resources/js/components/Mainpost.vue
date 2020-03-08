@@ -54,7 +54,29 @@
             </div>
             <div class="collapse" :id="'comment'+ post.id.toString()">
                 <div class="card card-body">
-                    <Comment :auth="auth" :post="post" :comments="same(comments)"></Comment>
+                    <div class="input-group mb-3">
+                        <input 
+                        type="text" 
+                        class="form-control" 
+                        placeholder="Recipient's username" 
+                        aria-label="Recipient's username" 
+                        aria-describedby="button-addon2"
+                        v-model="newC">
+                        <div class="input-group-append">
+                        <button 
+                        class="btn btn-light" 
+                        type="button" 
+                        id="button-addon2"
+                        @click="addComment(auth.id, post.id, newC)">
+                        Comment
+                        </button>
+                        </div>
+                    </div>
+                    <Comment 
+                    v-for="comt in comments" 
+                    :key="comt.id" :comt="comt"
+                    :auth="auth"
+                    ></Comment>
                 </div>
             </div>
        </div>
@@ -80,7 +102,9 @@ export default {
     },
     data: function(){
         return {
-            likes: this.likeC.length -1
+            likes: this.likeC.length -1,
+            comts:this.comments.sort((a, b)=>{return b['id'] - a['id']}),
+            newC:''
         }
     },
     mounted: function(){      
@@ -105,6 +129,15 @@ export default {
             }
         }).catch(err => console.log(err))
         },
+        addComment(userId, postId, commentBody){
+           axios.post(`/comments/add/${userId}/${postId}`,{
+               body:commentBody
+           }).then((response) => {
+               this.newC = '';
+               this.comments.unshift(response.data[0])
+               console.log(response.data)
+           })
+        }
     }
 }
 </script>

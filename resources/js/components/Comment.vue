@@ -1,37 +1,39 @@
 <template>
     <div class="main-container">
-        <div class="input-group mb-3">
-                <input 
-                type="text" 
-                class="form-control" 
-                placeholder="Recipient's username" 
-                aria-label="Recipient's username" 
-                aria-describedby="button-addon2"
-                v-model="body" row="5">
-            <div class="input-group-append">
-                <button 
-                class="btn btn-light" 
-                type="button" 
-                id="button-addon2"
-                @click="addComment()">
-                Comment
-                </button>
-            </div>
-        </div>
         <div>
-            <div class="comment-container" v-for="com in comts" :key="com.id"><span v-if="com.likes != null && com.likes != ''">{{com.likes.split(',').includes(auth.id.toString())}}</span>
+            <div class="comment-container">
                 <div class="p-1 p-md-2 m-0">
-                    <a class="font-weight-bold d-block" href="#">{{com.user.name}}</a>
-                    {{com.body}}
+                    <a class="font-weight-bold d-block" href="#">{{comt.user.name}}</a>
+                    {{comt.body}}                    
                 </div>
                 <div class="mb-2">
-                  <span class="text-muted ml-3">4 hours ago</span>
-                  <button 
-                  class="btn btn-link mt-0 ml-2 p-0"
-                  v-if="com.user_id == auth.id"
-                  @click="deleteComment(com.id)"
-                  >Delete
-                  </button> 
+                    <span class="text-muted ml-3">4 hours ago</span>
+                    <button 
+                    class="btn btn-link mt-0 ml-2 p-0 font-weight-bold"
+                    v-if="comtArr == null || comtArr == '' || !comtArr.includes(auth.id.toString())"
+                    @click="like(auth.id, comt.id)"
+                    >{{likeStr}}
+                        <span 
+                        class="badge badge-light"
+                        v-if="comtArr.length -1 > 0">
+                        {{comtArr.length -1 != 0 ? comtArr.length -1: ''}} 
+                        </span>
+                    </button>
+                    <button 
+                    class="btn btn-link mt-0 ml-2 p-0 font-weight-bold"
+                    v-else
+                    @click="like(auth.id, comt.id)"
+                    >Unlike 
+                        <span 
+                        class="badge badge-light"
+                        v-if="comtArr.length -1 > 0">
+                        {{comtArr.length -1}} 
+                        </span>
+                    </button>
+                    <button 
+                    class="btn btn-link mt-0 ml-2 p-0"
+                    >Delete
+                    </button>  
                 </div>        
             </div>
         </div>
@@ -43,41 +45,35 @@ import axios from 'axios';
 
 export default {
     name:'Comment',
-    props:['auth', 'post', 'comments'],
+    props:['comt','auth'],
     data: function(){
         return{
-            body:'',
-            comts:this.comments
+        comtArr:["",],
+        likeStr: 'Like',
         }
     },
-    mounted: function(){
-     this.comts.sort((a, b)=>{
-             return b['id'] - a['id']
-     });
+    mounted: function(){console.log(this.comt)
+       if(this.comt.likes != null && this.comt.likes != ''){
+           this.comtArr = this.comt.likes.split(',');
+       }
     },
     methods:{
-        addComment: function(){
-            axios.post(`comments/add/${this.auth.id}/${this.post.id}`,{
-                'body': this.body,
-            })
-            .then((response)=>{
-                this.body = '';
-                this.comts.unshift(response.data[0]);
-            })
-            .catch(err => console.log(err))
-        },
-        deleteComment: function(id){
-          let yes = confirm('Delete your comment?');
-          if(yes){
-            axios.delete(`/comment/destroy/${id}`)
-            .then((response)=>{
-                let comIndex = this.comments.findIndex(x => x.id === id);
-                this.comments.splice(comIndex,1);
-            })
-          }
-          
-        },
+        like: function(userId, commentId){
+        axios.post(`/comments/like/${userId}/${commentId}`)
+        .then((response) => {
+            if(response.data == 'like'){
+                this.comtArr.push(this.auth.id.toString())
+                this.likeStr = "Unlike";
+            }else{
+                this.likeStr = "Like"
+                let ind = this.comtArr.indexOf(this.auth.id.toString());
+                this.comtArr.splice(ind, 1)
+            }
+            console.log(response)
+        })
+        }
     }
+ 
 }
 </script>
 <style lang="scss" scoped>

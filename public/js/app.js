@@ -1949,49 +1949,44 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Comment',
-  props: ['auth', 'post', 'comments'],
+  props: ['comt', 'auth'],
   data: function data() {
     return {
-      body: '',
-      comts: this.comments
+      comtArr: [""],
+      likeStr: 'Like'
     };
   },
   mounted: function mounted() {
-    this.comts.sort(function (a, b) {
-      return b['id'] - a['id'];
-    });
+    console.log(this.comt);
+
+    if (this.comt.likes != null && this.comt.likes != '') {
+      this.comtArr = this.comt.likes.split(',');
+    }
   },
   methods: {
-    addComment: function addComment() {
+    like: function like(userId, commentId) {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("comments/add/".concat(this.auth.id, "/").concat(this.post.id), {
-        'body': this.body
-      }).then(function (response) {
-        _this.body = '';
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/comments/like/".concat(userId, "/").concat(commentId)).then(function (response) {
+        if (response.data == 'like') {
+          _this.comtArr.push(_this.auth.id.toString());
 
-        _this.comts.unshift(response.data[0]);
-      })["catch"](function (err) {
-        return console.log(err);
+          _this.likeStr = "Unlike";
+        } else {
+          _this.likeStr = "Like";
+
+          var ind = _this.comtArr.indexOf(_this.auth.id.toString());
+
+          _this.comtArr.splice(ind, 1);
+        }
+
+        console.log(response);
       });
-    },
-    deleteComment: function deleteComment(id) {
-      var _this2 = this;
-
-      var yes = confirm('Delete your comment?');
-
-      if (yes) {
-        axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("/comment/destroy/".concat(id)).then(function (response) {
-          var comIndex = _this2.comments.findIndex(function (x) {
-            return x.id === id;
-          });
-
-          _this2.comments.splice(comIndex, 1);
-        });
-      }
     }
   }
 });
@@ -2207,6 +2202,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2226,7 +2243,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      likes: this.likeC.length - 1
+      likes: this.likeC.length - 1,
+      comts: this.comments.sort(function (a, b) {
+        return b['id'] - a['id'];
+      }),
+      newC: ''
     };
   },
   mounted: function mounted() {// console.log(this.user);           
@@ -2254,6 +2275,19 @@ __webpack_require__.r(__webpack_exports__);
         }
       })["catch"](function (err) {
         return console.log(err);
+      });
+    },
+    addComment: function addComment(userId, postId, commentBody) {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/comments/add/".concat(userId, "/").concat(postId), {
+        body: commentBody
+      }).then(function (response) {
+        _this2.newC = '';
+
+        _this2.comments.unshift(response.data[0]);
+
+        console.log(response.data);
       });
     }
   }
@@ -38606,97 +38640,86 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "main-container" }, [
-    _c("div", { staticClass: "input-group mb-3" }, [
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.body,
-            expression: "body"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: {
-          type: "text",
-          placeholder: "Recipient's username",
-          "aria-label": "Recipient's username",
-          "aria-describedby": "button-addon2",
-          row: "5"
-        },
-        domProps: { value: _vm.body },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.body = $event.target.value
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "input-group-append" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-light",
-            attrs: { type: "button", id: "button-addon2" },
-            on: {
-              click: function($event) {
-                return _vm.addComment()
-              }
-            }
-          },
-          [_vm._v("\n            Comment\n            ")]
-        )
-      ])
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      _vm._l(_vm.comts, function(com) {
-        return _c("div", { key: com.id, staticClass: "comment-container" }, [
-          com.likes != null && com.likes != ""
-            ? _c("span", [
-                _vm._v(
-                  _vm._s(com.likes.split(",").includes(_vm.auth.id.toString()))
-                )
-              ])
-            : _vm._e(),
-          _vm._v(" "),
-          _c("div", { staticClass: "p-1 p-md-2 m-0" }, [
-            _c(
-              "a",
-              { staticClass: "font-weight-bold d-block", attrs: { href: "#" } },
-              [_vm._v(_vm._s(com.user.name))]
-            ),
-            _vm._v("\n                " + _vm._s(com.body) + "\n            ")
+    _c("div", [
+      _c("div", { staticClass: "comment-container" }, [
+        _c("div", { staticClass: "p-1 p-md-2 m-0" }, [
+          _c(
+            "a",
+            { staticClass: "font-weight-bold d-block", attrs: { href: "#" } },
+            [_vm._v(_vm._s(_vm.comt.user.name))]
+          ),
+          _vm._v(
+            "\n                " +
+              _vm._s(_vm.comt.body) +
+              "                    \n            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "mb-2" }, [
+          _c("span", { staticClass: "text-muted ml-3" }, [
+            _vm._v("4 hours ago")
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "mb-2" }, [
-            _c("span", { staticClass: "text-muted ml-3" }, [
-              _vm._v("4 hours ago")
-            ]),
-            _vm._v(" "),
-            com.user_id == _vm.auth.id
-              ? _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-link mt-0 ml-2 p-0",
-                    on: {
-                      click: function($event) {
-                        return _vm.deleteComment(com.id)
-                      }
+          _vm.comtArr == null ||
+          _vm.comtArr == "" ||
+          !_vm.comtArr.includes(_vm.auth.id.toString())
+            ? _c(
+                "button",
+                {
+                  staticClass: "btn btn-link mt-0 ml-2 p-0 font-weight-bold",
+                  on: {
+                    click: function($event) {
+                      return _vm.like(_vm.auth.id, _vm.comt.id)
                     }
-                  },
-                  [_vm._v("Delete\n              ")]
-                )
-              : _vm._e()
+                  }
+                },
+                [
+                  _vm._v(_vm._s(_vm.likeStr) + "\n                    "),
+                  _vm.comtArr.length - 1 > 0
+                    ? _c("span", { staticClass: "badge badge-light" }, [
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(
+                              _vm.comtArr.length - 1 != 0
+                                ? _vm.comtArr.length - 1
+                                : ""
+                            ) +
+                            " \n                    "
+                        )
+                      ])
+                    : _vm._e()
+                ]
+              )
+            : _c(
+                "button",
+                {
+                  staticClass: "btn btn-link mt-0 ml-2 p-0 font-weight-bold",
+                  on: {
+                    click: function($event) {
+                      return _vm.like(_vm.auth.id, _vm.comt.id)
+                    }
+                  }
+                },
+                [
+                  _vm._v("Unlike \n                    "),
+                  _vm.comtArr.length - 1 > 0
+                    ? _c("span", { staticClass: "badge badge-light" }, [
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(_vm.comtArr.length - 1) +
+                            " \n                    "
+                        )
+                      ])
+                    : _vm._e()
+                ]
+              ),
+          _vm._v(" "),
+          _c("button", { staticClass: "btn btn-link mt-0 ml-2 p-0" }, [
+            _vm._v("Delete\n                ")
           ])
         ])
-      }),
-      0
-    )
+      ])
+    ])
   ])
 }
 var staticRenderFns = []
@@ -39062,15 +39085,67 @@ var render = function() {
             "div",
             { staticClass: "card card-body" },
             [
-              _c("Comment", {
-                attrs: {
-                  auth: _vm.auth,
-                  post: _vm.post,
-                  comments: _vm.same(_vm.comments)
-                }
+              _c("div", { staticClass: "input-group mb-3" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.newC,
+                      expression: "newC"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    placeholder: "Recipient's username",
+                    "aria-label": "Recipient's username",
+                    "aria-describedby": "button-addon2"
+                  },
+                  domProps: { value: _vm.newC },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.newC = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "input-group-append" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-light",
+                      attrs: { type: "button", id: "button-addon2" },
+                      on: {
+                        click: function($event) {
+                          return _vm.addComment(
+                            _vm.auth.id,
+                            _vm.post.id,
+                            _vm.newC
+                          )
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                    Comment\n                    "
+                      )
+                    ]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _vm._l(_vm.comments, function(comt) {
+                return _c("Comment", {
+                  key: comt.id,
+                  attrs: { comt: comt, auth: _vm.auth }
+                })
               })
             ],
-            1
+            2
           )
         ]
       )
