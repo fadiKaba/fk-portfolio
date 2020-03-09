@@ -8,6 +8,7 @@ use App\Post;
 use App\Image;
 use File;
 use ImageResize;
+use App\User;
 
 class PostsController extends Controller
 {
@@ -176,5 +177,28 @@ class PostsController extends Controller
        $post->likes = $postStr;
        $post->save();
         return 'unlike';
+    }
+    public function getUser($usersId){
+         
+        $ids = [];
+
+        foreach(explode(',', $usersId) as $id){
+             array_push($ids, (int)$id);
+        }
+  
+        try{
+            $users = User::whereIn('id', $ids)->get();          
+            return $users;
+        }
+         catch(ModelNotFoundException $err){
+             return "not found";
+         }      
+       
+    }
+    public function postDetail($postId){
+        
+        $post = Post::findOrFail($postId);
+
+        return view('/post-details')->with(compact('post'));
     }
 }

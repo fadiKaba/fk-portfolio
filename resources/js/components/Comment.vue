@@ -6,30 +6,29 @@
                     <a class="font-weight-bold d-block" href="#">{{comt.user.name}}</a>
                     {{comt.body}}                    
                 </div>
-                <div class="mb-2">
+                <div v-if="auth != null" class="mb-2">
                     <span class="text-muted ml-3">4 hours ago</span>
                     <button 
                     class="btn btn-link mt-0 ml-2 p-0 font-weight-bold"
                     v-if="comtArr == null || comtArr == '' || !comtArr.includes(auth.id.toString())"
                     @click="like(auth.id, comt.id)"
                     >{{likeStr}}
-                        <span 
-                        class="badge badge-light"
-                        v-if="comtArr.length -1 > 0">
-                        {{comtArr.length -1 != 0 ? comtArr.length -1: ''}} 
-                        </span>
                     </button>
                     <button 
                     class="btn btn-link mt-0 ml-2 p-0 font-weight-bold"
                     v-else
                     @click="like(auth.id, comt.id)"
-                    >Unlike 
-                        <span 
-                        class="badge badge-light"
-                        v-if="comtArr.length -1 > 0">
-                        {{comtArr.length -1}} 
-                        </span>
+                    >Unlike                        
                     </button>
+                    <span 
+                    class="badge badge-light users-likes"
+                    v-if="comtArr.length -1 > 0"
+                    data-toggle="popover"
+                    data-placement="top" 
+                    :data-content="txt" 
+                    data-html="true">
+                    {{comtArr.length -1}} 
+                    </span>
                     <button 
                     id="example"
                     v-if="auth.id == comt.user_id || auth.is_admin == 1" 
@@ -53,23 +52,25 @@ export default {
         return{
         comtArr:["",],
         likeStr: 'Like',
+        txt:'',
         }
     },
     mounted: function(){
        if(this.comt.likes != null && this.comt.likes != ''){
            this.comtArr = this.comt.likes.split(',');
        }
+       this.usersLikes(this.comtArr);
     },
     methods:{
         like: function(userId, commentId){
         axios.post(`/comments/like/${userId}/${commentId}`)
         .then((response) => {
             if(response.data == 'like'){
-                this.comtArr.push(this.auth.id.toString())
+                this.comtArr.push(userId.toString())
                 this.likeStr = "Unlike";
             }else{
                 this.likeStr = "Like"
-                let ind = this.comtArr.indexOf(this.auth.id.toString());
+                let ind = this.comtArr.indexOf(userId.toString());
                 this.comtArr.splice(ind, 1)
             }
            // console.log(response)
@@ -84,12 +85,24 @@ export default {
                }).catch(err => console.log(err))
            }
         },
+        usersLikes(likes){   
+            if(likes.length > 1 && this.auth != null){
+            axios.get(`/post/getusername/${likes}`)
+            .then((response)=>{      
+                for(let i = 0; i < response.data.length; i++){
+                    this.txt += ` <a href="">${response.data[i].name}</a> -`
+                }
+            })  
+            }                      
+        }
     }
  
 }
+
 </script>
 <style lang="scss" scoped>
    .main-container{
+       transition: 1s;
        .comment-container{
            div:nth-child(1){
              display: inline-block;
@@ -98,7 +111,9 @@ export default {
              border-radius: 5px;
            }
            div:nth-child(2){
-
+           .users-likes{
+               cursor: pointer;
+           }
            }
        }
    }

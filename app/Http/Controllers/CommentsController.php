@@ -22,9 +22,12 @@ class CommentsController extends Controller
         return json_encode(Comment::where('id',$comment->id)->with('user')->get());
     }
     public function destroy($userId, $commentId){
+        $user = User::findOrFail($userId);
         $comment = Comment::findOrfail($commentId);
-        $comment->delete();
-        return json_encode($commentId);
+        if($comment->user_id == $userId || $user->id){
+            $comment->delete();
+            return json_encode($commentId);
+        }       
     }
     public function like($userId, $commentId){
         $comment = Comment::findOrFail($commentId);

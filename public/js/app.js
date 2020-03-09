@@ -1953,7 +1953,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Comment',
@@ -1961,13 +1960,16 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       comtArr: [""],
-      likeStr: 'Like'
+      likeStr: 'Like',
+      txt: ''
     };
   },
   mounted: function mounted() {
     if (this.comt.likes != null && this.comt.likes != '') {
       this.comtArr = this.comt.likes.split(',');
     }
+
+    this.usersLikes(this.comtArr);
   },
   methods: {
     like: function like(userId, commentId) {
@@ -1975,13 +1977,13 @@ __webpack_require__.r(__webpack_exports__);
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/comments/like/".concat(userId, "/").concat(commentId)).then(function (response) {
         if (response.data == 'like') {
-          _this.comtArr.push(_this.auth.id.toString());
+          _this.comtArr.push(userId.toString());
 
           _this.likeStr = "Unlike";
         } else {
           _this.likeStr = "Like";
 
-          var ind = _this.comtArr.indexOf(_this.auth.id.toString());
+          var ind = _this.comtArr.indexOf(userId.toString());
 
           _this.comtArr.splice(ind, 1);
         } // console.log(response)
@@ -1998,6 +2000,17 @@ __webpack_require__.r(__webpack_exports__);
           _this2.$emit('delItem', response.data);
         })["catch"](function (err) {
           return console.log(err);
+        });
+      }
+    },
+    usersLikes: function usersLikes(likes) {
+      var _this3 = this;
+
+      if (likes.length > 1 && this.auth != null) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/post/getusername/".concat(likes)).then(function (response) {
+          for (var i = 0; i < response.data.length; i++) {
+            _this3.txt += " <a href=\"\">".concat(response.data[i].name, "</a> -");
+          }
         });
       }
     }
@@ -2238,6 +2251,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2246,6 +2273,7 @@ __webpack_require__.r(__webpack_exports__);
     Comment: _Comment__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   props: {
+    big: Boolean,
     src: String,
     title: String,
     body: String,
@@ -2261,10 +2289,13 @@ __webpack_require__.r(__webpack_exports__);
       comts: this.comments.sort(function (a, b) {
         return b['id'] - a['id'];
       }),
-      newC: ''
+      newC: '',
+      delComment: '',
+      txt: ''
     };
   },
-  mounted: function mounted() {// console.log(this.user);           
+  mounted: function mounted() {
+    this.usersLikes(this.likeC);
   },
   methods: {
     same: function same(val) {
@@ -2273,7 +2304,7 @@ __webpack_require__.r(__webpack_exports__);
     like: function like(authId, postId) {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("posts/like/".concat(authId, "/").concat(postId)).then(function (respone) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/posts/like/".concat(authId, "/").concat(postId)).then(function (respone) {
         if (respone.data == 'like') {
           _this.likes += 1;
 
@@ -2299,17 +2330,34 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         _this2.newC = '';
 
-        _this2.comments.unshift(response.data[0]);
+        _this2.comts.unshift(response.data[0]);
       });
     },
     getDelItem: function getDelItem(val) {
-      var ind = this.comments.findIndex(function (x) {
-        return x.id == val;
+      this.comts = this.comts.filter(function (obj) {
+        return obj.id != val;
       });
-      var co = this.comments;
-      this.comments.splice(ind, 1);
-      console.log(ind);
-      console.log(this.comments);
+    },
+    usersLikes: function usersLikes(likes) {
+      var _this3 = this;
+
+      if (likes.length > 1 && this.auth != null) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/post/getusername/".concat(likes)).then(function (response) {
+          for (var i = 0; i < response.data.length; i++) {
+            _this3.txt += " <a href=\"\">".concat(response.data[i].name, "</a> -");
+          }
+        });
+      }
+    },
+    limitString: function limitString(str, limit, postId) {
+      var dot = "<a href=\"/posts/postDetail/".concat(postId, "\"> read more</a>");
+
+      if (str.length > limit && this.big == false) {
+        var string = str.substring(0, limit) + dot;
+        return string;
+      }
+
+      return str;
     }
   }
 });
@@ -6992,7 +7040,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".main-container .comment-container div[data-v-54ded044]:nth-child(1) {\n  display: inline-block;\n  background-color: #F2F3F5;\n  margin: 3px;\n  border-radius: 5px;\n}", ""]);
+exports.push([module.i, ".main-container[data-v-54ded044] {\n  transition: 1s;\n}\n.main-container .comment-container div[data-v-54ded044]:nth-child(1) {\n  display: inline-block;\n  background-color: #F2F3F5;\n  margin: 3px;\n  border-radius: 5px;\n}\n.main-container .comment-container div:nth-child(2) .users-likes[data-v-54ded044] {\n  cursor: pointer;\n}", ""]);
 
 // exports
 
@@ -7068,7 +7116,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".card .foot div[data-v-3fbeca78] {\n  background-color: #0E7F43;\n}", ""]);
+exports.push([module.i, ".card .btn-container div:nth-child(1) .like-span[data-v-3fbeca78] {\n  cursor: pointer;\n}\n.card .foot div[data-v-3fbeca78] {\n  background-color: #0E7F43;\n}", ""]);
 
 // exports
 
@@ -38676,81 +38724,81 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "mb-2" }, [
-          _c("span", { staticClass: "text-muted ml-3" }, [
-            _vm._v("4 hours ago")
-          ]),
-          _vm._v(" "),
-          _vm.comtArr == null ||
-          _vm.comtArr == "" ||
-          !_vm.comtArr.includes(_vm.auth.id.toString())
-            ? _c(
-                "button",
-                {
-                  staticClass: "btn btn-link mt-0 ml-2 p-0 font-weight-bold",
-                  on: {
-                    click: function($event) {
-                      return _vm.like(_vm.auth.id, _vm.comt.id)
-                    }
-                  }
-                },
-                [
-                  _vm._v(_vm._s(_vm.likeStr) + "\n                    "),
-                  _vm.comtArr.length - 1 > 0
-                    ? _c("span", { staticClass: "badge badge-light" }, [
-                        _vm._v(
-                          "\n                    " +
-                            _vm._s(
-                              _vm.comtArr.length - 1 != 0
-                                ? _vm.comtArr.length - 1
-                                : ""
-                            ) +
-                            " \n                    "
-                        )
-                      ])
-                    : _vm._e()
-                ]
-              )
-            : _c(
-                "button",
-                {
-                  staticClass: "btn btn-link mt-0 ml-2 p-0 font-weight-bold",
-                  on: {
-                    click: function($event) {
-                      return _vm.like(_vm.auth.id, _vm.comt.id)
-                    }
-                  }
-                },
-                [
-                  _vm._v("Unlike \n                    "),
-                  _vm.comtArr.length - 1 > 0
-                    ? _c("span", { staticClass: "badge badge-light" }, [
-                        _vm._v(
-                          "\n                    " +
-                            _vm._s(_vm.comtArr.length - 1) +
-                            " \n                    "
-                        )
-                      ])
-                    : _vm._e()
-                ]
-              ),
-          _vm._v(" "),
-          _vm.auth.id == _vm.comt.user_id || _vm.auth.is_admin == 1
-            ? _c(
-                "button",
-                {
-                  staticClass: "btn btn-link mt-0 ml-2 p-0",
-                  attrs: { id: "example" },
-                  on: {
-                    click: function($event) {
-                      return _vm.deleteC(_vm.auth.id, _vm.comt.id)
-                    }
-                  }
-                },
-                [_vm._v("Delete\n                ")]
-              )
-            : _vm._e()
-        ])
+        _vm.auth != null
+          ? _c("div", { staticClass: "mb-2" }, [
+              _c("span", { staticClass: "text-muted ml-3" }, [
+                _vm._v("4 hours ago")
+              ]),
+              _vm._v(" "),
+              _vm.comtArr == null ||
+              _vm.comtArr == "" ||
+              !_vm.comtArr.includes(_vm.auth.id.toString())
+                ? _c(
+                    "button",
+                    {
+                      staticClass:
+                        "btn btn-link mt-0 ml-2 p-0 font-weight-bold",
+                      on: {
+                        click: function($event) {
+                          return _vm.like(_vm.auth.id, _vm.comt.id)
+                        }
+                      }
+                    },
+                    [_vm._v(_vm._s(_vm.likeStr) + "\n                ")]
+                  )
+                : _c(
+                    "button",
+                    {
+                      staticClass:
+                        "btn btn-link mt-0 ml-2 p-0 font-weight-bold",
+                      on: {
+                        click: function($event) {
+                          return _vm.like(_vm.auth.id, _vm.comt.id)
+                        }
+                      }
+                    },
+                    [_vm._v("Unlike                        \n                ")]
+                  ),
+              _vm._v(" "),
+              _vm.comtArr.length - 1 > 0
+                ? _c(
+                    "span",
+                    {
+                      staticClass: "badge badge-light users-likes",
+                      attrs: {
+                        "data-toggle": "popover",
+                        "data-placement": "top",
+                        "data-content": _vm.txt,
+                        "data-html": "true"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(_vm.comtArr.length - 1) +
+                          " \n                "
+                      )
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.auth.id == _vm.comt.user_id || _vm.auth.is_admin == 1
+                ? _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-link mt-0 ml-2 p-0",
+                      attrs: { id: "example" },
+                      on: {
+                        click: function($event) {
+                          return _vm.deleteC(_vm.auth.id, _vm.comt.id)
+                        }
+                      }
+                    },
+                    [_vm._v("Delete\n                ")]
+                  )
+                : _vm._e()
+            ])
+          : _vm._e()
       ])
     ])
   ])
@@ -38963,148 +39011,195 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "row no-gutters" }, [
         _vm.src != ""
-          ? _c("div", { staticClass: "col-md-4 m-md-4" }, [
-              _vm.src != ""
-                ? _c("img", {
-                    staticClass: "card-img-top",
-                    attrs: { src: "./images/" + _vm.src, alt: "" }
-                  })
-                : _vm._e()
-            ])
+          ? _c(
+              "div",
+              { class: _vm.big == false ? "col-md-4 m-md-4" : "col-md-12" },
+              [
+                _vm.src != ""
+                  ? _c("img", {
+                      staticClass: "card-img-top",
+                      attrs: { src: "/images/" + _vm.src, alt: "" }
+                    })
+                  : _vm._e()
+              ]
+            )
           : _vm._e(),
         _vm._v(" "),
-        _c("div", { class: _vm.src == "" ? "col-md-12" : "col-md-7" }, [
-          _c("div", { staticClass: "card-body" }, [
-            _c("p", { staticClass: "card-text" }, [_vm._v(_vm._s(_vm.body))]),
-            _vm._v(" "),
-            _vm._m(0),
-            _vm._v(" "),
-            _vm.loged == true
-              ? _c("div", { staticClass: "btn-container row" }, [
-                  _c("div", { staticClass: "col-4" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-link text-decoration-none",
-                        on: {
-                          click: function($event) {
-                            return _vm.like(_vm.auth.id, _vm.post.id)
+        _c(
+          "div",
+          {
+            class: _vm.src == "" || _vm.big == true ? "col-md-12" : "col-md-7"
+          },
+          [
+            _c("div", { staticClass: "card-body" }, [
+              _c("p", {
+                staticClass: "card-text content-text",
+                domProps: {
+                  innerHTML: _vm._s(_vm.limitString(_vm.body, 400, _vm.post.id))
+                }
+              }),
+              _vm._v(" "),
+              _vm._m(0),
+              _vm._v(" "),
+              _vm.loged == true
+                ? _c("div", { staticClass: "btn-container row" }, [
+                    _c("div", { class: _vm.big == false ? "col-4" : "col-1" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-link text-decoration-none pr-0",
+                          on: {
+                            click: function($event) {
+                              return _vm.like(_vm.auth.id, _vm.post.id)
+                            }
                           }
-                        }
-                      },
-                      [
-                        _vm.likeC.includes(_vm.auth.id.toString())
-                          ? _c("img", {
-                              attrs: {
-                                src: _vm.same("../icons/unlike.svg"),
-                                alt: "",
-                                width: "25px"
-                              }
-                            })
-                          : _c("img", {
-                              attrs: {
-                                src: _vm.same("../icons/like.svg"),
-                                alt: "",
-                                width: "25px"
-                              }
-                            }),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "badge badge-light" }, [
-                          _vm._v(_vm._s(_vm.likes) + " ")
-                        ])
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-8" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-link text-decoration-none",
-                        attrs: {
-                          "data-toggle": "collapse",
-                          href: "#comment" + _vm.post.id.toString(),
-                          role: "button",
-                          "aria-expanded": "false",
-                          "aria-controls": "collapseExample"
-                        }
-                      },
-                      [
-                        _c("img", {
+                        },
+                        [
+                          _vm.likeC.includes(_vm.auth.id.toString())
+                            ? _c("img", {
+                                attrs: {
+                                  src: "/icons/unlike.svg",
+                                  alt: "",
+                                  width: "25px"
+                                }
+                              })
+                            : _c("img", {
+                                attrs: {
+                                  src: "/icons/like.svg",
+                                  alt: "",
+                                  width: "25px"
+                                }
+                              })
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "span",
+                        {
+                          staticClass: "badge badge-light like-span",
                           attrs: {
-                            src: _vm.same("../icons/comment.svg"),
-                            alt: "",
-                            width: "25px"
+                            "data-toggle": "popover",
+                            "data-placement": "top",
+                            "data-content": _vm.txt,
+                            "data-html": "true"
                           }
-                        }),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "badge badge-light" }, [
-                          _vm._v(_vm._s(_vm.comments.length))
-                        ])
-                      ]
-                    )
+                        },
+                        [
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(_vm.likes) +
+                              " \n                            "
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { class: _vm.big == false ? "col-8" : "col-2" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-link text-decoration-none",
+                          attrs: {
+                            "data-toggle": "collapse",
+                            href: "#comment" + _vm.post.id.toString(),
+                            role: "button",
+                            "aria-expanded": "false",
+                            "aria-controls": "collapseExample"
+                          }
+                        },
+                        [
+                          _c("img", {
+                            attrs: {
+                              src: "/icons/comment.svg",
+                              alt: "",
+                              width: "25px"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "badge badge-light" }, [
+                            _vm._v(_vm._s(_vm.comts.length))
+                          ])
+                        ]
+                      )
+                    ])
                   ])
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.loged == false
-              ? _c("div", { staticClass: "btn-container row" }, [
-                  _c("div", { staticClass: "col-4" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-link text-decoration-none",
-                        attrs: {
-                          type: "button",
-                          "data-toggle": "modal",
-                          "data-target": "#notloged"
-                        }
-                      },
-                      [
-                        _c("img", {
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.loged == false
+                ? _c("div", { staticClass: "btn-container row" }, [
+                    _c("div", { staticClass: "col-4" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-link text-decoration-none",
                           attrs: {
-                            src: _vm.same("../icons/like.svg"),
-                            alt: "",
-                            width: "25px"
+                            type: "button",
+                            "data-toggle": "modal",
+                            "data-target": "#notloged"
                           }
-                        }),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "badge badge-light" }, [
-                          _vm._v(_vm._s(_vm.likes))
-                        ])
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-8" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-link text-decoration-none",
-                        attrs: {
-                          "data-toggle": "modal",
-                          "data-target": "#notloged"
-                        }
-                      },
-                      [
-                        _c("img", {
+                        },
+                        [
+                          _c("img", {
+                            attrs: {
+                              src: "/icons/like.svg",
+                              alt: "",
+                              width: "25px"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "span",
+                            {
+                              staticClass: "badge badge-light like-span",
+                              attrs: {
+                                "data-toggle": "popover",
+                                "data-placement": "top",
+                                "data-content": _vm.txt,
+                                "data-html": "true"
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                " +
+                                  _vm._s(_vm.likes) +
+                                  " \n                                "
+                              )
+                            ]
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-8" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-link text-decoration-none",
                           attrs: {
-                            src: _vm.same("../icons/comment.svg"),
-                            alt: "",
-                            width: "25px"
+                            "data-toggle": "modal",
+                            "data-target": "#notloged"
                           }
-                        }),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "badge badge-light" }, [
-                          _vm._v(_vm._s(_vm.comments.length))
-                        ])
-                      ]
-                    )
+                        },
+                        [
+                          _c("img", {
+                            attrs: {
+                              src: "/icons/comment.svg",
+                              alt: "",
+                              width: "25px"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "badge badge-light" }, [
+                            _vm._v(_vm._s(_vm.comts.length))
+                          ])
+                        ]
+                      )
+                    ])
                   ])
-                ])
-              : _vm._e()
-          ])
-        ])
+                : _vm._e()
+            ])
+          ]
+        )
       ]),
       _vm._v(" "),
       _c(
@@ -39171,9 +39266,9 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _vm._l(_vm.comments, function(comt) {
+              _vm._l(_vm.comts, function(comt) {
                 return _c("Comment", {
-                  key: comt.id,
+                  key: "cc" + comt.id,
                   attrs: { comt: comt, auth: _vm.auth },
                   on: { delItem: _vm.getDelItem }
                 })
@@ -39183,7 +39278,10 @@ var render = function() {
           )
         ]
       )
-    ])
+    ]),
+    _c("a", {
+      attrs: { id: "dots", href: _vm.same("/posts/postDetail/" + _vm.post.id) }
+    })
   ])
 }
 var staticRenderFns = [

@@ -18,6 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/posts/postDetail/{postId}', 'PostsController@postDetail');
 
 Route::group(['middleware' => ['admin']], function(){
 
@@ -36,6 +37,7 @@ Route::group(['middleware' => ['auth']], function(){
    Route::post('/comments/add/{userId}/{post_id}','CommentsController@store')->name('newcomment');
    Route::delete('/comment/destroy/{userId}/{commentId}','CommentsController@destroy')->name('deletecomment');
    Route::post('/comments/like/{userId}/{postId}','CommentsController@like')->name('clike');
+   Route:: get('/post/getusername/{usersId}','PostsController@getUser');
 
 });
 

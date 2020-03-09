@@ -18,6 +18,7 @@
             @if(count($posts) > 0)
             @foreach($posts as $post)
             <Mainpost 
+            :big="false"
             :src="{{json_encode($post->image != null ? $post->image->url : '')}}" 
             :title="{{json_encode($post->post_title)}}" 
             :body="{{json_encode($post->post_body)}}"
