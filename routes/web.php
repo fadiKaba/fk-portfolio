@@ -37,7 +37,8 @@ Route::group(['middleware' => ['auth']], function(){
    Route::post('/comments/add/{userId}/{post_id}','CommentsController@store')->name('newcomment');
    Route::delete('/comment/destroy/{userId}/{commentId}','CommentsController@destroy')->name('deletecomment');
    Route::post('/comments/like/{userId}/{postId}','CommentsController@like')->name('clike');
-   Route:: get('/post/getusername/{usersId}','PostsController@getUser');
+   Route::get('/post/getusername/{usersId}','PostsController@getUser');
+   Route::get('/profile/{userId}', 'ProfilesController@index')->name('profile');
 
 });
 
