@@ -19,7 +19,7 @@ class PostsController extends Controller
      */
     public function index()
     {   
-        $posts = Post::orderBy('created_at','desc')->get();
+        $posts = Post::orderBy('created_at','desc')->with('user')->get();
         return view('/admin/admin-posts')->with(compact('posts'));
     }
 
@@ -201,6 +201,7 @@ class PostsController extends Controller
     public function postDetail($postId){
         
         $post = Post::findOrFail($postId);
+        $post = Post::where('id',$postId)->with('user')->get();
 
         return view('/post-details')->with(compact('post'));
     }
