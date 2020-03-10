@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\User;
 use File;
+use Image;
 
 class ProfilesController extends Controller
 {
@@ -30,11 +31,23 @@ class ProfilesController extends Controller
             if(File::exists(public_path('/photos/'.$user->src))){
                 File::delete(public_path('/photos/'.$user->src));
             }
+            // $imgName =  $id .'pr' . time().'.'.$request->img->extension();
+            // $request->img->move(public_path('photos'), $imgName);
+            // $user->update([
+            //     'src' => $imgName,
+            // ]);   
+            
+            $image = $request->file('img');
             $imgName =  $id .'pr' . time().'.'.$request->img->extension();
-            $request->img->move(public_path('photos'), $imgName);
+            $destinationPath = public_path('photos');
+            $img = Image::make($image->path());
+            $img->fit(400, 400, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($destinationPath."\\".$imgName);
             $user->update([
-                'src' => $imgName,
-            ]);           
+                    'src' => $imgName,
+                ]);
+            
         }
         
         return \redirect()->back()->with('success', 'Saved');

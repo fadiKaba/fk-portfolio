@@ -3,7 +3,10 @@
         <div>
             <div class="comment-container">
                 <div class="p-1 p-md-2 m-0">
-                    <a class="font-weight-bold d-block" href="#">{{comt.user.name}}</a>
+                    <a class="font-weight-bold d-block" href="#">
+                        <Profilephoto :src="comt.user.src"></Profilephoto>
+                        {{comt.user.name}}
+                    </a>
                     {{comt.body}}                    
                 </div>
                 <div v-if="auth != null" class="mb-2">
@@ -44,10 +47,12 @@
 <script>
 
 import axios from 'axios';
+import Profilephoto from './Profilephoto';
 
 export default {
     name:'Comment',
     props:['comt','auth'],
+    components:{Profilephoto},
     data: function(){
         return{
         comtArr:["",],

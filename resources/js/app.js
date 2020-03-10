@@ -30,9 +30,9 @@ import Mainlink from "./components/Mainlink";
 import Cyrcle from "./components/Cyrcle";
 import Foot from "./components/Foot";
 import Mainpost from "./components/Mainpost";
-import Minipost from "./components/Minipost";
 import Search from "./components/Search";
 import Modal from './components/Modal';
+import Profilephoto from './components/Profilephoto';
 
 $(function () {
     $('[data-toggle="popover"]').popover()
@@ -40,7 +40,7 @@ $(function () {
 
 const app = new Vue({
     el: '#app',
-    components:{Mainlink,Cyrcle,Foot, Mainpost, Minipost, Search, Modal},
+    components:{Mainlink,Cyrcle,Foot, Mainpost, Search, Modal, Profilephoto},
     methods:{
         same: function(input){
             return input

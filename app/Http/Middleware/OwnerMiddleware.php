@@ -19,10 +19,8 @@ class OwnerMiddleware
         if($request->route('userId') == Auth::id()){
             return $next($request);
         }else{
-            dd($request->route('userId') .'=='. Auth::id());
+            return 'not allowed';
         }
         
-        // if(Auth::check() && Auth::id() == )
-        // 
     }
 }

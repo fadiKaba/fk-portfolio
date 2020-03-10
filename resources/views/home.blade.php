@@ -17,7 +17,7 @@
         <div class="col-md-6 posts-container my-2 ">
             @if(count($posts) > 0)
             @foreach($posts as $post)
-            <Mainpost 
+            <Mainpost
             :big="false"
             :src="{{json_encode($post->image != null ? $post->image->url : '')}}" 
             :title="{{json_encode($post->post_title)}}" 

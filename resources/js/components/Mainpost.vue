@@ -13,7 +13,14 @@
                 <div :class="src == '' || big == true?'col-md-12': 'col-md-7'">
                     <div class="card-body">
                         <p class="card-text content-text" v-html="limitString(body,400, post.id)"></p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <p class="card-text">Written by: <br><Profilephoto :src="post.user.src" :cls="'d-inline'"></Profilephoto> {{post.user.name}}</p>
+                            </div>
+                            <div class="col-6">
+                                <small class="text-muted">Last updated 3 mins ago</small>
+                            </div>
+                        </div>                       
                         <div v-if="loged == true" class="btn-container row">
                             <div :class="big == false ?'col-4' : 'col-1'">
                                 <button class="btn btn-link text-decoration-none pr-0" @click="like(auth.id,post.id)">
@@ -101,10 +108,11 @@
 
 import axios from 'axios';
 import Comment from './Comment';
+import Profilephoto from './Profilephoto';
 
 export default {
     name:'Mainpost',
-    components:{Comment,},
+    components:{Comment, Profilephoto},
     props:{
         big:Boolean,
         src: String,
