@@ -11,7 +11,7 @@
                 <img src="{{asset('/wallpapers/city-green.jpg')}}" alt="city" width="100%">
             </div>
             <div class="search-container-home">
-                <Search></Search>
+                <Search :url="same('/posts/usersearch')" :res="same('/posts/usersearchresult')">{{ csrf_field() }}</Search>
             </div>       
         </div>            
         <div class="col-md-6 posts-container my-2 ">

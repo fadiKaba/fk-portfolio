@@ -27,4 +27,14 @@ class HomeController extends Controller
         $posts = Post::orderBy('created_at','desc')->with('user')->paginate(10);
         return view('home')->with(compact('posts'));
     }
+    public function search(Request $request){
+
+      $search = Post::where('post_title', 'LIKE', "%$request->str%")->get();
+      return $search;
+    }
+    public function getResult(Request $request){
+
+     $posts = Post::where('post_title', 'LIKE', "%$request->sresult%")->with('user')->get();
+     return view('home')->with(compact('posts'));
+    }
 }

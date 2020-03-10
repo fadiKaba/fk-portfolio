@@ -19,6 +19,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/posts/postDetail/{postId}', 'PostsController@postDetail');
+Route::get('/posts/usersearch/{str}','HomeController@search');
+Route::post('/posts/usersearchresult','HomeController@getResult');
 
 Route::group(['middleware' => ['admin']], function(){
 
@@ -40,8 +42,10 @@ Route::group(['middleware' => ['auth']], function(){
    Route::get('/post/getusername/{usersId}','PostsController@getUser');
    Route::get('/profile/{userId}', 'ProfilesController@show')->name('profile');
    Route::group(['middleware' => ['owner']], function(){
+
        Route::post('/profile/edit/{userId}','ProfilesController@update')->name('editprofile');
        Route::delete('/profile/delphoto/{userId}','ProfilesController@delPhoto')->name('delphoto');
+
    });
 });
 
