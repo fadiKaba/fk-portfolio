@@ -106,17 +106,20 @@ class PostsController extends Controller
         $post = Post::findOrFail($id);
 
         if($request->image != null){
-            if(File::exists(public_path('/images/'.$post->image->url))){
+
+            if($post->image != null && File::exists(public_path('/images/'.$post->image->url))){
                 File::delete(public_path('/images/'.$post->image->url));
+            }
                 $imageName = 'img'.time().'.'.$request->image->extension();
                 $request->image->move(public_path('images'),$imageName);
-                $img= Image::findOrFail($post->image->id);
-                $img->delete();
+                if($post->image != null){
+                   $img= Image::findOrFail($post->image->id);
+                $img->delete(); 
+                }              
                 Image::create([
                     'post_id' => $post->id,
                     'url' => $imageName,
                 ]);
-            }
         }
 
         $post->update([

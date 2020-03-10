@@ -2,9 +2,11 @@
 @section('content')
 <div class="container">
     <div class="row p-md-3">
+        @if($post->image != null && $post->image != '')
         <div class="col-md-6">
            <img src="{{asset('./images/'.$post->image->url)}}" alt="img" width="100%">
         </div>
+        @endif
         <div class="col-md-6">
             <div class="form-container p-md-3">
                 <form action="{{route('posts.update',$post->id)}}" enctype="multipart/form-data" method="POST">

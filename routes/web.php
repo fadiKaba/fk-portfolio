@@ -38,11 +38,11 @@ Route::group(['middleware' => ['auth']], function(){
    Route::delete('/comment/destroy/{userId}/{commentId}','CommentsController@destroy')->name('deletecomment');
    Route::post('/comments/like/{userId}/{postId}','CommentsController@like')->name('clike');
    Route::get('/post/getusername/{usersId}','PostsController@getUser');
-   Route::get('/profile/{userId}', 'ProfilesController@index')->name('profile');
+   Route::get('/profile/{userId}', 'ProfilesController@show')->name('profile');
    Route::group(['middleware' => ['owner']], function(){
-       Route::post('/profile/edit/{userId}','ProfilesController@store')->name('editprofile');
+       Route::post('/profile/edit/{userId}','ProfilesController@update')->name('editprofile');
+       Route::delete('/profile/delphoto/{userId}','ProfilesController@delPhoto')->name('delphoto');
    });
-
 });
 
 

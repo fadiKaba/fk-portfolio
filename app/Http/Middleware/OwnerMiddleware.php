@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Auth;
 
 class OwnerMiddleware
 {
@@ -15,8 +16,13 @@ class OwnerMiddleware
      */
     public function handle($request, Closure $next)
     {   
-        dd('ddd');
+        if($request->route('userId') == Auth::id()){
+            return $next($request);
+        }else{
+            dd($request->route('userId') .'=='. Auth::id());
+        }
+        
         // if(Auth::check() && Auth::id() == )
-        // return $next($request);
+        // 
     }
 }
