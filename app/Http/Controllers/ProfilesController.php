@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 
 class ProfilesController extends Controller
 {
     public function index(){
-        return view('profile');
+        if(Auth::check()){
+            return view('profile');
+        }
+        return "error";
     }
 }

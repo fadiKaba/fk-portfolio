@@ -39,6 +39,9 @@ Route::group(['middleware' => ['auth']], function(){
    Route::post('/comments/like/{userId}/{postId}','CommentsController@like')->name('clike');
    Route::get('/post/getusername/{usersId}','PostsController@getUser');
    Route::get('/profile/{userId}', 'ProfilesController@index')->name('profile');
+   Route::group(['middleware' => ['owner']], function(){
+       Route::post('/profile/edit/{userId}','ProfilesController@store')->name('editprofile');
+   });
 
 });
 
