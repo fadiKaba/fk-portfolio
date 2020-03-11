@@ -1,13 +1,15 @@
 @import '~bootstrap/scss/bootstrap';
 
 
-$color1:#0E7F43;
+$color1:#8DBB23;
 $color2: #fff;
 
 @import 'users';
 
 body{
     padding-top:60px;
+    position: relative;
+    min-height: 100vh;
 }
 .main-nav{
     background-color:$color1;

@@ -1,5 +1,8 @@
 .welcome-body{
-    background-color:#A4CB38;
+    //background-color: #fff;
+    background-image: url('../wallpapers/mainwallpaper.png'), linear-gradient(#8DBB23 , #fff , #fff );
+    background-repeat: no-repeat;
+    background-position: center 55vh, top;
     h2{
         color:#fff;
         

@@ -5,10 +5,10 @@
     <div class="row justify-content-center">
         <div class="col-md-3 left-column px-0 my-2">
             <div>
-                <h1 class="px-2 py-1">My website</h1>
+                <h1 class="px-2 py-1 m-0">My website</h1>
             </div>
             <div class="mb-2">
-                <img src="{{asset('/wallpapers/city-green.jpg')}}" alt="city" width="100%">
+                <img src="{{asset('/wallpapers/green-buildings.png')}}" alt="city" width="100%">
             </div>
             <div class="search-container-home">
                 <Search :url="same('/posts/usersearch')" :res="same('/posts/usersearchresult')">{{ csrf_field() }}</Search>
@@ -31,7 +31,7 @@
             @endforeach
             @endif
          </div> 
-         <Modal :modal-id="{{json_encode('notloged')}}" :modal-text="{{json_encode('You need to login')}}"></Modal>
+         <Modal :modal-id="{{json_encode('notloged')}}" :modal-text="{{json_encode('')}}" :loged="false"></Modal>
     </div>
 </div>
 @endsection

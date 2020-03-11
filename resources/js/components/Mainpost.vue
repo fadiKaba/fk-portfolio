@@ -1,9 +1,9 @@
 <template>
     <div>
-        <div class="card mb-0 rounded-0">
+        <div class="card mb-1 shadow rounded-0">
             <div class="foot row w-100 mx-auto">
-                <div class="col-12 py-2  shadow">
-                    <h3 class="text-light">{{title}}</h3>
+                <div class="col-12  shadow">
+                    <h3 class="m-0 p-1">{{title}}</h3>
                 </div>                  
             </div>   
             <div class="row no-gutters">
@@ -17,8 +17,8 @@
                             <div class="col-6">
                                 <p class="card-text">Written by: <br><Profilephoto :src="post.user.src" :cls="'d-inline'"></Profilephoto> {{post.user.name}}</p>
                             </div>
-                            <div class="col-6">
-                                <small class="text-muted">Last updated 3 mins ago</small>
+                            <div class="col-6"> 
+                                <small class="text-muted">{{moment.utc(post.created_at).fromNow()}}</small>
                             </div>
                         </div>                       
                         <div v-if="loged == true" class="btn-container row">
@@ -106,6 +106,8 @@
 </template>
 <script>
 
+
+
 import axios from 'axios';
 import Comment from './Comment';
 import Profilephoto from './Profilephoto';
@@ -133,6 +135,7 @@ export default {
             newC:'',
             delComment:'',
             txt:'',
+            moment:require('moment')
         }
     },
     mounted: function(){      
@@ -213,7 +216,10 @@ export default {
         }
         .foot{
             div{
-                 background-color: #0E7F43;
+                 background-color: #3E7828;
+                 h3{
+                     color:#fff;                    
+                 }
             }
         }
 

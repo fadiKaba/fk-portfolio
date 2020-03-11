@@ -12,14 +12,22 @@ export default {
 </script>
 <style lang="scss" scoped>
 
-$color1:#0E7F43;
-$color2:#fff;
-
-    p{
+$color1:#fff;
+$color2:#3E7828;
+div{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    footer{
+      p{
         background-color:$color2;
         color:$color1;
         font-weight: 700;
         text-align: center;
         padding: 20px 0px;
+        margin-bottom: 0;
     }
+    }
+}
+    
 </style>

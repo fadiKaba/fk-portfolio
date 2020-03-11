@@ -39,10 +39,11 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-$color1:#0E7F43;
+$color1:#8DBB23;
 $color2:#fff;
 $color4:#5B5C54;
-$colors:rgb(181, 204, 119);
+$colors:#678720;
+$colort:#66872083;
 
 $outerCyrcleWH: 240px;
 $innerCyrcleWH: 230px;
@@ -59,7 +60,7 @@ $innerCyrcleWH: 230px;
         background-color: #fff;     
         margin:auto;
         border-radius: 50%;    
-        box-shadow: 0 0 0pt 2pt $colors;
+        box-shadow: 0 0 0pt 2pt $color1;
         transition: 0.2s;  
         .inner-cyrcle{
             display: flex;
@@ -69,7 +70,7 @@ $innerCyrcleWH: 230px;
           height: $innerCyrcleWH; 
           border: 10px #fff dashed;
           border-radius: 50%;
-          background-color: $color1;
+          background-image: radial-gradient(circle,$color1, $colors);
           transition: 0.7s;
           span:nth-child(1){
               color: #fff;
@@ -91,7 +92,7 @@ $innerCyrcleWH: 230px;
           }   
         }
         &:hover{
-            box-shadow: 0 0 0pt 20pt $colors;
+            box-shadow: 0 0 0pt 20pt $colort;
             .inner-cyrcle{
                 transform: rotateZ(90deg);
                 background-color: transparent;
@@ -118,19 +119,19 @@ $innerCyrcleWH: 230px;
 
 @keyframes borderShadow{
     0%{
-      box-shadow: 0 0 0pt 20pt $colors;
+      box-shadow: 0 0 0pt 20pt $colort;
     }
     30%{
-      box-shadow: 0 0 0pt 10pt $colors;
+      box-shadow: 0 0 0pt 10pt $colort;
     }
     60%{
-      box-shadow: 0 0 0pt 30pt $colors;
+      box-shadow: 0 0 0pt 30pt $colort;
     }
     80%{
-      box-shadow: 0 0 0pt 15pt $colors; 
+      box-shadow: 0 0 0pt 15pt $colort; 
     }
     100%{
-      box-shadow: 0 0 0pt 20pt $colors;
+      box-shadow: 0 0 0pt 20pt $colort;
     }   
 }
 
@@ -150,8 +151,12 @@ $innerCyrcleWH: 230px;
         background-position: center;
         background-repeat: no-repeat;
         background-size: contain;
-        width: 400px;
+        width: 231px;
+        height: 231px;
+        &:hover{
+      width: 400px;
         height: 400px;
+  }
   }
 }
 

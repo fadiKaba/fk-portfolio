@@ -6655,7 +6655,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "p[data-v-89c0c74e] {\n  background-color: #fff;\n  color: #0E7F43;\n  font-weight: 700;\n  text-align: center;\n  padding: 20px 0px;\n}", ""]);
+exports.push([module.i, "div[data-v-89c0c74e] {\n  width: 100%;\n  position: absolute;\n  bottom: 0;\n}\ndiv footer p[data-v-89c0c74e] {\n  background-color: #3E7828;\n  color: #fff;\n  font-weight: 700;\n  text-align: center;\n  padding: 20px 0px;\n  margin-bottom: 0;\n}", ""]);
 
 // exports
 

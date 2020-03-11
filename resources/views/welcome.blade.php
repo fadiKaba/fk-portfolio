@@ -22,7 +22,7 @@
                     </div>
                     <div class="col-md-4">
                         @auth
-                            <a class="btn-main" href="{{ url('/home') }}"><img src="">Home</a>
+                            {{-- <a class="btn-main" href="{{ url('/home') }}"><img src="">Home</a> --}}
                         @else
                             <Mainlink :btn-name="same('Login')" :icon-path="same('{{asset('./icons/login.svg')}}')" :btn-path="same('{{ route('login') }}')"></Mainlink>
                             @if (Route::has('register'))

@@ -10,7 +10,7 @@
                     {{comt.body}}                    
                 </div>
                 <div v-if="auth != null" class="mb-2">
-                    <span class="text-muted ml-3">4 hours ago</span>
+                    <span class="text-muted ml-3">{{moment.utc(comt.created_at).fromNow()}}</span>
                     <button 
                     class="btn btn-link mt-0 ml-2 p-0 font-weight-bold"
                     v-if="comtArr == null || comtArr == '' || !comtArr.includes(auth.id.toString())"
@@ -58,6 +58,7 @@ export default {
         comtArr:["",],
         likeStr: 'Like',
         txt:'',
+        moment: require('moment'),
         }
     },
     mounted: function(){

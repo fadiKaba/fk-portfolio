@@ -10885,7 +10885,7 @@ a.text-dark:focus {
 }
 
 .secondary-navbar {
-  background-color: #0E7F43;
+  background-color: #8DBB23;
 }
 
 .secondary-navbar a {
@@ -10893,16 +10893,18 @@ a.text-dark:focus {
 }
 
 table thead th {
-  background-color: #0E7F43;
+  background-color: #8DBB23;
   color: #fff;
 }
 
 body {
   padding-top: 60px;
+  position: relative;
+  min-height: 100vh;
 }
 
 .main-nav {
-  background-color: #0E7F43;
+  background-color: #8DBB23;
 }
 
 .main-nav ul li a {
@@ -10915,7 +10917,7 @@ body {
 }
 
 .form-container {
-  background-color: #0E7F43;
+  background-color: #8DBB23;
   border-radius: 5px;
 }
 

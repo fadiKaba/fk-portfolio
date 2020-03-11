@@ -10885,7 +10885,9 @@ a.text-dark:focus {
 }
 
 .welcome-body {
-  background-color: #A4CB38;
+  background-image: url(/images/mainwallpaper.png?de6419c07bce90ae3d44d7b0227f426c), linear-gradient(#8DBB23, #fff, #fff);
+  background-repeat: no-repeat;
+  background-position: center 55vh, top;
 }
 
 .welcome-body h2 {
@@ -10893,11 +10895,14 @@ a.text-dark:focus {
 }
 
 body {
-  background-color: #A4CB38;
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 70px;
+  background-color: #fff;
 }
 
 body #app nav {
-  background-color: #5B5C54;
+  background-color: #3E7828;
 }
 
 body #app nav a {
@@ -10905,20 +10910,21 @@ body #app nav a {
 }
 
 body #app .left-column {
-  background-color: #5B5C54;
+  background-color: #3E7828;
 }
 
 body #app .left-column h1 {
   background-color: #fff;
-  color: #5B5C54;
+  color: #2B4325;
 }
 
 body #app .left-column div:nth-child(2) {
-  background-color: #fff;
+  background-color: #3E7828;
 }
 
 body #app .left-column .search-container-home {
-  background-color: #5B5C54;
+  background-color: #3E7828;
+  padding: 20px 0px;
 }
 
 @media screen and (max-width: 600px) {

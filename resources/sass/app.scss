@@ -10,26 +10,31 @@
 @import 'welcome';
 
 body{
-    background-color: $color3;
+    min-height: 100vh;
+    position: relative;
+    padding-bottom: 70px;
+    background-color: $color1;
     #app{
         nav{
-            background-color: $color1;
+            background-color: $color2;
             a{
-                color:$color2;
+                color:$color1;
             }
         }
         .left-column{
-            background-color:$color1;
+            background-color:$color2;
+            
            // max-height: 100vh;
             h1{
-                background-color: $color2;
-                color:$color1;
+                background-color: $color1;
+                color:$color4;
             }
             div:nth-child(2){
                 background-color: $color2;
             }
             .search-container-home{
-                background-color: $color1;
+                background-color: $color2;
+                padding: 20px 0px;
             }
         }
         .posts-container{
