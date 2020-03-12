@@ -10890,41 +10890,66 @@ a.text-dark:focus {
   background-position: center 55vh, top;
 }
 
-.welcome-body h2 {
+.welcome-body .welcome-nav {
+  background-color: #3E7828;
+  font-family: "Acme", sans-serif;
+}
+
+.welcome-body .welcome-nav h2 {
   color: #fff;
+  font-weight: bold;
+  font-family: "Acme", sans-serif;
 }
 
 body {
   min-height: 100vh;
   position: relative;
   padding-bottom: 70px;
-  background-color: #fff;
+  font-family: "Acme", sans-serif;
+  background-color: #F6F6F6;
+}
+
+body #app .login-container {
+  background-color: #F6F6F6;
+}
+
+body #app .login-container .card-header {
+  background-color: #294222;
+  color: #fff;
+}
+
+body #app .login-container .card-body button {
+  background-color: #294222;
+  color: #fff;
 }
 
 body #app nav {
-  background-color: #3E7828;
+  background-color: #294222;
 }
 
 body #app nav a {
   color: #fff;
 }
 
-body #app .left-column {
-  background-color: #3E7828;
+body #app .left-column-container {
+  position: relative;
 }
 
-body #app .left-column h1 {
+body #app .left-column-container .left-column {
+  background-color: #fff;
+}
+
+body #app .left-column-container .left-column h1 {
   background-color: #fff;
   color: #2B4325;
 }
 
-body #app .left-column div:nth-child(2) {
+body #app .left-column-container .left-column div:nth-child(2) {
   background-color: #3E7828;
 }
 
-body #app .left-column .search-container-home {
-  background-color: #3E7828;
-  padding: 20px 0px;
+body #app .left-column-container .left-column .search-container-home .card-header {
+  background-color: #2B4325;
 }
 
 @media screen and (max-width: 600px) {

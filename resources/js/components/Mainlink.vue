@@ -22,7 +22,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-$color1:#0E7F43;
+$color1:#3E7828;
 $color2:#fff;
 .btn-main{
     background-color: $color2;

@@ -2,19 +2,37 @@
 
 @section('content')
 <div class="container-fluid">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center left-column-container">
         <div class="col-md-3 left-column px-0 my-2">
             <div>
-                <h1 class="px-2 py-1 m-0">My website</h1>
+                <h1 class="px-2 py-1 m-0">Welcome to {{ config('app.name', 'Green') }}</h1>
             </div>
             <div class="mb-2">
-                <img src="{{asset('/wallpapers/green-buildings.png')}}" alt="city" width="100%">
+               <img src="{{asset('/wallpapers/green-buildings.png')}}" alt="city" width="100%"> 
             </div>
-            <div class="search-container-home">
-                <Search :url="same('/posts/usersearch')" :res="same('/posts/usersearchresult')">{{ csrf_field() }}</Search>
-            </div>       
-        </div>            
+            <div class="search-container-home mb-2">
+                <div class="card  rounded-0">
+                    <div class="card-header text-light rounded-0">
+                      Search
+                    </div>
+                    <div class="card-body bg-light">
+                      <p class="card-text"><Search :url="same('/posts/usersearch')" :res="same('/posts/usersearchresult')">{{ csrf_field() }}</Search></p>
+                    </div>
+                  </div>                
+            </div>
+            <div class=" d-none d-sm-block search-container-home">
+                <div class="card  rounded-0">
+                    <div class="card-header text-light rounded-0">
+                        Advertisment
+                    </div>
+                    <div class="card-body bg-light">
+                        <a href="#"><img src="{{asset('wallpapers/adver.jpeg')}}" width="100%" alt=""></a>
+                    </div>
+                  </div> 
+            </div>     
+        </div>         
         <div class="col-md-6 posts-container my-2 ">
+            @include('layouts/navbar')
             @if(count($posts) > 0)
             @foreach($posts as $post)
             <Mainpost

@@ -7,7 +7,7 @@
         <title>Laravel</title>
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Acme|Oswald:400,500&display=swap" rel="stylesheet">
 
         <!-- script -->
         <script src="{{ asset('js/app.js') }}" defer></script> 
@@ -16,9 +16,12 @@
     <body class="welcome-body">
         <div id="app">
             @if (Route::has('login'))
-                <div class="container-fluid row mx-auto mt-md-3">
+                <div class="container-fluid row mx-auto py-2 welcome-nav">
                     <div class="col-md-8">
-                        <h2 class="intro">Try to descover what I have by clickig the gear down</h2>
+                        <h2 class="intro m-0">
+                            <img src="{{asset('icons/logo.png')}}" width="60px">
+                            Be a part of our conversation 
+                        </h2>
                     </div>
                     <div class="col-md-4">
                         @auth

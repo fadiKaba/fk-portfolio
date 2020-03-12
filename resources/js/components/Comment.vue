@@ -27,6 +27,7 @@
                     class="badge badge-light users-likes"
                     v-if="comtArr.length -1 > 0"
                     data-toggle="popover"
+                    data-trigger="hover"
                     data-placement="top" 
                     :data-content="txt" 
                     data-html="true">

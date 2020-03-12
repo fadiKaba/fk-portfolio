@@ -28,9 +28,11 @@
                                     <img v-else src="/icons/like.svg" alt="" width="25px">                               
                                 </button>
                                 <span 
+                                v-if="likes > 0"
                                 class="badge badge-light like-span"
                                 data-toggle="popover"
                                 data-placement="top" 
+                                data-trigger="hover"
                                 :data-content="txt"
                                 data-html="true">
                                 {{likes}} 
@@ -45,7 +47,7 @@
                                 aria-expanded="false" 
                                 aria-controls="collapseExample">
                                     <img src="/icons/comment.svg" alt="" width="25px">
-                                    <span class="badge badge-light">{{comts.length}}</span>
+                                    <span v-if="comts.length > 0" class="badge badge-light">{{comts.length}}</span>
                                 </button>
                             </div>
                         </div>
@@ -54,6 +56,7 @@
                                 <button class="btn btn-link text-decoration-none" type="button" data-toggle="modal" data-target="#notloged">
                                     <img src="/icons/like.svg" alt="" width="25px"> 
                                     <span 
+                                    v-if="likes > 0"
                                     class="badge badge-light like-span"
                                     data-toggle="popover"
                                     data-placement="top" 
@@ -66,7 +69,7 @@
                             <div class="col-8">
                                 <button class="btn btn-link text-decoration-none" data-toggle="modal" data-target="#notloged">
                                     <img src="/icons/comment.svg" alt="" width="25px"> 
-                                    <span class="badge badge-light">{{comts.length}}</span>
+                                    <span v-if="comts.length > 0" class="badge badge-light">{{comts.length}}</span>
                                 </button>
                             </div>
                         </div>

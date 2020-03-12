@@ -1,8 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+@include('layouts/navbar')
+<div class="container py-2 login-container">
     <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div>
+                <h1 class="px-2 py-1 m-0">{{ config('app.name', 'Green') }}</h1>
+            </div>
+            <div class="mb-2">
+                <img src="{{asset('/wallpapers/minigreen.jpg')}}" alt="city" width="100%">
+            </div>
+        </div>
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Register') }}</div>

@@ -3,8 +3,14 @@
     background-image: url('../wallpapers/mainwallpaper.png'), linear-gradient(#8DBB23 , #fff , #fff );
     background-repeat: no-repeat;
     background-position: center 55vh, top;
-    h2{
-        color:#fff;
-        
+    .welcome-nav{
+        background-color: $color2;
+        font-family: 'Acme', sans-serif;
+        h2{
+            color:#fff;          
+            font-weight: bold;
+            font-family: 'Acme', sans-serif;
+        }
     }
+    
 }

@@ -34,6 +34,6 @@ export default {
 </script>
 <style scoped>
 .modal-content{
-    background-color: #fff;
+    background-color: rgb(246, 246, 246);
 }
 </style>

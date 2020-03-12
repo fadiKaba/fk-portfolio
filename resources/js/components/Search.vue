@@ -12,7 +12,7 @@
                 placeholder="Search" 
                 aria-label="Search"
                 name="sresult">
-                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+                <button class="btn my-2 my-sm-0" type="submit">Search</button>
                 <datalist id="search-result">
                     <option 
                     v-for="result in results" 
@@ -54,5 +54,8 @@ export default {
 }
 </script>
 <style scoped>
-
+button{
+    background-color:#294222;
+    color:#fff;
+}
 </style>
