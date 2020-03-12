@@ -7087,7 +7087,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".btn-main[data-v-0ba115c4] {\n  background-color: #fff;\n  border-radius: 20px;\n  margin: 5px 10px;\n  padding: 2px;\n  text-decoration: none;\n  display: inline-block;\n}\n.btn-main div[data-v-0ba115c4] {\n  border-radius: 20px;\n  background-color: #fff;\n  display: grid;\n  grid-template-columns: 1fr 3fr;\n  justify-items: center;\n  transition: 0.2s;\n}\n.btn-main div div[data-v-0ba115c4]:nth-child(1) {\n  background-color: #3E7828;\n  display: flex;\n  padding: 5px;\n}\n.btn-main div div:nth-child(1) img[data-v-0ba115c4] {\n  width: 25px;\n  border-radius: 20px;\n}\n.btn-main div div[data-v-0ba115c4]:nth-child(2) {\n  background-color: #fff;\n  color: #3E7828;\n  font-weight: 700;\n  display: flex;\n  padding: 5px;\n  transition: 0.2s;\n}\n.btn-main:hover div[data-v-0ba115c4] {\n  background-color: #3E7828;\n}\n.btn-main:hover div div[data-v-0ba115c4]:nth-child(2) {\n  background-color: #3E7828;\n  color: #fff;\n}\n@-webkit-keyframes grow-data-v-0ba115c4 {\n0% {\n    width: 40px;\n}\n100% {\n    width: 150px;\n}\n}\n@keyframes grow-data-v-0ba115c4 {\n0% {\n    width: 40px;\n}\n100% {\n    width: 150px;\n}\n}\n@-webkit-keyframes shrink-data-v-0ba115c4 {\n0% {\n    width: 100px;\n}\n100% {\n    width: 0px;\n}\n}\n@keyframes shrink-data-v-0ba115c4 {\n0% {\n    width: 100px;\n}\n100% {\n    width: 0px;\n}\n}", ""]);
+exports.push([module.i, "", ""]);
 
 // exports
 
@@ -56626,13 +56626,21 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("a", { staticClass: "btn-main", attrs: { href: _vm.btnPath } }, [
-    _c("div", [
-      _c("div", [_c("img", { attrs: { src: _vm.iconPath } })]),
-      _vm._v(" "),
-      _c("div", [_c("span", [_vm._v(_vm._s(_vm.btnName))])])
-    ])
-  ])
+  return _c(
+    "a",
+    { staticClass: "btn-main btn ", attrs: { href: _vm.btnPath } },
+    [
+      _c("div", [
+        _c("div", [_c("img", { attrs: { src: _vm.iconPath, width: "30px" } })]),
+        _vm._v(" "),
+        _c("div", [
+          _c("span", { staticClass: "text-light" }, [
+            _vm._v(_vm._s(_vm.btnName))
+          ])
+        ])
+      ])
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -56737,14 +56745,14 @@ var render = function() {
                           _vm.likeC.includes(_vm.auth.id.toString())
                             ? _c("img", {
                                 attrs: {
-                                  src: "/icons/unlike.svg",
+                                  src: "/ico/unlike.svg",
                                   alt: "",
                                   width: "25px"
                                 }
                               })
                             : _c("img", {
                                 attrs: {
-                                  src: "/icons/like.svg",
+                                  src: "/ico/like.svg",
                                   alt: "",
                                   width: "25px"
                                 }
@@ -56792,7 +56800,7 @@ var render = function() {
                         [
                           _c("img", {
                             attrs: {
-                              src: "/icons/comment.svg",
+                              src: "/ico/comment.svg",
                               alt: "",
                               width: "25px"
                             }
@@ -56825,7 +56833,7 @@ var render = function() {
                         [
                           _c("img", {
                             attrs: {
-                              src: "/icons/like.svg",
+                              src: "/ico/like.svg",
                               alt: "",
                               width: "25px"
                             }
@@ -56869,7 +56877,7 @@ var render = function() {
                         [
                           _c("img", {
                             attrs: {
-                              src: "/icons/comment.svg",
+                              src: "/ico/comment.svg",
                               alt: "",
                               width: "25px"
                             }
@@ -70182,9 +70190,9 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\project\my-portfolio\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! D:\project\my-portfolio\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! D:\project\my-portfolio\resources\sass\admin.scss */"./resources/sass/admin.scss");
+__webpack_require__(/*! D:\projects\fk-portfolio\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! D:\projects\fk-portfolio\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! D:\projects\fk-portfolio\resources\sass\admin.scss */"./resources/sass/admin.scss");
 
 
 /***/ })

@@ -11,7 +11,7 @@
                <img src="{{asset('/wallpapers/green-buildings.png')}}" alt="city" width="100%"> 
             </div>
             <div class="search-container-home mb-2">
-                <div class="card  rounded-0">
+                <div class="card  rounded-0 d-none d-md-block">
                     <div class="card-header text-light rounded-0">
                       Search
                     </div>
@@ -31,7 +31,7 @@
                   </div> 
             </div>     
         </div>         
-        <div class="col-md-6 posts-container my-2 ">
+        <div class="col-md-6 posts-container my-2 px-0 px-md-4">
             @include('layouts/navbar')
             @if(count($posts) > 0)
             @foreach($posts as $post)

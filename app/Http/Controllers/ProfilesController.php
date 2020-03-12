@@ -28,8 +28,8 @@ class ProfilesController extends Controller
             'name' => $request->name,
         ]);       
         if($request->file('img') != null){
-            if(File::exists(public_path('/photos/'.$user->src))){
-                File::delete(public_path('/photos/'.$user->src));
+            if(File::exists('photos/'.$user->src)){
+                File::delete('photos/'.$user->src);
             }
             // $imgName =  $id .'pr' . time().'.'.$request->img->extension();
             // $request->img->move(public_path('photos'), $imgName);
@@ -39,9 +39,9 @@ class ProfilesController extends Controller
             
             $image = $request->file('img');
             $imgName =  $id .'pr' . time().'.'.$request->img->extension();
-            $destinationPath = public_path('photos');
+            $destinationPath = 'photos';
             $img = Image::make($image->path());
-            $img->fit(400, 400, function ($constraint) {
+            $img->orientate()->fit(400, 400, function ($constraint) {
                 $constraint->aspectRatio();
             })->save($destinationPath."\\".$imgName);
             $user->update([
@@ -55,8 +55,8 @@ class ProfilesController extends Controller
     public function delPhoto($id){
 
         $user = User::findOrFail($id);
-        if(File::exists(public_path('/photos/'.$user->src))){
-            File::delete(public_path('/photos/'.$user->src));
+        if(File::exists('photos/'.$user->src)){
+            File::delete('photos/'.$user->src);
         }
         $user->update([
             'src' => ''

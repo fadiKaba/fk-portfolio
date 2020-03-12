@@ -19,7 +19,7 @@
                 <div class="container-fluid row mx-auto py-2 welcome-nav">
                     <div class="col-md-8">
                         <h2 class="intro m-0">
-                            <img src="{{asset('icons/logo.png')}}" width="60px">
+                            <img src="{{asset('ico/logo.png')}}" width="60px">
                             Be a part of our conversation 
                         </h2>
                     </div>
@@ -27,9 +27,9 @@
                         @auth
                             {{-- <a class="btn-main" href="{{ url('/home') }}"><img src="">Home</a> --}}
                         @else
-                            <Mainlink :btn-name="same('Login')" :icon-path="same('{{asset('./icons/login.svg')}}')" :btn-path="same('{{ route('login') }}')"></Mainlink>
+                            <Mainlink :btn-name="same('Login')" :icon-path="same('{{asset('ico/login.svg')}}')" :btn-path="same('{{ route('login') }}')"></Mainlink>
                             @if (Route::has('register'))
-                            <Mainlink :btn-name="same('Register')" :icon-path="same('{{asset('./icons/register.svg')}}')" :btn-path="same('{{route('register')}}')"></Mainlink>
+                            <Mainlink :btn-name="same('Register')" :icon-path="same('{{asset('ico/register.svg')}}')" :btn-path="same('{{route('register')}}')"></Mainlink>
                             @endif
                         @endauth
                     </div>

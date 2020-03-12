@@ -54,7 +54,7 @@ class PostsController extends Controller
         ]);
         if($request->image != null){
             $imageName = 'img'.time().'.'.$request->image->extension();
-            $request->image->move(public_path('images'),$imageName);
+            $request->image->move('images',$imageName);
     
             Image::create([
                 'post_id' => $nPost->id,
@@ -107,11 +107,11 @@ class PostsController extends Controller
 
         if($request->image != null){
 
-            if($post->image != null && File::exists(public_path('/images/'.$post->image->url))){
-                File::delete(public_path('/images/'.$post->image->url));
+            if($post->image != null && File::exists('images/'.$post->image->url)){
+                File::delete('images/'.$post->image->url);
             }
                 $imageName = 'img'.time().'.'.$request->image->extension();
-                $request->image->move(public_path('images'),$imageName);
+                $request->image->move('images',$imageName);
                 if($post->image != null){
                    $img= Image::findOrFail($post->image->id);
                 $img->delete(); 
@@ -140,8 +140,8 @@ class PostsController extends Controller
         $post = Post::findOrFail($id);
 
         if($post->image != null){
-            if(File::exists(public_path('/images/'.$post->image->url))){
-                File::delete(public_path('/images/'.$post->image->url));
+            if(File::exists('images/'.$post->image->url)){
+                File::delete('images/'.$post->image->url);
                 }
         }
         

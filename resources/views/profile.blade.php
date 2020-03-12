@@ -1,10 +1,10 @@
 @extends('layouts/app')
 @section('content')
-
+@include('layouts/navbar')
 <div class="container row m-auto bg-light p-md-3">
-    <div class="col-md-6">
+    <div class="col-md-6 my-3">
        <img 
-       
+       class="rounded"       
        @if($userAuth->src == null || $userAuth->src == '')
        src="{{asset('wallpapers/default-user.png')}}" 
        @else

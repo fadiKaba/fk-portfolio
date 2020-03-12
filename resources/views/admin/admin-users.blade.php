@@ -45,7 +45,7 @@
                         <!-- dropdown -->
                         <div class="dropdown">
                             <button class="btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              <img width="25px" src="{{asset('icons/edit.svg')}}">
+                              <img width="25px" src="{{asset('ico/edit.svg')}}">
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                               <a class="dropdown-item" href="#">Action</a>

@@ -24,8 +24,8 @@
                         <div v-if="loged == true" class="btn-container row">
                             <div :class="big == false ?'col-4' : 'col-1'">
                                 <button class="btn btn-link text-decoration-none pr-0" @click="like(auth.id,post.id)">
-                                    <img v-if="likeC.includes(auth.id.toString())" src="/icons/unlike.svg" alt="" width="25px">
-                                    <img v-else src="/icons/like.svg" alt="" width="25px">                               
+                                    <img v-if="likeC.includes(auth.id.toString())" src="/ico/unlike.svg" alt="" width="25px">
+                                    <img v-else src="/ico/like.svg" alt="" width="25px">                               
                                 </button>
                                 <span 
                                 v-if="likes > 0"
@@ -46,7 +46,7 @@
                                 role="button" 
                                 aria-expanded="false" 
                                 aria-controls="collapseExample">
-                                    <img src="/icons/comment.svg" alt="" width="25px">
+                                    <img src="/ico/comment.svg" alt="" width="25px">
                                     <span v-if="comts.length > 0" class="badge badge-light">{{comts.length}}</span>
                                 </button>
                             </div>
@@ -54,7 +54,7 @@
                         <div v-if="loged == false" class="btn-container row">
                             <div class="col-4">
                                 <button class="btn btn-link text-decoration-none" type="button" data-toggle="modal" data-target="#notloged">
-                                    <img src="/icons/like.svg" alt="" width="25px"> 
+                                    <img src="/ico/like.svg" alt="" width="25px"> 
                                     <span 
                                     v-if="likes > 0"
                                     class="badge badge-light like-span"
@@ -68,7 +68,7 @@
                             </div>
                             <div class="col-8">
                                 <button class="btn btn-link text-decoration-none" data-toggle="modal" data-target="#notloged">
-                                    <img src="/icons/comment.svg" alt="" width="25px"> 
+                                    <img src="/ico/comment.svg" alt="" width="25px"> 
                                     <span v-if="comts.length > 0" class="badge badge-light">{{comts.length}}</span>
                                 </button>
                             </div>
