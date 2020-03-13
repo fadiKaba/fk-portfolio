@@ -1,7 +1,7 @@
 <template>
     <div>
        <footer>
-           <p>Fadi Kaba Allright reserved &copy; 2020</p>
+           <p>Green Conversation Allright reserved &copy; 2020</p>
        </footer>
     </div>
 </template>

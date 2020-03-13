@@ -20,27 +20,25 @@
                             <div class="col-6"> 
                                 <small class="text-muted">{{moment.utc(post.created_at).fromNow()}}</small>
                             </div>
-                        </div>                       
+                        </div>
                         <div v-if="loged == true" class="btn-container row">
-                            <div :class="big == false ?'col-4' : 'col-1'">
-                                <button class="btn btn-link text-decoration-none pr-0" @click="like(auth.id,post.id)">
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <button class="btn btn-light text-decoration-none pr-0" @click="like(auth.id,post.id)">
                                     <img v-if="likeC.includes(auth.id.toString())" src="/ico/unlike.svg" alt="" width="25px">
-                                    <img v-else src="/ico/like.svg" alt="" width="25px">                               
+                                    <img v-else src="/ico/like.svg" alt="" width="25px"> 
+                                    <span 
+                                    v-if="likes > 0"
+                                    class="badge badge-light like-span"
+                                    data-toggle="popover"
+                                    data-placement="top" 
+                                    data-trigger="hover"
+                                    :data-content="txt"
+                                    data-html="true">
+                                    {{likes}} 
+                                    </span>                              
                                 </button>
-                                <span 
-                                v-if="likes > 0"
-                                class="badge badge-light like-span"
-                                data-toggle="popover"
-                                data-placement="top" 
-                                data-trigger="hover"
-                                :data-content="txt"
-                                data-html="true">
-                                {{likes}} 
-                                </span>
-                            </div>
-                            <div :class="big == false ?'col-8' : 'col-2'">
                                 <button 
-                                class="btn btn-link text-decoration-none"
+                                class="btn btn-light text-decoration-none"
                                 data-toggle="collapse" 
                                 :href="'#comment'+ post.id.toString()" 
                                 role="button" 
@@ -49,11 +47,29 @@
                                     <img src="/ico/comment.svg" alt="" width="25px">
                                     <span v-if="comts.length > 0" class="badge badge-light">{{comts.length}}</span>
                                 </button>
+                                <div class="btn-group" role="group">
+                                    <button id="btnGroupDrop1" type="button"
+                                    class="btn btn-light dropdown-toggle" 
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img src="/ico/share.svg" alt="share" width="25px">
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                        <a class="dropdown-item" target="_blank" :href="'https://www.facebook.com/sharer/sharer.php?u=http%3A//127.0.0.1%3A8000/posts/postDetail/'+post.id">
+                                        <img src="/ico/facebook.svg" alt="facebook" width="25px">
+                                        Facebook
+                                        </a>
+                                        <a class="dropdown-item" target="_blank" :href="'https://twitter.com/intent/tweet?text=http%3A//127.0.0.1%3A8000/posts/postDetail/'+ post.id">
+                                        <img src="/ico/twitter.svg" alt="twitter" width="25px">
+                                        Twitte
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        </div>                       
                         <div v-if="loged == false" class="btn-container row">
-                            <div class="col-4">
-                                <button class="btn btn-link text-decoration-none" type="button" data-toggle="modal" data-target="#notloged">
+
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <button class="btn btn-light text-decoration-none" type="button" data-toggle="modal" data-target="#notloged">
                                     <img src="/ico/like.svg" alt="" width="25px"> 
                                     <span 
                                     v-if="likes > 0"
@@ -65,11 +81,13 @@
                                     {{likes}} 
                                     </span>
                                 </button>
-                            </div>
-                            <div class="col-8">
-                                <button class="btn btn-link text-decoration-none" data-toggle="modal" data-target="#notloged">
+                                <button class="btn btn-light text-decoration-none" data-toggle="modal" data-target="#notloged">
                                     <img src="/ico/comment.svg" alt="" width="25px"> 
                                     <span v-if="comts.length > 0" class="badge badge-light">{{comts.length}}</span>
+                                </button>
+                                <button class="btn btn-light" 
+                                data-toggle="modal" data-target="#notloged">
+                                    <img src="/ico/share.svg" width="25px">
                                 </button>
                             </div>
                         </div>
@@ -85,10 +103,11 @@
                         placeholder="Recipient's username" 
                         aria-label="Recipient's username" 
                         aria-describedby="button-addon2"
+                        required
                         v-model="newC">
                         <div class="input-group-append">
                         <button 
-                        class="btn btn-light" 
+                        class="btn inner-comment-btn" 
                         type="button" 
                         id="button-addon2"
                         @click="addComment(auth.id, post.id, newC)">
@@ -164,12 +183,14 @@ export default {
         }).catch(err => console.log(err))
         },
         addComment(userId, postId, commentBody){
-           axios.post(`/comments/add/${userId}/${postId}`,{
+            if(commentBody != ''){
+                axios.post(`/comments/add/${userId}/${postId}`,{
                body:commentBody
-           }).then((response) => {
-               this.newC = '';
-               this.comts.unshift(response.data[0])
-           })
+                }).then((response) => {
+                    this.newC = '';
+                    this.comts.unshift(response.data[0])
+                })
+            }          
         },
         getDelItem: function(val){          
            this.comts = this.comts.filter(function( obj ) {
@@ -225,6 +246,10 @@ export default {
                  }
             }
         }
+         .inner-comment-btn{
+             background-color: #3E7828;
+             color:#fff; 
+         }
 
 }
 

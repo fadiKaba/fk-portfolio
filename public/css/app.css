@@ -10904,7 +10904,7 @@ a.text-dark:focus {
 body {
   min-height: 100vh;
   position: relative;
-  padding-bottom: 70px;
+  padding-bottom: 60px;
   font-family: "Acme", sans-serif;
   background-color: #F6F6F6;
 }
@@ -10949,6 +10949,40 @@ body #app .left-column-container .left-column div:nth-child(2) {
 }
 
 body #app .left-column-container .left-column .search-container-home .card-header {
+  background-color: #2B4325;
+}
+
+body #app .about-container {
+  background-image: url("/wallpapers/about.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 90vh;
+}
+
+body #app .about-container h3 {
+  color: #2B4325;
+  font-weight: bold;
+  font-size: 1.7rem;
+  text-align: center;
+}
+
+body #app .about-container .sec {
+  background-color: rgba(255, 255, 255, 0.664);
+  border-radius: 5px;
+  color: #2B4325;
+}
+
+body #app .about-container .sec h4 {
+  text-align: center;
+}
+
+body #app .pagination-nav {
+  background-color: #fff;
+}
+
+body #app .pagination-nav ul li .act {
+  color: #fff;
   background-color: #2B4325;
 }
 

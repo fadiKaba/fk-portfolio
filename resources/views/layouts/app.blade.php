@@ -21,7 +21,7 @@
 <body>
     <div id="app">
         @include('layouts/error')
-        <main class="pb-4">
+        <main class="pb-0">
             @yield('content')
         </main>
         <Foot></Foot>

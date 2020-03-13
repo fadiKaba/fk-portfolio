@@ -2253,6 +2253,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2316,13 +2335,15 @@ __webpack_require__.r(__webpack_exports__);
     addComment: function addComment(userId, postId, commentBody) {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/comments/add/".concat(userId, "/").concat(postId), {
-        body: commentBody
-      }).then(function (response) {
-        _this2.newC = '';
+      if (commentBody != '') {
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/comments/add/".concat(userId, "/").concat(postId), {
+          body: commentBody
+        }).then(function (response) {
+          _this2.newC = '';
 
-        _this2.comts.unshift(response.data[0]);
-      });
+          _this2.comts.unshift(response.data[0]);
+        });
+      }
     },
     getDelItem: function getDelItem(val) {
       this.comts = this.comts.filter(function (obj) {
@@ -7106,7 +7127,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".card .btn-container div:nth-child(1) .like-span[data-v-3fbeca78] {\n  cursor: pointer;\n}\n.card .foot div[data-v-3fbeca78] {\n  background-color: #3E7828;\n}\n.card .foot div h3[data-v-3fbeca78] {\n  color: #fff;\n}", ""]);
+exports.push([module.i, ".card .btn-container div:nth-child(1) .like-span[data-v-3fbeca78] {\n  cursor: pointer;\n}\n.card .foot div[data-v-3fbeca78] {\n  background-color: #3E7828;\n}\n.card .foot div h3[data-v-3fbeca78] {\n  color: #fff;\n}\n.card .inner-comment-btn[data-v-3fbeca78] {\n  background-color: #3E7828;\n  color: #fff;\n}", ""]);
 
 // exports
 
@@ -56601,7 +56622,9 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", [
-      _c("footer", [_c("p", [_vm._v("Fadi Kaba Allright reserved © 2020")])])
+      _c("footer", [
+        _c("p", [_vm._v("Green Conversation Allright reserved © 2020")])
+      ])
     ])
   }
 ]
@@ -56730,167 +56753,254 @@ var render = function() {
               _vm._v(" "),
               _vm.loged == true
                 ? _c("div", { staticClass: "btn-container row" }, [
-                    _c("div", { class: _vm.big == false ? "col-4" : "col-1" }, [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-link text-decoration-none pr-0",
-                          on: {
-                            click: function($event) {
-                              return _vm.like(_vm.auth.id, _vm.post.id)
-                            }
-                          }
-                        },
-                        [
-                          _vm.likeC.includes(_vm.auth.id.toString())
-                            ? _c("img", {
-                                attrs: {
-                                  src: "/ico/unlike.svg",
-                                  alt: "",
-                                  width: "25px"
-                                }
-                              })
-                            : _c("img", {
-                                attrs: {
-                                  src: "/ico/like.svg",
-                                  alt: "",
-                                  width: "25px"
-                                }
-                              })
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _vm.likes > 0
-                        ? _c(
-                            "span",
-                            {
-                              staticClass: "badge badge-light like-span",
-                              attrs: {
-                                "data-toggle": "popover",
-                                "data-placement": "top",
-                                "data-trigger": "hover",
-                                "data-content": _vm.txt,
-                                "data-html": "true"
+                    _c(
+                      "div",
+                      {
+                        staticClass: "btn-group",
+                        attrs: { role: "group", "aria-label": "Basic example" }
+                      },
+                      [
+                        _c(
+                          "button",
+                          {
+                            staticClass:
+                              "btn btn-light text-decoration-none pr-0",
+                            on: {
+                              click: function($event) {
+                                return _vm.like(_vm.auth.id, _vm.post.id)
                               }
-                            },
-                            [
-                              _vm._v(
-                                "\n                            " +
-                                  _vm._s(_vm.likes) +
-                                  " \n                            "
-                              )
-                            ]
-                          )
-                        : _vm._e()
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { class: _vm.big == false ? "col-8" : "col-2" }, [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-link text-decoration-none",
-                          attrs: {
-                            "data-toggle": "collapse",
-                            href: "#comment" + _vm.post.id.toString(),
-                            role: "button",
-                            "aria-expanded": "false",
-                            "aria-controls": "collapseExample"
-                          }
-                        },
-                        [
-                          _c("img", {
-                            attrs: {
-                              src: "/ico/comment.svg",
-                              alt: "",
-                              width: "25px"
                             }
-                          }),
-                          _vm._v(" "),
-                          _vm.comts.length > 0
-                            ? _c("span", { staticClass: "badge badge-light" }, [
-                                _vm._v(_vm._s(_vm.comts.length))
-                              ])
-                            : _vm._e()
-                        ]
-                      )
-                    ])
+                          },
+                          [
+                            _vm.likeC.includes(_vm.auth.id.toString())
+                              ? _c("img", {
+                                  attrs: {
+                                    src: "/ico/unlike.svg",
+                                    alt: "",
+                                    width: "25px"
+                                  }
+                                })
+                              : _c("img", {
+                                  attrs: {
+                                    src: "/ico/like.svg",
+                                    alt: "",
+                                    width: "25px"
+                                  }
+                                }),
+                            _vm._v(" "),
+                            _vm.likes > 0
+                              ? _c(
+                                  "span",
+                                  {
+                                    staticClass: "badge badge-light like-span",
+                                    attrs: {
+                                      "data-toggle": "popover",
+                                      "data-placement": "top",
+                                      "data-trigger": "hover",
+                                      "data-content": _vm.txt,
+                                      "data-html": "true"
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                " +
+                                        _vm._s(_vm.likes) +
+                                        " \n                                "
+                                    )
+                                  ]
+                                )
+                              : _vm._e()
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-light text-decoration-none",
+                            attrs: {
+                              "data-toggle": "collapse",
+                              href: "#comment" + _vm.post.id.toString(),
+                              role: "button",
+                              "aria-expanded": "false",
+                              "aria-controls": "collapseExample"
+                            }
+                          },
+                          [
+                            _c("img", {
+                              attrs: {
+                                src: "/ico/comment.svg",
+                                alt: "",
+                                width: "25px"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _vm.comts.length > 0
+                              ? _c(
+                                  "span",
+                                  { staticClass: "badge badge-light" },
+                                  [_vm._v(_vm._s(_vm.comts.length))]
+                                )
+                              : _vm._e()
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "btn-group",
+                            attrs: { role: "group" }
+                          },
+                          [
+                            _vm._m(0),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "dropdown-menu",
+                                attrs: { "aria-labelledby": "btnGroupDrop1" }
+                              },
+                              [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "dropdown-item",
+                                    attrs: {
+                                      target: "_blank",
+                                      href:
+                                        "https://www.facebook.com/sharer/sharer.php?u=http%3A//127.0.0.1%3A8000/posts/postDetail/" +
+                                        _vm.post.id
+                                    }
+                                  },
+                                  [
+                                    _c("img", {
+                                      attrs: {
+                                        src: "/ico/facebook.svg",
+                                        alt: "facebook",
+                                        width: "25px"
+                                      }
+                                    }),
+                                    _vm._v(
+                                      "\n                                    Facebook\n                                    "
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "dropdown-item",
+                                    attrs: {
+                                      target: "_blank",
+                                      href:
+                                        "https://twitter.com/intent/tweet?text=http%3A//127.0.0.1%3A8000/posts/postDetail/" +
+                                        _vm.post.id
+                                    }
+                                  },
+                                  [
+                                    _c("img", {
+                                      attrs: {
+                                        src: "/ico/twitter.svg",
+                                        alt: "twitter",
+                                        width: "25px"
+                                      }
+                                    }),
+                                    _vm._v(
+                                      "\n                                    Twitte\n                                    "
+                                    )
+                                  ]
+                                )
+                              ]
+                            )
+                          ]
+                        )
+                      ]
+                    )
                   ])
                 : _vm._e(),
               _vm._v(" "),
               _vm.loged == false
                 ? _c("div", { staticClass: "btn-container row" }, [
-                    _c("div", { staticClass: "col-4" }, [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-link text-decoration-none",
-                          attrs: {
-                            type: "button",
-                            "data-toggle": "modal",
-                            "data-target": "#notloged"
-                          }
-                        },
-                        [
-                          _c("img", {
+                    _c(
+                      "div",
+                      {
+                        staticClass: "btn-group",
+                        attrs: { role: "group", "aria-label": "Basic example" }
+                      },
+                      [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-light text-decoration-none",
                             attrs: {
-                              src: "/ico/like.svg",
-                              alt: "",
-                              width: "25px"
+                              type: "button",
+                              "data-toggle": "modal",
+                              "data-target": "#notloged"
                             }
-                          }),
-                          _vm._v(" "),
-                          _vm.likes > 0
-                            ? _c(
-                                "span",
-                                {
-                                  staticClass: "badge badge-light like-span",
-                                  attrs: {
-                                    "data-toggle": "popover",
-                                    "data-placement": "top",
-                                    "data-content": _vm.txt,
-                                    "data-html": "true"
-                                  }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                " +
-                                      _vm._s(_vm.likes) +
-                                      " \n                                "
-                                  )
-                                ]
-                              )
-                            : _vm._e()
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-8" }, [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-link text-decoration-none",
-                          attrs: {
-                            "data-toggle": "modal",
-                            "data-target": "#notloged"
-                          }
-                        },
-                        [
-                          _c("img", {
+                          },
+                          [
+                            _c("img", {
+                              attrs: {
+                                src: "/ico/like.svg",
+                                alt: "",
+                                width: "25px"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _vm.likes > 0
+                              ? _c(
+                                  "span",
+                                  {
+                                    staticClass: "badge badge-light like-span",
+                                    attrs: {
+                                      "data-toggle": "popover",
+                                      "data-placement": "top",
+                                      "data-content": _vm.txt,
+                                      "data-html": "true"
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                " +
+                                        _vm._s(_vm.likes) +
+                                        " \n                                "
+                                    )
+                                  ]
+                                )
+                              : _vm._e()
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-light text-decoration-none",
                             attrs: {
-                              src: "/ico/comment.svg",
-                              alt: "",
-                              width: "25px"
+                              "data-toggle": "modal",
+                              "data-target": "#notloged"
                             }
-                          }),
-                          _vm._v(" "),
-                          _vm.comts.length > 0
-                            ? _c("span", { staticClass: "badge badge-light" }, [
-                                _vm._v(_vm._s(_vm.comts.length))
-                              ])
-                            : _vm._e()
-                        ]
-                      )
-                    ])
+                          },
+                          [
+                            _c("img", {
+                              attrs: {
+                                src: "/ico/comment.svg",
+                                alt: "",
+                                width: "25px"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _vm.comts.length > 0
+                              ? _c(
+                                  "span",
+                                  { staticClass: "badge badge-light" },
+                                  [_vm._v(_vm._s(_vm.comts.length))]
+                                )
+                              : _vm._e()
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm._m(1)
+                      ]
+                    )
                   ])
                 : _vm._e()
             ])
@@ -56924,7 +57034,8 @@ var render = function() {
                     type: "text",
                     placeholder: "Recipient's username",
                     "aria-label": "Recipient's username",
-                    "aria-describedby": "button-addon2"
+                    "aria-describedby": "button-addon2",
+                    required: ""
                   },
                   domProps: { value: _vm.newC },
                   on: {
@@ -56941,7 +57052,7 @@ var render = function() {
                   _c(
                     "button",
                     {
-                      staticClass: "btn btn-light",
+                      staticClass: "btn inner-comment-btn",
                       attrs: { type: "button", id: "button-addon2" },
                       on: {
                         click: function($event) {
@@ -56980,7 +57091,44 @@ var render = function() {
     })
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-light dropdown-toggle",
+        attrs: {
+          id: "btnGroupDrop1",
+          type: "button",
+          "data-toggle": "dropdown",
+          "aria-haspopup": "true",
+          "aria-expanded": "false"
+        }
+      },
+      [
+        _c("img", {
+          attrs: { src: "/ico/share.svg", alt: "share", width: "25px" }
+        })
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-light",
+        attrs: { "data-toggle": "modal", "data-target": "#notloged" }
+      },
+      [_c("img", { attrs: { src: "/ico/share.svg", width: "25px" } })]
+    )
+  }
+]
 render._withStripped = true
 
 

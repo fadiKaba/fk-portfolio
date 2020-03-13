@@ -18,7 +18,7 @@
                     <a class="nav-link" href="{{ route('login') }}">{{ __('Home') }}</a>
                 </li>
                 <li class="nav-item text-center">
-                    <a class="nav-link" href="#">About</a>
+                    <a class="nav-link" href="/about">About</a>
                 </li>
                 <li class="nav-item text-center ">
                     <a class="nav-link" href="#">Contact</a>

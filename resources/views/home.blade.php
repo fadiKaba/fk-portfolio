@@ -48,6 +48,9 @@
             </Mainpost>
             @endforeach
             @endif
+            @if($posts instanceof \Illuminate\Pagination\LengthAwarePaginator )
+            {{$posts->links('vendor.pagination.simple-bootstrap-4')}}
+            @endif 
          </div> 
          <Modal :modal-id="{{json_encode('notloged')}}" :modal-text="{{json_encode('')}}" :loged="false"></Modal>
     </div>
