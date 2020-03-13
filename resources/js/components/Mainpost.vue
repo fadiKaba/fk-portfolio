@@ -13,29 +13,30 @@
                 <div :class="src == '' || big == true?'col-md-12': 'col-md-7'">
                     <div class="card-body">
                         <p class="card-text content-text" v-html="limitString(body,400, post.id)"></p>
-                        <div class="row mb-3">
-                            <div class="col-6">
+                        <div class="d-flex mb-3 border-top pt-2">
+                            <div class="">
                                 <p class="card-text">Written by: <br><Profilephoto :src="post.user.src" :cls="'d-inline'"></Profilephoto> {{post.user.name}}</p>
                             </div>
-                            <div class="col-6"> 
+                            <div class="ml-3"> 
                                 <small class="text-muted">{{moment.utc(post.created_at).fromNow()}}</small>
                             </div>
                         </div>
-                        <div v-if="loged == true" class="btn-container row">
+                        <div v-if="loged == true" class="btn-container">
+                            <p class="text-muted text-right border-bottom py-2">
+                                <span 
+                                v-if="comts.length > 0">{{comts.length}} Comment</span><span v-if="comts.length > 1">s</span><span class="ml-2"></span>  
+                                <span v-if="likes > 0"
+                                data-toggle="popover"
+                                data-placement="top" 
+                                data-trigger="hover"
+                                :data-content="txt"
+                                data-html="true"
+                                >{{likes}} Like</span><span v-if="likes > 1">s</span> 
+                            </p>
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <button class="btn btn-light text-decoration-none pr-0" @click="like(auth.id,post.id)">
+                                <button class="btn btn-light text-decoration-none" @click="like(auth.id,post.id)">
                                     <img v-if="likeC.includes(auth.id.toString())" src="/ico/unlike.svg" alt="" width="25px">
-                                    <img v-else src="/ico/like.svg" alt="" width="25px"> 
-                                    <span 
-                                    v-if="likes > 0"
-                                    class="badge badge-light like-span"
-                                    data-toggle="popover"
-                                    data-placement="top" 
-                                    data-trigger="hover"
-                                    :data-content="txt"
-                                    data-html="true">
-                                    {{likes}} 
-                                    </span>                              
+                                    <img v-else src="/ico/like.svg" alt="" width="25px">  Like                            
                                 </button>
                                 <button 
                                 class="btn btn-light text-decoration-none"
@@ -45,13 +46,14 @@
                                 aria-expanded="false" 
                                 aria-controls="collapseExample">
                                     <img src="/ico/comment.svg" alt="" width="25px">
-                                    <span v-if="comts.length > 0" class="badge badge-light">{{comts.length}}</span>
+                                    Comment
                                 </button>
                                 <div class="btn-group" role="group">
                                     <button id="btnGroupDrop1" type="button"
                                     class="btn btn-light dropdown-toggle" 
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <img src="/ico/share.svg" alt="share" width="25px">
+                                    Share
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                                         <a class="dropdown-item" target="_blank" :href="'https://www.facebook.com/sharer/sharer.php?u=http%3A//127.0.0.1%3A8000/posts/postDetail/'+post.id">
@@ -66,28 +68,26 @@
                                 </div>
                             </div>
                         </div>                       
-                        <div v-if="loged == false" class="btn-container row">
-
+                        <div v-if="loged == false" class="btn-container">
+                            <p class="text-muted text-right border-bottom py-2">
+                                <span 
+                                v-if="comts.length > 0">{{comts.length}} Comment</span><span v-if="comts.length > 1">s</span><span class="ml-2"></span>  
+                                <span v-if="likes > 0"
+                                >{{likes}} Like</span><span v-if="likes > 1">s</span> 
+                            </p>
                             <div class="btn-group" role="group" aria-label="Basic example">
                                 <button class="btn btn-light text-decoration-none" type="button" data-toggle="modal" data-target="#notloged">
-                                    <img src="/ico/like.svg" alt="" width="25px"> 
-                                    <span 
-                                    v-if="likes > 0"
-                                    class="badge badge-light like-span"
-                                    data-toggle="popover"
-                                    data-placement="top" 
-                                    :data-content="txt"
-                                    data-html="true">
-                                    {{likes}} 
-                                    </span>
+                                    <img src="/ico/like.svg" alt="" width="25px">
+                                    Like 
                                 </button>
                                 <button class="btn btn-light text-decoration-none" data-toggle="modal" data-target="#notloged">
                                     <img src="/ico/comment.svg" alt="" width="25px"> 
-                                    <span v-if="comts.length > 0" class="badge badge-light">{{comts.length}}</span>
+                                    Comment
                                 </button>
                                 <button class="btn btn-light" 
                                 data-toggle="modal" data-target="#notloged">
                                     <img src="/ico/share.svg" width="25px">
+                                    Share
                                 </button>
                             </div>
                         </div>
@@ -100,7 +100,7 @@
                         <input 
                         type="text" 
                         class="form-control" 
-                        placeholder="Recipient's username" 
+                        placeholder="Comment..." 
                         aria-label="Recipient's username" 
                         aria-describedby="button-addon2"
                         required

@@ -56725,8 +56725,8 @@ var render = function() {
                 }
               }),
               _vm._v(" "),
-              _c("div", { staticClass: "row mb-3" }, [
-                _c("div", { staticClass: "col-6" }, [
+              _c("div", { staticClass: "d-flex mb-3 border-top pt-2" }, [
+                _c("div", {}, [
                   _c(
                     "p",
                     { staticClass: "card-text" },
@@ -56742,7 +56742,7 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-6" }, [
+                _c("div", { staticClass: "ml-3" }, [
                   _c("small", { staticClass: "text-muted" }, [
                     _vm._v(
                       _vm._s(_vm.moment.utc(_vm.post.created_at).fromNow())
@@ -56752,7 +56752,42 @@ var render = function() {
               ]),
               _vm._v(" "),
               _vm.loged == true
-                ? _c("div", { staticClass: "btn-container row" }, [
+                ? _c("div", { staticClass: "btn-container" }, [
+                    _c(
+                      "p",
+                      {
+                        staticClass: "text-muted text-right border-bottom py-2"
+                      },
+                      [
+                        _vm.comts.length > 0
+                          ? _c("span", [
+                              _vm._v(_vm._s(_vm.comts.length) + " Comment")
+                            ])
+                          : _vm._e(),
+                        _vm.comts.length > 1
+                          ? _c("span", [_vm._v("s")])
+                          : _vm._e(),
+                        _c("span", { staticClass: "ml-2" }),
+                        _vm._v(" "),
+                        _vm.likes > 0
+                          ? _c(
+                              "span",
+                              {
+                                attrs: {
+                                  "data-toggle": "popover",
+                                  "data-placement": "top",
+                                  "data-trigger": "hover",
+                                  "data-content": _vm.txt,
+                                  "data-html": "true"
+                                }
+                              },
+                              [_vm._v(_vm._s(_vm.likes) + " Like")]
+                            )
+                          : _vm._e(),
+                        _vm.likes > 1 ? _c("span", [_vm._v("s")]) : _vm._e()
+                      ]
+                    ),
+                    _vm._v(" "),
                     _c(
                       "div",
                       {
@@ -56763,8 +56798,7 @@ var render = function() {
                         _c(
                           "button",
                           {
-                            staticClass:
-                              "btn btn-light text-decoration-none pr-0",
+                            staticClass: "btn btn-light text-decoration-none",
                             on: {
                               click: function($event) {
                                 return _vm.like(_vm.auth.id, _vm.post.id)
@@ -56787,29 +56821,9 @@ var render = function() {
                                     width: "25px"
                                   }
                                 }),
-                            _vm._v(" "),
-                            _vm.likes > 0
-                              ? _c(
-                                  "span",
-                                  {
-                                    staticClass: "badge badge-light like-span",
-                                    attrs: {
-                                      "data-toggle": "popover",
-                                      "data-placement": "top",
-                                      "data-trigger": "hover",
-                                      "data-content": _vm.txt,
-                                      "data-html": "true"
-                                    }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                                " +
-                                        _vm._s(_vm.likes) +
-                                        " \n                                "
-                                    )
-                                  ]
-                                )
-                              : _vm._e()
+                            _vm._v(
+                              "  Like                            \n                            "
+                            )
                           ]
                         ),
                         _vm._v(" "),
@@ -56833,14 +56847,9 @@ var render = function() {
                                 width: "25px"
                               }
                             }),
-                            _vm._v(" "),
-                            _vm.comts.length > 0
-                              ? _c(
-                                  "span",
-                                  { staticClass: "badge badge-light" },
-                                  [_vm._v(_vm._s(_vm.comts.length))]
-                                )
-                              : _vm._e()
+                            _vm._v(
+                              "\n                                Comment\n                            "
+                            )
                           ]
                         ),
                         _vm._v(" "),
@@ -56919,88 +56928,31 @@ var render = function() {
                 : _vm._e(),
               _vm._v(" "),
               _vm.loged == false
-                ? _c("div", { staticClass: "btn-container row" }, [
+                ? _c("div", { staticClass: "btn-container" }, [
                     _c(
-                      "div",
+                      "p",
                       {
-                        staticClass: "btn-group",
-                        attrs: { role: "group", "aria-label": "Basic example" }
+                        staticClass: "text-muted text-right border-bottom py-2"
                       },
                       [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-light text-decoration-none",
-                            attrs: {
-                              type: "button",
-                              "data-toggle": "modal",
-                              "data-target": "#notloged"
-                            }
-                          },
-                          [
-                            _c("img", {
-                              attrs: {
-                                src: "/ico/like.svg",
-                                alt: "",
-                                width: "25px"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _vm.likes > 0
-                              ? _c(
-                                  "span",
-                                  {
-                                    staticClass: "badge badge-light like-span",
-                                    attrs: {
-                                      "data-toggle": "popover",
-                                      "data-placement": "top",
-                                      "data-content": _vm.txt,
-                                      "data-html": "true"
-                                    }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                                " +
-                                        _vm._s(_vm.likes) +
-                                        " \n                                "
-                                    )
-                                  ]
-                                )
-                              : _vm._e()
-                          ]
-                        ),
+                        _vm.comts.length > 0
+                          ? _c("span", [
+                              _vm._v(_vm._s(_vm.comts.length) + " Comment")
+                            ])
+                          : _vm._e(),
+                        _vm.comts.length > 1
+                          ? _c("span", [_vm._v("s")])
+                          : _vm._e(),
+                        _c("span", { staticClass: "ml-2" }),
                         _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-light text-decoration-none",
-                            attrs: {
-                              "data-toggle": "modal",
-                              "data-target": "#notloged"
-                            }
-                          },
-                          [
-                            _c("img", {
-                              attrs: {
-                                src: "/ico/comment.svg",
-                                alt: "",
-                                width: "25px"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _vm.comts.length > 0
-                              ? _c(
-                                  "span",
-                                  { staticClass: "badge badge-light" },
-                                  [_vm._v(_vm._s(_vm.comts.length))]
-                                )
-                              : _vm._e()
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _vm._m(1)
+                        _vm.likes > 0
+                          ? _c("span", [_vm._v(_vm._s(_vm.likes) + " Like")])
+                          : _vm._e(),
+                        _vm.likes > 1 ? _c("span", [_vm._v("s")]) : _vm._e()
                       ]
-                    )
+                    ),
+                    _vm._v(" "),
+                    _vm._m(1)
                   ])
                 : _vm._e()
             ])
@@ -57032,7 +56984,7 @@ var render = function() {
                   staticClass: "form-control",
                   attrs: {
                     type: "text",
-                    placeholder: "Recipient's username",
+                    placeholder: "Comment...",
                     "aria-label": "Recipient's username",
                     "aria-describedby": "button-addon2",
                     required: ""
@@ -57111,7 +57063,10 @@ var staticRenderFns = [
       [
         _c("img", {
           attrs: { src: "/ico/share.svg", alt: "share", width: "25px" }
-        })
+        }),
+        _vm._v(
+          "\n                                Share\n                                "
+        )
       ]
     )
   },
@@ -57120,12 +57075,62 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c(
-      "button",
+      "div",
       {
-        staticClass: "btn btn-light",
-        attrs: { "data-toggle": "modal", "data-target": "#notloged" }
+        staticClass: "btn-group",
+        attrs: { role: "group", "aria-label": "Basic example" }
       },
-      [_c("img", { attrs: { src: "/ico/share.svg", width: "25px" } })]
+      [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-light text-decoration-none",
+            attrs: {
+              type: "button",
+              "data-toggle": "modal",
+              "data-target": "#notloged"
+            }
+          },
+          [
+            _c("img", {
+              attrs: { src: "/ico/like.svg", alt: "", width: "25px" }
+            }),
+            _vm._v(
+              "\n                                Like \n                            "
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-light text-decoration-none",
+            attrs: { "data-toggle": "modal", "data-target": "#notloged" }
+          },
+          [
+            _c("img", {
+              attrs: { src: "/ico/comment.svg", alt: "", width: "25px" }
+            }),
+            _vm._v(
+              " \n                                Comment\n                            "
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-light",
+            attrs: { "data-toggle": "modal", "data-target": "#notloged" }
+          },
+          [
+            _c("img", { attrs: { src: "/ico/share.svg", width: "25px" } }),
+            _vm._v(
+              "\n                                Share\n                            "
+            )
+          ]
+        )
+      ]
     )
   }
 ]
