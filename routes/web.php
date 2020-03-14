@@ -22,6 +22,7 @@ Route::get('/posts/postDetail/{postId}', 'PostsController@postDetail');
 Route::get('/posts/usersearch/{str}','HomeController@search');
 Route::post('/posts/usersearchresult','HomeController@getResult');
 Route::get('/about', 'HomeController@about');
+Route::get('/send/mail', 'MailsController@send');
 
 Route::group(['middleware' => ['admin']], function(){
 
