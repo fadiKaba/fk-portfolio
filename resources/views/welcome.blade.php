@@ -20,7 +20,7 @@
                     <div class="col-md-8">
                         <h2 class="intro m-0">
                             <img src="{{asset('ico/logo.png')}}" width="60px">
-                            Be a part of our conversation 
+                            <span class="pl-2">Green</span>
                         </h2>
                     </div>
                     <div class="col-md-4">
@@ -36,8 +36,19 @@
                 </div>
             @endif
 
-            <div class="content">
-                 <Cyrcle :cyrcle-name="same('Start')" :cyrcle-path="same('/home')"></Cyrcle>
+            <div id="welcome-content">
+                <div class="row px-md-5 pt-md-4 justify-content-center mx-2">
+                    <div class="col-md-5 col1 px-5 pb-4 pt-3 mt-2">
+                        <h1 class="text-center">GREEN <br> CONVERSATION</h1>
+                        <p class="pb-3">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem praesentium reiciendis iure rerum suscipit 
+                            maxime velit perspiciatis maiores magnam ullam ut odio, deserunt dicta culpa, cumque consequuntur, atque 
+                        </p>                       
+                    </div>
+                    <div class="col-md-6 col2">
+                        <Cyrcle :cyrcle-name="same('Start')" :cyrcle-path="same('/home')"></Cyrcle>
+                    </div>
+                </div>
             </div>
             <Foot></Foot>
         </div>

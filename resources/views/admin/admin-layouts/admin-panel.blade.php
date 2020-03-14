@@ -19,9 +19,9 @@
     <div id="adm">
         <div>
             <!-- navbar -->
-            <nav class="navbar navbar-expand-lg fixed-top main-nav">
+            <nav class="navbar navbar-expand-lg fixed-top main-nav p-0">
               <div class="container">
-                <a class="navbar-brand" href="#">My App</a>
+                <a class="navbar-brand" href="/home"><img src="{{asset('ico/logo.png')}}" alt="" width="40px"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>

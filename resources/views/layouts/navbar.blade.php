@@ -23,6 +23,11 @@
                 <li class="nav-item text-center ">
                     <a class="nav-link" href="#">Contact</a>
                 </li>
+                @if(Auth::check() && Auth::user()->is_admin == 1)
+                <li class="nav-item text-center ">
+                    <a class="nav-link text-warning" href="admin/posts">Admin</a>
+                </li>
+                @endif
             </ul>
 
             <!-- Right Side Of Navbar -->

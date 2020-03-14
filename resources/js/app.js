@@ -29,4 +29,7 @@ const app = new Vue({
             return input
         },
     },
+    mounted: function(){
+      //  console.log($(window).width())
+    }
 });

@@ -20,7 +20,8 @@
         "mockery/mockery": "^1.0",
         "nunomaduro/collision": "^3.0",
         "phpunit/phpunit": "^8.0",
-        "intervention/image": "dev-master"
+        "intervention/image": "dev-master",
+        "symfony/translation": "4.3.8"
     },
     "config": {
         "optimize-autoloader": true,

@@ -1,6 +1,6 @@
 @extends('admin/admin-layouts/admin-panel')
 @section('content')
-<div class="container-fluid mt-2">
+<div class="container-fluid mt-2 px-0 px-md-4">
     <ul class="nav nav-pills mb-3 secondary-navbar p-2 rounded" id="pills-tab" role="tablist">
         <li class="nav-item">
           <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Posts</a>
@@ -17,7 +17,7 @@
       </ul>
       <div class="tab-content" id="pills-tabContent">
         <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-          <div class="container overflow-auto px-md-5">
+          <div class="container overflow-auto px-0 px-md-5">
               @foreach($posts as $post)
               <div class="card my-2">
                 @if($post->image->url ?? null)
