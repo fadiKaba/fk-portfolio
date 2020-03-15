@@ -7,7 +7,11 @@ use Mail;
 use App\Mail\SupportMail;
 
 class MailsController extends Controller
-{
+{   
+    public function index(){
+        return view('contact');
+    }
+
     public function send(){
 
         $detail = [

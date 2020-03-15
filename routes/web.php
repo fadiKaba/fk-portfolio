@@ -22,7 +22,7 @@ Route::get('/posts/postDetail/{postId}', 'PostsController@postDetail');
 Route::get('/posts/usersearch/{str}','HomeController@search');
 Route::post('/posts/usersearchresult','HomeController@getResult');
 Route::get('/about', 'HomeController@about');
-Route::get('/send/mail', 'MailsController@send');
+Route::get('/contact', 'MailsController@index');
 
 Route::group(['middleware' => ['admin']], function(){
 
@@ -43,6 +43,7 @@ Route::group(['middleware' => ['auth']], function(){
    Route::post('/comments/like/{userId}/{postId}','CommentsController@like')->name('clike');
    Route::get('/post/getusername/{usersId}','PostsController@getUser');
    Route::get('/profile/{userId}', 'ProfilesController@show')->name('profile');
+   Route::get('/mail/send', 'MailsController@send');
    Route::group(['middleware' => ['owner']], function(){
 
        Route::post('/profile/edit/{userId}','ProfilesController@update')->name('editprofile');

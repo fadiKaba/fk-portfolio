@@ -21,7 +21,7 @@
                     <a class="nav-link" href="/about">About</a>
                 </li>
                 <li class="nav-item text-center ">
-                    <a class="nav-link" href="#">Contact</a>
+                    <a class="nav-link" href="/contact">Contact</a>
                 </li>
                 @if(Auth::check() && Auth::user()->is_admin == 1)
                 <li class="nav-item text-center ">
