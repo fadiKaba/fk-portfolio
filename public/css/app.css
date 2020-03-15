@@ -10884,22 +10884,16 @@ a.text-dark:focus {
   }
 }
 
-.welcome-body {
+.welcome-body a {
+  text-decoration: none;
+}
+
+.welcome-body #app #welcome-content {
   background-color: #fff;
-  background-image: url(/images/mainwallpaper.png?de6419c07bce90ae3d44d7b0227f426c), linear-gradient(#8DBB23, #fff, #fff, #fff);
+  background-image: url(/images/bg_1.jpg?32ff0a73260c38a023de4ea2d603b798);
   background-repeat: no-repeat;
-  background-position: center 50vh, top;
-}
-
-.welcome-body .welcome-nav {
-  background-color: #3E7828;
-  font-family: "Acme", sans-serif;
-}
-
-.welcome-body .welcome-nav h2 {
-  color: #fff;
-  font-weight: bold;
-  font-family: "Acme", sans-serif;
+  background-position: center;
+  background-size: cover;
 }
 
 .welcome-body #app #welcome-content div {
@@ -10907,7 +10901,7 @@ a.text-dark:focus {
 }
 
 .welcome-body #app #welcome-content div .col1 {
-  background-color: #3E7828;
+  background-color: #82AE46;
   -webkit-clip-path: polygon(100% 0, 100% 91%, 6% 91%, 0 100%, 0 0);
           clip-path: polygon(100% 0, 100% 91%, 6% 91%, 0 100%, 0 0);
   font-size: 1.3rem;
@@ -10919,11 +10913,58 @@ a.text-dark:focus {
   font-size: 3rem;
 }
 
-@media screen and (max-width: 1050px) {
-  .welcome-body {
-    background-image: linear-gradient(#8DBB23, #fff, #fff);
-  }
+.welcome-body #app .fruits-container h4 {
+  text-align: center;
+  margin: 40px 0;
+  font-size: 2rem;
+  font-weight: bold;
+}
 
+.welcome-body #app .fruits-container div div {
+  border: #ebebeb solid 1px;
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+
+.welcome-body #app .fruits-container div div img {
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.welcome-body #app .fruits-container div div img:hover {
+  transform: scale(1.2);
+}
+
+.welcome-body #app .fruits-container div div p {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.welcome-body #app .advice-container {
+  background-image: url(/images/bg_3.jpg?637b8f8baf6e95478ceb6322eeb2e370);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
+
+.welcome-body #app .advice-container div div:nth-child(2) span {
+  color: #82AE46;
+}
+
+.welcome-body #app .advice-container div div:nth-child(2) .adv-title {
+  font-size: 2rem;
+  font-weight: bolder;
+  margin: 50px 0;
+}
+
+.welcome-body #app .advice-container div div:nth-child(2) .adv {
+  color: #888888;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+@media screen and (max-width: 1050px) {
   .welcome-body .welcome-nav h2 {
     font-size: 1.5rem;
   }
@@ -10940,21 +10981,15 @@ a.text-dark:focus {
   .welcome-body #app #welcome-content div div.col1 h1 {
     font-size: 2rem;
   }
+}
 
-  .welcome-body #app #welcome-content div .col2 {
-    background-image: url(/images/mainwallpaper.png?de6419c07bce90ae3d44d7b0227f426c);
-    background-repeat: no-repeat;
-    background-position: center bottom, top;
-    background-size: contain;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   min-height: 100vh;
-  position: relative;
-  padding-bottom: 60px;
-  font-family: "Acme", sans-serif;
-  background-color: #F6F6F6;
+  background-color: #fff;
 }
 
 body #app .login-container {
@@ -10971,12 +11006,26 @@ body #app .login-container .card-body button {
   color: #fff;
 }
 
+body #app .login-nav {
+  background-color: #82AE46;
+}
+
+body #app .login-nav span {
+  font-size: 1rem;
+  color: #fff;
+}
+
 body #app nav {
-  background-color: #294222;
+  background-color: #fff;
 }
 
 body #app nav a {
-  color: #fff;
+  color: #000;
+}
+
+body #app nav a.navbar-brand {
+  color: #82AE46;
+  font-weight: bold;
 }
 
 body #app .left-column-container {
@@ -10993,7 +11042,7 @@ body #app .left-column-container .left-column h1 {
 }
 
 body #app .left-column-container .left-column div:nth-child(2) {
-  background-color: #3E7828;
+  background-color: #82AE46;
 }
 
 body #app .left-column-container .left-column .search-container-home .card-header {

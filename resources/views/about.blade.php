@@ -1,6 +1,5 @@
 @extends('layouts/app')
 @section('content')
-   @include('layouts/navbar') 
 
 <div class="container-fluid about-container p-md-5">
     {{-- <img src="/wallpapers/about.png" alt="About img" width="100%"> --}}

@@ -1,6 +1,5 @@
 @extends('layouts/app')
 @section('content')
-@include('layouts/navbar')
 <div class="container row m-auto bg-light py-4 p-md-3">
     <div class="col-md-6 my-3">
        <img 

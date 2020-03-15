@@ -9,20 +9,21 @@
 
 @import 'welcome';
 
+html{
+    scroll-behavior: smooth;
+}
+
 body{
     min-height: 100vh;
-    position: relative;
-    padding-bottom: 60px;
     //background-color: $color1;
-    font-family: 'Acme', sans-serif;
-    background-color: #F6F6F6;
+  //  font-family: 'Acme', sans-serif;
+    background-color: #fff;
     #app{
         .login-container{
             background-color: #F6F6F6;
             .card-header{
                 background-color: $color5;
-                color:$color1;
-                
+                color:$color1;              
             }
             .card-body{
                 button{
@@ -31,10 +32,21 @@ body{
                 }
             }
         }
+        .login-nav{
+            background-color: $color2;
+            span{ 
+                font-size: 1rem;
+                color:#fff;          
+            }
+        }
         nav{
-            background-color: $color5;
+            background-color: $color1;
             a{
-                color:$color1;
+                color:#000;
+                &.navbar-brand{
+                color: $color2;
+                font-weight: bold;
+                }
             }
         }
         .left-column-container{

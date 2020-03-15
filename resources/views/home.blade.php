@@ -32,7 +32,6 @@
             </div>     
         </div>         
         <div class="col-md-6 posts-container my-2 px-0 px-md-4">
-            @include('layouts/navbar')
             @if(count($posts) > 0)
             @foreach($posts as $post)
             <Mainpost

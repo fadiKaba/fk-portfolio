@@ -15,26 +15,7 @@
     </head>
     <body class="welcome-body">
         <div id="app">
-            @if (Route::has('login'))
-                <div class="container-fluid row mx-auto py-2 welcome-nav">
-                    <div class="col-md-8">
-                        <h2 class="intro m-0">
-                            <img src="{{asset('ico/logo.png')}}" width="60px">
-                            <span class="pl-2">Green</span>
-                        </h2>
-                    </div>
-                    <div class="col-md-4">
-                        @auth
-                            {{-- <a class="btn-main" href="{{ url('/home') }}"><img src="">Home</a> --}}
-                        @else
-                            <Mainlink :btn-name="same('Login')" :icon-path="same('{{asset('ico/login.svg')}}')" :btn-path="same('{{ route('login') }}')"></Mainlink>
-                            @if (Route::has('register'))
-                            <Mainlink :btn-name="same('Register')" :icon-path="same('{{asset('ico/register.svg')}}')" :btn-path="same('{{route('register')}}')"></Mainlink>
-                            @endif
-                        @endauth
-                    </div>
-                </div>
-            @endif
+        @include('layouts/navbar')
 
             <div id="welcome-content">
                 <div class="row px-md-5 pt-md-4 justify-content-center mx-2">
@@ -47,6 +28,40 @@
                     </div>
                     <div class="col-md-6 col2">
                         <Cyrcle :cyrcle-name="same('Start')" :cyrcle-path="same('/home')"></Cyrcle>
+                    </div>
+                </div>
+            </div>
+            <div class="fruits-container py-md-5">
+                <h4>Awsome Food</h4>
+                <p class="text-center text-muted font-weight-bold">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quia, provident?</p>
+                <div class="row m-4 mb-5 px-md-5 justify-content-center">
+                    <div class="col-md-2 mx-md-3">
+                        <img src="/wallpapers/product-1.jpg" alt="" width="100%">
+                        <p>For Vitamin C</p>
+                    </div>
+                    <div class="col-md-2 mx-md-3">
+                        <img src="/wallpapers/product-5.jpg" alt="" width="100%">
+                        <p>For Vitamin D</p>
+                    </div>
+                    <div class="col-md-2 mx-md-3">
+                        <img src="/wallpapers/product-10.jpg" alt="" width="100%">
+                        <p>Vitamin C</p>
+                    </div>
+                    <div class="col-md-2 mx-md-3">
+                        <img src="/wallpapers/product-12.jpg" alt="" width="100%">
+                        <p>So hot</p>
+                    </div>
+                </div>
+            </div>
+            <div class="advice-container">
+                <div class="row">
+                    <div class="col-md-6"></div>
+                    <div class="col-md-6">
+                        <span>Start your day</span>
+                        <p class="adv-title">Advice of the day</p>
+                        <p class="adv">Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
+                        Aliquid nemo et quidem quis laudantium odit autem a doloremque nihil possimus.
+                        </p>
                     </div>
                 </div>
             </div>

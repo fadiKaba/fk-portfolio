@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts/navbar')
 <div class="container py-2 login-container">
     <div class="row justify-content-center">
         <div class="col-md-4">

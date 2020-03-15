@@ -20,6 +20,7 @@
 </head>
 <body>
     <div id="app">
+        @include('layouts/navbar')
         @include('layouts/error')
         <main class="pb-0">
             @yield('content')

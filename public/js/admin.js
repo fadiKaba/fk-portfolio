@@ -2040,6 +2040,40 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Foot'
 });
@@ -6655,7 +6689,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "div[data-v-89c0c74e] {\n  width: 100%;\n  position: absolute;\n  bottom: 0;\n}\ndiv footer p[data-v-89c0c74e] {\n  background-color: #3E7828;\n  color: #fff;\n  font-weight: 700;\n  text-align: center;\n  padding: 20px 0px;\n  margin-bottom: 0;\n}", ""]);
+exports.push([module.i, ".main-container[data-v-89c0c74e] {\n  width: 100%;\n  color: #000;\n  background-color: #fff;\n}\n.main-container .arrow-container[data-v-89c0c74e] {\n  margin-top: -65px;\n}\n.main-container .arrow-container a[data-v-89c0c74e] {\n  background-color: #82AE46;\n  padding: 20px 10px;\n  border-radius: 50%;\n}\n.main-container .arrow-container a img[data-v-89c0c74e] {\n  -webkit-animation: moveUp-data-v-89c0c74e 1s infinite linear;\n          animation: moveUp-data-v-89c0c74e 1s infinite linear;\n}\n.main-container footer ul[data-v-89c0c74e] {\n  list-style-type: none;\n}\n.main-container footer ul li.title[data-v-89c0c74e] {\n  font-size: 1.2;\n}\n.main-container footer p[data-v-89c0c74e] {\n  font-weight: 700;\n  text-align: center;\n  padding: 20px 0px;\n  margin-bottom: 0;\n}\n@-webkit-keyframes moveUp-data-v-89c0c74e {\n0% {\n    transform: translate(0);\n}\n100% {\n    transform: translate(0, -10px);\n}\n}\n@keyframes moveUp-data-v-89c0c74e {\n0% {\n    transform: translate(0);\n}\n100% {\n    transform: translate(0, -10px);\n}\n}", ""]);
 
 // exports
 
@@ -38398,17 +38432,104 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "main-container py-5" }, [
+    _c("div", { staticClass: "arrow-container text-center" }, [
+      _c(
+        "a",
+        {
+          attrs: { href: "#" },
+          on: {
+            click: function($event) {
+              return _vm.window.scrollTo(_vm.x - _vm.coord, _vm.y - _vm.coord)
+            }
+          }
+        },
+        [
+          _c("img", {
+            attrs: { src: "/ico/up-arrow.svg", alt: "", width: "40px" }
+          })
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _vm._m(0)
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("footer", [
-        _c("p", [_vm._v("Green Conversation Allright reserved © 2020")])
-      ])
+    return _c("footer", [
+      _c(
+        "div",
+        { staticClass: "row jusify-content-center container m-auto py-3" },
+        [
+          _c("div", { staticClass: "col-md-4" }, [
+            _c("ul", [
+              _c("li", { staticClass: "mb-3 font-weight-bold title" }, [
+                _vm._v("Green Conversation")
+              ]),
+              _vm._v(" "),
+              _c("li", [
+                _vm._v(
+                  "Lorem ipsum dolor sit amet consectetur adipisicing elit. \n                       Quam quod doloribus laborum neque provident eligendi!\n                    "
+                )
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "mt-4" }, [
+                _c("a", { staticClass: "mr-3", attrs: { href: "#" } }, [
+                  _c("img", {
+                    attrs: { src: "/ico/facebook.svg", width: "35px" }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("a", { staticClass: "mr-3", attrs: { href: "#" } }, [
+                  _c("img", {
+                    attrs: { src: "/ico/twitter.svg", width: "35px" }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("a", { staticClass: "mr-3", attrs: { href: "#" } }, [
+                  _c("img", {
+                    attrs: { src: "/ico/instagram.svg", width: "35px" }
+                  })
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-4" }, [
+            _c("ul", [
+              _c("li", { staticClass: "mb-3 font-weight-bold title" }, [
+                _vm._v("Help")
+              ]),
+              _vm._v(" "),
+              _c("li", [_vm._v("Privicy policy")]),
+              _vm._v(" "),
+              _c("li", [_vm._v("Contact")]),
+              _vm._v(" "),
+              _c("li", [_vm._v("Terms & Condition")])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-4" }, [
+            _c("ul", [
+              _c("li", { staticClass: "mb-3 font-weight-bold title" }, [
+                _vm._v("Menu")
+              ]),
+              _vm._v(" "),
+              _c("li", [_vm._v("Blog")]),
+              _vm._v(" "),
+              _c("li", [_vm._v("About")]),
+              _vm._v(" "),
+              _c("li", [_vm._v("Contact")])
+            ])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c("p", [_vm._v("Green Conversation Allright reserved © 2020")])
     ])
   }
 ]
@@ -51071,7 +51192,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\project\my-portfolio\resources\js\admin.js */"./resources/js/admin.js");
+module.exports = __webpack_require__(/*! C:\coding\projects\porto-deploy\fk-portfolio\resources\js\admin.js */"./resources/js/admin.js");
 
 
 /***/ })
