@@ -69703,12 +69703,31 @@ var app = new Vue({
     Modal: _components_Modal__WEBPACK_IMPORTED_MODULE_5__["default"],
     Profilephoto: _components_Profilephoto__WEBPACK_IMPORTED_MODULE_6__["default"]
   },
+  mounted: function mounted() {
+    //  console.log($(window).width())
+    $('#myCarousel').carousel({
+      interval: 3000,
+      cycle: true
+    });
+    this.showAn('.welcome-body > #app > .fruits-container > div.fruits-inner-container > div > img');
+  },
   methods: {
     same: function same(input) {
       return input;
+    },
+    showAn: function showAn(ele) {
+      // document.querySelector(ele).style.opacity = '0'
+      var observer = new IntersectionObserver(function (entries) {
+        // isIntersecting is true when element and viewport are overlapping
+        // isIntersecting is false when element and viewport don't overlap
+        if (entries[0].isIntersecting === true) console.log('wwwwwwwwwww');
+        document.querySelector(ele).style.backgroundColor = 'red';
+        document.querySelector(ele).classList.add('d-opacity');
+      }, {
+        threshold: [0]
+      });
+      observer.observe(document.querySelector(ele));
     }
-  },
-  mounted: function mounted() {//  console.log($(window).width())
   }
 });
 
@@ -70466,9 +70485,9 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\coding\projects\porto-deploy\fk-portfolio\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\coding\projects\porto-deploy\fk-portfolio\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\coding\projects\porto-deploy\fk-portfolio\resources\sass\admin.scss */"./resources/sass/admin.scss");
+__webpack_require__(/*! D:\project\my-portfolio\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! D:\project\my-portfolio\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! D:\project\my-portfolio\resources\sass\admin.scss */"./resources/sass/admin.scss");
 
 
 /***/ })

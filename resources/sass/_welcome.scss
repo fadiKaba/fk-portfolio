@@ -8,12 +8,41 @@
         text-decoration: none;
     }
     #app{
+        .show-case{
+            .carousel{
+                
+                .carousel-inner{
+                   max-height: 100vh; 
+                   position: relative;
+                  
+                   .carousel-item{
+                    &::before{
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background-color: rgba(0, 0, 0, 0.267);
+                    }
+                       .carousel-caption{
+                           bottom: 55%;
+                           h5{
+                            font-family: 'Amatic SC', cursive;
+                            font-size: 100px;
+                           }
+                           p{
+                            font-family: 'Poppins', sans-serif;
+                            font-weight: 18px;
+                            text-transform: uppercase;
+                            letter-spacing: 2px;
+                           }
+                       }
+                   }
+                }
+            }           
+        }
         #welcome-content{
-            background-color: #fff;
-    background-image: url('../wallpapers/bg_1.jpg');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size:cover;
             div{
                 color:#fff;
                 .col1{
@@ -41,12 +70,13 @@
                 font-size: 2rem;
                 font-weight: bold;
             }
-            div{
+            div{               
                 div{
                     border: rgb(235, 235, 235) solid 1px;
                     overflow: hidden;
                     margin-bottom: 5px;
                     img{
+                        opacity:0;
                         transition: 0.3s;
                         cursor: pointer;
                         &:hover{
@@ -92,6 +122,21 @@
 
 
 
+.d-opacity{
+    animation: opacity 3s ease-in;
+}
+
+@keyframes opacity {
+    0%{
+      opacity: 0;
+    }
+    100%{
+      opacity: 1;
+    }
+}
+
+
+
 
 
 
@@ -115,7 +160,8 @@
                 div.col1{
                     max-height: 1000px;
                     h1{
-                        font-size: 2rem;
+                        font-size: 1.5rem;
+                        font-weight: bolder;
                     }
                     
                 }
@@ -131,3 +177,4 @@
 }
 
 }
+
