@@ -10947,10 +10947,10 @@ a.text-dark:focus {
   border: #ebebeb solid 1px;
   overflow: hidden;
   margin-bottom: 5px;
+  opacity: 0;
 }
 
 .welcome-body #app .fruits-container div div img {
-  opacity: 0;
   transition: 0.3s;
   cursor: pointer;
 }
@@ -10972,6 +10972,10 @@ a.text-dark:focus {
   min-height: 100vh;
 }
 
+.welcome-body #app .advice-container div div:nth-child(2) {
+  opacity: 0;
+}
+
 .welcome-body #app .advice-container div div:nth-child(2) span {
   color: #82AE46;
 }
@@ -10989,27 +10993,33 @@ a.text-dark:focus {
 }
 
 .d-opacity {
-  -webkit-animation: opacity 3s ease-in;
-          animation: opacity 3s ease-in;
+  -webkit-animation: opacity 0.3s ease-in;
+          animation: opacity 0.3s ease-in;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
 }
 
 @-webkit-keyframes opacity {
   0% {
     opacity: 0;
+    transform: translate(0, 20px);
   }
 
   100% {
     opacity: 1;
+    transform: translate(0, 0px);
   }
 }
 
 @keyframes opacity {
   0% {
     opacity: 0;
+    transform: translate(0, 20px);
   }
 
   100% {
     opacity: 1;
+    transform: translate(0, 0px);
   }
 }
 
@@ -11131,6 +11141,41 @@ body #app .pagination-nav {
 body #app .pagination-nav ul li .act {
   color: #fff;
   background-color: #2B4325;
+}
+
+.blog-showcase {
+  background-image: url(/images/category-3.jpg?9a73352f7a604700dd7474a5ca01b5cb);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 50vh;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.blog-showcase h3 {
+  font-size: 2rem;
+  font-weight: bolder;
+  font-family: "Roboto Condensed", sans-serif;
+  text-transform: uppercase;
+}
+
+.blog-showcase p {
+  text-transform: uppercase;
+  font-size: 1.1rem;
+}
+
+.green {
+  background-color: #82AE46;
+  color: #fff;
+}
+
+.green:hover {
+  background-color: #fff;
+  color: #82AE46;
 }
 
 @media screen and (max-width: 600px) {

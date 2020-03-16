@@ -1,9 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="blog-showcase">
+    <p>Home blog</p>
+    <h3>Blog</h3>
+</div>
 <div class="container-fluid">
     <div class="row justify-content-center left-column-container">
-        <div class="col-md-3 left-column px-0 my-2">
+        {{-- <div class="col-md-3 left-column px-0 my-2">
             <div>
                 <h1 class="px-2 py-1 m-0">Welcome to {{ config('app.name', 'Green') }}</h1>
             </div>
@@ -30,8 +34,8 @@
                     </div>
                   </div> 
             </div>     
-        </div>         
-        <div class="col-md-6 posts-container my-2 px-0 px-md-4">
+        </div>          --}}
+        <div class="col-md-7 posts-container my-2 px-0 px-md-4">
             @if(count($posts) > 0)
             @foreach($posts as $post)
             <Mainpost
@@ -51,6 +55,16 @@
             {{$posts->links('vendor.pagination.simple-bootstrap-4')}}
             @endif 
          </div> 
+         <div class="col-md-3 d-none d-md-block">
+            <p><Search :url="same('/posts/usersearch')" :res="same('/posts/usersearchresult')">{{ csrf_field() }}</Search></p>
+            <div class="mt-md-5">
+                <h5>Paragraph</h5>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, pariatur sint voluptas ex enim in qui inventore
+                     rem, optio repellat quos veritatis. Fugiat cum quam velit autem ipsum eos voluptates doloremque nemo necessitatibus 
+                     ipsam hic tempora expedita dolorem odit, rerum similique consequatur earum placeat fugit ipsa rem numquam optio.
+                </p>
+            </div>
+         </div>
          <Modal :modal-id="{{json_encode('notloged')}}" :modal-text="{{json_encode('')}}" :loged="false"></Modal>
     </div>
 </div>

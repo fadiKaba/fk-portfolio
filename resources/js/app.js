@@ -30,24 +30,29 @@ const app = new Vue({
         interval: 3000,
         cycle: true
       }); 
-      this.showAn('.welcome-body > #app > .fruits-container > div.fruits-inner-container > div > img');
+      this.showAn('div.fruits-inner-container > div');
+      this.showAn('.advice-container > div > div:nth-child(2)');
     },
     methods:{
         same: function(input){
             return input
         },
         showAn: function(ele){
-         // document.querySelector(ele).style.opacity = '0'
-          var observer = new IntersectionObserver(function(entries) {
-            // isIntersecting is true when element and viewport are overlapping
-            // isIntersecting is false when element and viewport don't overlap
-            if(entries[0].isIntersecting === true)
-            console.log('wwwwwwwwwww')
-            document.querySelector(ele).style.backgroundColor = 'red'
-           document.querySelector(ele).classList.add('d-opacity');
-          }, { threshold: [0] });
-          
-          observer.observe(document.querySelector(ele));
+          if(document.querySelectorAll(ele).length > 0){
+            console.log(document.querySelectorAll(ele))
+            let time = 100; 
+            var observer = new IntersectionObserver(function(entries) {
+              if(entries[0].isIntersecting === true)
+             document.querySelectorAll(ele).forEach((item) => {                       
+               setTimeout(()=>{
+                 item.classList.add('d-opacity'); 
+               }, time)
+               time+=100;     
+             });
+            }, { threshold: [1] });
+            
+            observer.observe(document.querySelector(ele));
+          }         
         },
     },
     

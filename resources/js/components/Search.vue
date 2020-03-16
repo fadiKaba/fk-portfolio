@@ -1,31 +1,36 @@
 <template>
-   <div>
-       <div>
-           <form class="form-inline my-2 my-lg-0 ml-md-5" :action="res" method="POST">
+   <div class="mt-md-5">
+        <form class="my-2 my-lg-0" :action="res" method="POST">
+            <div class="input-group mb-1">
                 <input 
                 autocomplete="off" 
                 list="search-result" 
                 @keyup="startSearch(sVal)" 
                 v-model="sVal" 
-                class="form-control mr-sm-2" 
+                class="form-control" 
                 type="search" 
                 placeholder="Search" 
                 aria-label="Search"
+                aria-describedby="button-addon2"
                 name="sresult">
-                <button class="btn my-2 my-sm-0" type="submit">Search</button>
-                <datalist id="search-result">
-                    <option 
-                    v-for="result in results" 
-                    :key="result.id"
-                    :value="result.email||result.post_title"
-                    >
-                    {{result.email || result.post_title}}<span>{{result.name}}</span>
-                    </option>
-                </datalist> 
-                <slot></slot>            
-           </form>
-       </div>      
-   </div>   
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="submit" btn btn-outline-secondary>Search</button>
+                </div>                                
+            </div>                           
+            <slot></slot>            
+        </form>
+        <div>              
+            <ul class="list-group" v-if="results.length > 0">
+                <li class="list-group-item p-0" v-for="result in results" :key="result.id">
+                    <form :action="res" method="POST">
+                    <input type="hidden" name="sresult" :value="result.email||result.post_title">
+                    <button class="btn" type="submit">{{result.email || result.post_title}}<span>{{result.name}}</span></button>
+                    <slot></slot> 
+                    </form> 
+                </li>
+            </ul>                                           
+        </div> 
+    </div>      
 </template>
 <script>
 
@@ -42,10 +47,15 @@ export default {
     },
     methods:{
         startSearch: function(val){
-            axios.get(this.url+ '/' +this.sVal).
-            then((response)=>{
-                this.results = response.data;
+            this.sVal == ''? this.results = []:'';
+            if(this.sVal != ''){
+               axios.get(this.url+ '/' +this.sVal).
+               then((response)=>{
+                    this.results = response.data;
+                    console.log(this.results)
+                    console.log(document.querySelector('#search-result  option'))
             })
+            }
         },
         goToRes(id){
             console.log(id)
@@ -54,8 +64,5 @@ export default {
 }
 </script>
 <style scoped>
-button{
-    background-color:#294222;
-    color:#fff;
-}
+
 </style>

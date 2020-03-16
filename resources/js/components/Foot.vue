@@ -1,5 +1,5 @@
 <template>
-    <div class="main-container py-5">
+    <div class="main-container py-5 mt-3">
         <div class="arrow-container text-center">
             <a @click="window.scrollTo(x-coord, y-coord);" href="#"><img src="/ico/up-arrow.svg" alt="" width="40px"></a>
         </div>       
@@ -11,7 +11,7 @@
                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
                            Quam quod doloribus laborum neque provident eligendi!
                         </li>
-                        <li class="mt-4">
+                        <li class="mt-4 social-container">
                             <a href="#" class="mr-3"><img src="/ico/facebook.svg" width="35px"></a>
                             <a href="#" class="mr-3"><img src="/ico/twitter.svg" width="35px"></a>
                             <a href="#" class="mr-3"><img src="/ico/instagram.svg" width="35px"></a>
@@ -42,11 +42,31 @@
 <script>
 export default {
     name:'Foot',
+    mounted: function(){
+    this.showAn('.social-container > a > img');
+    },
+    methods:{
+        showAn: function(ele){
+          // document.querySelector(ele).style.opacity = '0'
+          let time = 100; 
+          var observer = new IntersectionObserver(function(entries) {
+            if(entries[0].isIntersecting === true)
+           document.querySelectorAll(ele).forEach((item) => {                       
+             setTimeout(()=>{
+               item.classList.add('d-opacity'); 
+             }, time)
+             time+=100;     
+           });
+          }, { threshold: [1] });
+          
+          observer.observe(document.querySelector(ele));
+        },
+    }
 }
 </script>
 <style lang="scss" scoped>
 
-$color1:#fff;
+$color1:#F7F6F2;
 $color2:#82AE46;
 .main-container{
     width: 100%;
@@ -67,6 +87,11 @@ $color2:#82AE46;
             ul{
                 list-style-type: none;
                 li{
+                    a{
+                        img{
+                            opacity:0;
+                        }
+                    }
                     &.title{
                         font-size: 1.2;
                     }
@@ -80,6 +105,24 @@ $color2:#82AE46;
     }
     }
 }
+
+.d-opacity{
+    animation: opacity 0.3s ease-in;
+    animation-fill-mode: forwards;
+}
+
+@keyframes opacity {
+    0%{
+      opacity: 0;
+      transform: translate(0, 20px);
+    }
+    100%{
+      opacity: 1;
+      transform: translate(0, 0px);
+    }
+}
+
+
 @keyframes moveUp {
     0%{
         transform: translate(0);

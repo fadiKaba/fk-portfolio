@@ -1,31 +1,28 @@
 <template>
     <div>
-        <div class="card mb-1 shadow rounded-0">
-            <div class="foot row w-100 mx-auto">
-                <div class="col-12  shadow">
-                    <h3 class="m-0 p-1">{{title}}</h3>
-                </div>                  
-            </div>   
+        <div class="card mb-5 rounded-0 border-0">
             <div class="row no-gutters">
                 <div :class="big == false ? 'col-md-4 m-md-4': 'col-md-12'" v-if="src != ''">
                     <img v-if="src != ''" :src="'/images/' + src" class="card-img-top" alt=""> 
                 </div>
                 <div :class="src == '' || big == true?'col-md-12': 'col-md-7'">
                     <div class="card-body">
+                        <h3 class="m-0 p-1">{{title}}</h3>
                         <p class="card-text content-text" v-html="limitString(body,400, post.id)"></p>
                         <div class="d-flex mb-3 border-top pt-2">
                             <div class="">
-                                <p class="card-text">Written by: <br><Profilephoto :src="post.user.src" :cls="'d-inline'"></Profilephoto> {{post.user.name}}</p>
+                                <p class="card-text"><Profilephoto :src="post.user.src" :cls="'d-inline'"></Profilephoto> {{post.user.name}}</p>
                             </div>
                             <div class="ml-3"> 
                                 <small class="text-muted">{{moment.utc(post.created_at).fromNow()}}</small>
                             </div>
                         </div>
                         <div v-if="loged == true" class="btn-container">
-                            <p class="text-muted text-right border-bottom py-2">
+                            <p class="text-muted text-right py-2">
                                 <span 
                                 v-if="comts.length > 0">{{comts.length}} Comment</span><span v-if="comts.length > 1">s</span><span class="ml-2"></span>  
                                 <span v-if="likes > 0"
+                                class="like-span"
                                 data-toggle="popover"
                                 data-placement="top" 
                                 data-trigger="hover"
@@ -69,7 +66,7 @@
                             </div>
                         </div>                       
                         <div v-if="loged == false" class="btn-container">
-                            <p class="text-muted text-right border-bottom py-2">
+                            <p class="text-muted text-right py-2">
                                 <span 
                                 v-if="comts.length > 0">{{comts.length}} Comment</span><span v-if="comts.length > 1">s</span><span class="ml-2"></span>  
                                 <span v-if="likes > 0"
@@ -95,7 +92,7 @@
                 </div>
             </div>
             <div class="collapse" :id="'comment'+ post.id.toString()">
-                <div class="card card-body">
+                <div class="card card-body border-0 pl-md-5 ml-md-5">
                     <div class="input-group mb-3">
                         <input 
                         type="text" 
@@ -115,12 +112,14 @@
                         </button>
                         </div>
                     </div>
-                    <Comment 
-                    v-for="comt in comts" 
-                    :key="'cc'+comt.id" :comt="comt"
-                    :auth="auth"
-                    v-on:delItem="getDelItem"
-                    ></Comment>
+                    <div>
+                        <Comment 
+                        v-for="comt in comts" 
+                        :key="'cc'+comt.id" :comt="comt"
+                        :auth="auth"
+                        v-on:delItem="getDelItem"
+                        ></Comment>
+                    </div>                   
                 </div>
             </div>
        </div><a id="dots" :href="same(`/posts/postDetail/${post.id}`)"></a>
@@ -223,19 +222,16 @@ export default {
 <style lang="scss" scoped>
 .card{
         .btn-container{
+            p{
+               span{
+                   cursor: pointer;
+               }
+           }
             div:nth-child(1){
-           // background-color: #0E7F43;
+           
            .like-span{
                cursor: pointer;
            }
-            }
-            div:nth-child(2){
-           // background-color: #A4CB38;
-            }
-        }
-        .card-body{
-            .content-text{
-                
             }
         }
         .foot{

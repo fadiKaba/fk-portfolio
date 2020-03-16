@@ -1,6 +1,6 @@
 @extends('layouts/app')
 @section('content')
-<div class="container row m-auto bg-light py-4 p-md-3">
+<div class="container row mt-3 mx-auto bg-light p-md-4">
     <div class="col-md-6 my-3">
        <img 
        class="rounded"       
@@ -26,7 +26,7 @@
                 <label for="img">Edit your profile photo</label>
                 <input class="form-control" type="file" name="img" id="img">
             </div>
-            <button class="btn btn-primary" type="submit">Save</button>
+            <button class="btn green" type="submit">Save</button>
             @csrf
         </form>
         @if($userAuth->src != null || $userAuth->src != '')

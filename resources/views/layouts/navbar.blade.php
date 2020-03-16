@@ -47,6 +47,9 @@
                 </li>
                 @endif
                 <li class="nav-item">
+                    <a class="nav-link mr-md-4" href="/home">Home</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link mr-md-4" href="{{ route('login') }}">Blog</a>
                 </li>
                 <li class="nav-item">

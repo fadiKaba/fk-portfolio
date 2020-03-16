@@ -1,8 +1,7 @@
 @extends('layouts/app')
 @section('content')
-    @include('layouts/navbar')
     <div class="">
-        <div class="container">
+        <div class="container-fluid">
             <Mainpost   
             :big="true"
             :src="{{json_encode($post[0]->image != null ? $post[0]->image->url : '')}}" 
