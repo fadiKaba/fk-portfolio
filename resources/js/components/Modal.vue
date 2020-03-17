@@ -8,7 +8,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <img src="/wallpapers/minigreen.jpg" width="100%">
+                <img src="/wallpapers/modal.jpg" width="100%" class="mb-4">
                 {{modalText}}
                 <div v-if="loged == false">
                    You have to <a href="/login">login</a> to be able to like or comment. No account? <a href="/register">Register</a>
@@ -34,6 +34,8 @@ export default {
 </script>
 <style scoped>
 .modal-content{
-    background-color: rgb(246, 246, 246);
+    background-color: #fff;
+    font-size: 1.2rem;
+    font-weight: bold;
 }
 </style>

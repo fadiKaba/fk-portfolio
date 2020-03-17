@@ -26,16 +26,17 @@ class MailsController extends Controller
 
         try{
           Mail::to('fadikaba9@gmail.com')->send(new SupportMail($detail));  
+          if (Mail::failures()) {
+            return redirect()->back()->withErrors('Sorry! We could not send your email, Please try again latter');
+       }else{
+            return redirect()->back()->with('success','Successfully send in your mail');
+          }
         }catch(Exception $err){
             abort(403, 'Unauthorized action.');
             return redirect()->back();
         }
         
 
-    //     if (Mail::failures()) {
-    //         return response()->w('Sorry! Please try again latter');
-    //    }else{
-    //         return response()->success('Great! Successfully send in your mail');
-    //       }
+        
     }
 }

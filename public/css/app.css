@@ -11052,20 +11052,6 @@ body {
   background-color: #fff;
 }
 
-body #app .login-container {
-  background-color: #F6F6F6;
-}
-
-body #app .login-container .card-header {
-  background-color: #294222;
-  color: #fff;
-}
-
-body #app .login-container .card-body button {
-  background-color: #294222;
-  color: #fff;
-}
-
 body #app .login-nav {
   background-color: #82AE46;
 }
@@ -11234,12 +11220,10 @@ body #app .pagination-nav ul li .act {
   background-color: #F7F6F2;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 .login-container .login-showcase {
-  background-image: url(/images/contact.jpg?ebc9239e7212bb758abdc0cd9fff6c2b);
+  background-image: url(/images/bg_1.jpg?32ff0a73260c38a023de4ea2d603b798);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -11266,7 +11250,7 @@ body #app .pagination-nav ul li .act {
 
 .login-container .content div.row .login-col1 {
   min-height: 80vh;
-  background-image: url(/images/image_3.jpg?da5dd81084085fe2f1cdf5e6ebb6eb4f);
+  background-image: url(/images/img_7.jpg?263ee22aeaec6cabaf1dbd9b36ce4ca4);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -11276,8 +11260,6 @@ body #app .pagination-nav ul li .act {
   background-color: #F7F6F2;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 .green {

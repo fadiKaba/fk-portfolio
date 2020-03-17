@@ -63,6 +63,17 @@ export default {
     }
 }
 </script>
-<style scoped>
-
+<style lang="scss" scoped>
+  ul.list-group{
+      li{
+          form{
+             button{
+            &:hover{
+                color: #82AE46;
+            }
+        }
+          }
+        
+      }
+  }
 </style>

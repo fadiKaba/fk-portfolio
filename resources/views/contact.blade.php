@@ -10,13 +10,16 @@
         <div class="row">
             <div class="col-md-6 contact-col1 mr-md-4"></div>
             <div class="col-md-5 p-3 p-md-5 contact-col2">
+                @if(Auth::check())
                 <div>
                     <form action="/mail/send" method="POST">
                         <div class="form-group">
-                            <input class="form-control" required name="subject" type="text" id="subject" placeholder="Subject">
+                            <input class="form-control" required name="subject" type="text" id="subject" value="{{old('subject')}}" placeholder="Subject">
                         </div>
                         <div class="form-group">
-                            <textarea class="form-control" required name="message" id="" cols="30" rows="10" placeholder="Message"></textarea>
+                            <textarea class="form-control" required name="message" id="" cols="30" rows="10" placeholder="Message">
+                                {{old('message')}} 
+                            </textarea>
                         </div>
                         @if(Auth::check())                     
                         <button class="btn green">Send</button>
@@ -27,6 +30,9 @@
                     <button class="btn green" data-toggle="modal" data-target="#notloged">Send</button>
                     @endif
                 </div>
+                @else
+                <div>Login Or register to contact us</div>
+                @endif
             </div>
         </div>       
     </div>

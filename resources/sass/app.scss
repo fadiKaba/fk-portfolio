@@ -17,19 +17,6 @@ body{
     min-height: 100vh;
     background-color: #fff;
     #app{
-        .login-container{
-            background-color: #F6F6F6;
-            .card-header{
-                background-color: $color5;
-                color:$color1;              
-            }
-            .card-body{
-                button{
-                    background-color: $color5;
-                    color:#fff;
-                }
-            }
-        }
         .login-nav{
             background-color: $color2;
             span{ 
@@ -196,8 +183,6 @@ body{
                 background-color: #F7F6F2;
                 display: flex;
                 flex-direction: column;
-                justify-content: center;
-                align-items: center;
                 } 
         }
         
@@ -206,7 +191,7 @@ body{
 
 .login-container{
     .login-showcase{
-        background-image:url('../wallpapers/contact.jpg');
+        background-image:url('../wallpapers/bg_1.jpg');
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
@@ -231,18 +216,18 @@ body{
     .content{
         div.row{
            .login-col1{
-            min-height: 80vh;
-            background-image:url('../wallpapers/image_3.jpg');
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
+                min-height: 80vh;
+                background-image:url('../wallpapers/img_7.jpg');
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center;
             } 
             .login-col2{
                 background-color: #F7F6F2;
                 display: flex;
                 flex-direction: column;
-                justify-content: center;
-                align-items: center;
+                //justify-content: center;
+               // align-items: center;
                 } 
         }
         
@@ -258,8 +243,6 @@ body{
         color: $color2;
     }
 }
-
-
 
 
 @media screen and (max-width:600px){

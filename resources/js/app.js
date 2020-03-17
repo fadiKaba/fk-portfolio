@@ -17,6 +17,7 @@ import Search from "./components/Search";
 import Modal from './components/Modal';
 import Profilephoto from './components/Profilephoto';
 
+
 $(function () {
     $('[data-toggle="popover"]').popover()
   })

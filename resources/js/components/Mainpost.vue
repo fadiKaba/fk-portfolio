@@ -94,17 +94,19 @@
             <div class="collapse" :id="'comment'+ post.id.toString()">
                 <div class="card card-body border-0 pl-md-5 ml-md-5">
                     <div class="input-group mb-3">
-                        <input 
+                        <textarea 
+                        rows="1"
                         type="text" 
                         class="form-control" 
                         placeholder="Comment..." 
                         aria-label="Recipient's username" 
                         aria-describedby="button-addon2"
                         required
-                        v-model="newC">
+                        v-on:keyup.enter="addComment(auth.id, post.id, newC)"
+                        v-model="newC"></textarea>
                         <div class="input-group-append">
                         <button 
-                        class="btn inner-comment-btn" 
+                        class="btn" 
                         type="button" 
                         id="button-addon2"
                         @click="addComment(auth.id, post.id, newC)">
@@ -248,6 +250,7 @@ export default {
          }
 
 }
+
 
 </style>
 
