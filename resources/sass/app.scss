@@ -65,27 +65,6 @@ body{
                 }
             }
         }
-        .about-container{
-            background-image: url('/wallpapers/about.png');
-            background-position: center;
-            background-size: cover;
-            background-repeat: no-repeat;
-            min-height: 90vh;
-            h3{
-                color: $color4;
-                font-weight: bold;
-                font-size: 1.7rem;
-                text-align: center;
-            }
-            .sec{
-                background-color: rgba(255, 255, 255, 0.664);
-                border-radius: 5px;
-                color: $color4;
-                h4{
-                    text-align: center;
-                }
-            }
-        }
         .pagination-nav{
             background-color: #fff;
             ul{
@@ -119,10 +98,154 @@ body{
         font-weight: bolder;
         font-family: 'Roboto Condensed', sans-serif;
         text-transform: uppercase;
+        letter-spacing:4px;
     }
     p{
         text-transform: uppercase;
         font-size: 1.1rem;
+    }
+}
+
+.about-container{
+    .about-showcase{
+        background-image:url('./wallpapers/image_5.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        min-height: 50vh;
+        color:#fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        h3{
+            font-size: 2rem;
+            font-weight: bolder;
+            font-family: 'Roboto Condensed', sans-serif;
+            text-transform: uppercase;
+            letter-spacing:4px;
+        }
+        p{
+            text-transform: uppercase;
+            font-size: 1.1rem;
+        }
+    }
+    .content{
+        div{
+           div:nth-child(1){
+            min-height: 80vh;
+            background-image:url('../wallpapers/about.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            } 
+            div:nth-child(2){
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                h5{
+                    font-size: 2.5rem;
+                    font-family: 'Poppins', sans-serif;
+                }
+                p{  
+                    color: rgb(100, 100, 100);
+                    font-size: 1.1rem;
+                    font-family: 'Poppins', sans-serif;
+                }
+                } 
+        }
+        
+    }
+}
+
+.contact-container{
+    .contact-showcase{
+        background-image:url('../wallpapers/contact.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        min-height: 50vh;
+        color:#fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        h3{
+            font-size: 2rem;
+            font-weight: bolder;
+            font-family: 'Roboto Condensed', sans-serif;
+            text-transform: uppercase;
+            letter-spacing:4px;
+        }
+        p{
+            text-transform: uppercase;
+            font-size: 1.1rem;
+        }
+    }
+    .content{
+        div.row{
+           .contact-col1{
+            min-height: 80vh;
+            background-image:url('../wallpapers/image_3.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            } 
+            .contact-col2{
+                background-color: #F7F6F2;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                } 
+        }
+        
+    }
+}
+
+.login-container{
+    .login-showcase{
+        background-image:url('../wallpapers/contact.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        min-height: 50vh;
+        color:#fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        h3{
+            font-size: 2rem;
+            font-weight: bolder;
+            font-family: 'Roboto Condensed', sans-serif;
+            text-transform: uppercase;
+            letter-spacing:4px;
+        }
+        p{
+            text-transform: uppercase;
+            font-size: 1.1rem;
+        }
+    }
+    .content{
+        div.row{
+           .login-col1{
+            min-height: 80vh;
+            background-image:url('../wallpapers/image_3.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            } 
+            .login-col2{
+                background-color: #F7F6F2;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                } 
+        }
+        
     }
 }
 

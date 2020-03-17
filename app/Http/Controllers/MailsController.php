@@ -12,14 +12,25 @@ class MailsController extends Controller
         return view('contact');
     }
 
-    public function send(){
+    public function send(Request $request){
+        
+        $request->validate([
+            'subject' => 'required',
+            'message' => 'required'
+        ]);
 
         $detail = [
-            'title' => "Hello",
-            'body'  => "This is the first email"
+            'title' => $request->subject,
+            'body'  => $request->message
         ];
 
-        Mail::to('fadikaba9@gmail.com')->send(new SupportMail($detail));
+        try{
+          Mail::to('fadikaba9@gmail.com')->send(new SupportMail($detail));  
+        }catch(Exception $err){
+            abort(403, 'Unauthorized action.');
+            return redirect()->back();
+        }
+        
 
     //     if (Mail::failures()) {
     //         return response()->w('Sorry! Please try again latter');

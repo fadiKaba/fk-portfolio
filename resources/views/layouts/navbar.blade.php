@@ -47,10 +47,10 @@
                 </li>
                 @endif
                 <li class="nav-item">
-                    <a class="nav-link mr-md-4" href="/home">Home</a>
+                    <a class="nav-link mr-md-4" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link mr-md-4" href="{{ route('login') }}">Blog</a>
+                    <a class="nav-link mr-md-4" href="/home">Blog</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link mr-md-4" href="/about">About</a>

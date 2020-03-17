@@ -74,7 +74,7 @@
                     </div>
                 </div>
             </div>
-            <div class="advice-container">
+            <div class="advice-container mb-5">
                 <div class="row container-fluid">
                     <div class="col-md-6"></div>
                     <div class="col-md-6 pt-md-5">
