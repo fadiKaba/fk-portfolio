@@ -11105,7 +11105,7 @@ body #app .pagination-nav ul li .act {
 }
 
 .blog-showcase {
-  background-image: url(/images/category-3.jpg?9a73352f7a604700dd7474a5ca01b5cb);
+  background-image: url(/images/category_3.jpg?9a73352f7a604700dd7474a5ca01b5cb);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -11131,7 +11131,7 @@ body #app .pagination-nav ul li .act {
 }
 
 .about-container .about-showcase {
-  background-image: url(/images/image_5.jpg?29c3d03057b3d7e028a79dde2d976e47);
+  background-image: url(/images/image-5.jpg?29c3d03057b3d7e028a79dde2d976e47);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -11158,7 +11158,7 @@ body #app .pagination-nav ul li .act {
 
 .about-container .content div div:nth-child(1) {
   min-height: 80vh;
-  background-image: url(/images/about.jpg?c1a67a3916dd7716fb7919fc90ae065d);
+  background-image: url(/images/abou.jpg?c1a67a3916dd7716fb7919fc90ae065d);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -11183,7 +11183,7 @@ body #app .pagination-nav ul li .act {
 }
 
 .contact-container .contact-showcase {
-  background-image: url(/images/contact.jpg?ebc9239e7212bb758abdc0cd9fff6c2b);
+  background-image: url(/images/contac.jpg?ebc9239e7212bb758abdc0cd9fff6c2b);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -11210,7 +11210,7 @@ body #app .pagination-nav ul li .act {
 
 .contact-container .content div.row .contact-col1 {
   min-height: 80vh;
-  background-image: url(/images/image_3.jpg?da5dd81084085fe2f1cdf5e6ebb6eb4f);
+  background-image: url(/images/image-3.jpg?da5dd81084085fe2f1cdf5e6ebb6eb4f);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -11223,7 +11223,7 @@ body #app .pagination-nav ul li .act {
 }
 
 .login-container .login-showcase {
-  background-image: url(/images/bg_1.jpg?32ff0a73260c38a023de4ea2d603b798);
+  background-image: url(/images/bg1.jpg?32ff0a73260c38a023de4ea2d603b798);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -11250,7 +11250,7 @@ body #app .pagination-nav ul li .act {
 
 .login-container .content div.row .login-col1 {
   min-height: 80vh;
-  background-image: url(/images/img_7.jpg?263ee22aeaec6cabaf1dbd9b36ce4ca4);
+  background-image: url(/images/img7.jpg?263ee22aeaec6cabaf1dbd9b36ce4ca4);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;

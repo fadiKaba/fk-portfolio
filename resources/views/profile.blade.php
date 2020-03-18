@@ -1,7 +1,7 @@
 @extends('layouts/app')
 @section('content')
 <div class="container row mt-3 mb-5 mx-auto bg-light p-md-4">
-    <div class="col-md-6 my-3">
+    <div class="col-md-4 my-3">
        <img 
        class="rounded"       
        @if($userAuth->src == null || $userAuth->src == '')

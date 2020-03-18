@@ -4,12 +4,10 @@
     }
     #app{
         .show-case{
-            .carousel{
-                
+            .carousel{               
                 .carousel-inner{
                    max-height: 100vh; 
-                   position: relative;
-                  
+                   position: relative;                 
                    .carousel-item{
                     &::before{
                         content: '';
