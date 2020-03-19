@@ -8,7 +8,7 @@
     </div>
     <div class="container content mt-3 mb-5">
         <div class="row">
-            <div class="col-md-6 contact-col1 mr-md-4"></div>
+            <div class="col-md-6 contact-col1 mr-md-4 d-none d-md-block"></div>
             <div class="col-md-5 p-3 p-md-5 contact-col2">
                 @if(Auth::check())
                 <div>

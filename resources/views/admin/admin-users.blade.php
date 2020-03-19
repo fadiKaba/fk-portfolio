@@ -18,7 +18,7 @@
       <div class="tab-content" id="pills-tabContent">
           <!-- tab 1 -->
         <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-          <div class="overflow-auto table-container rounded-top">
+          <div class="overflow-auto table-container rounded-top mb-5">
             <table class="table table-light table-striped">
                 <thead>
                     <tr>
@@ -48,12 +48,10 @@
                               <img width="25px" src="{{asset('ico/edit.svg')}}">
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                              <a class="dropdown-item" href="#">Action</a>
                               <!-- Button trigger modal -->
                               <button type="button" class="dropdown-item btn btn-primary" data-toggle="modal" data-target="#usmo{{$user->id}}">
                                     Edit
                               </button>
-                              <a class="dropdown-item" href="#">Another action</a>
                               <button type="button" class="btn btn-danger dropdown-item" data-toggle="modal" data-target="#del{{$user->id}}">
                                 Delete user
                               </button>

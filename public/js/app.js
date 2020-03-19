@@ -2327,6 +2327,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -56494,7 +56497,10 @@ var render = function() {
         _c("div", { staticClass: "p-1 p-md-2 m-0" }, [
           _c(
             "a",
-            { staticClass: "font-weight-bold d-block", attrs: { href: "#" } },
+            {
+              staticClass: "font-weight-bold d-block",
+              attrs: { href: "/profile/" + _vm.comt.user.id }
+            },
             [
               _c("Profilephoto", { attrs: { src: _vm.comt.user.src } }),
               _vm._v(
@@ -56883,7 +56889,12 @@ var render = function() {
                       _c("Profilephoto", {
                         attrs: { src: _vm.post.user.src, cls: "d-inline" }
                       }),
-                      _vm._v(" " + _vm._s(_vm.post.user.name))
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        { attrs: { href: "/profile/" + _vm.post.user.id } },
+                        [_vm._v(_vm._s(_vm.post.user.name))]
+                      )
                     ],
                     1
                   )
@@ -56902,10 +56913,18 @@ var render = function() {
                 ? _c("div", { staticClass: "btn-container" }, [
                     _c("p", { staticClass: "text-muted text-right py-2" }, [
                       _vm.comts.length > 0
-                        ? _c("span", [
-                            _vm._v(_vm._s(_vm.comts.length) + " Comment")
-                          ])
+                        ? _c(
+                            "span",
+                            {
+                              attrs: {
+                                "data-toggle": "collapse",
+                                href: "#comment" + _vm.post.id.toString()
+                              }
+                            },
+                            [_vm._v(_vm._s(_vm.comts.length) + " Comment")]
+                          )
                         : _vm._e(),
+                      _vm._v(" "),
                       _vm.comts.length > 1
                         ? _c("span", [_vm._v("s")])
                         : _vm._e(),
@@ -57018,7 +57037,7 @@ var render = function() {
                                     attrs: {
                                       target: "_blank",
                                       href:
-                                        "https://www.facebook.com/sharer/sharer.php?u=http%3A//127.0.0.1%3A8000/posts/postDetail/" +
+                                        "https://www.facebook.com/sharer/sharer.php?u=http%3A//greenconversation.dx.am/posts/postDetail/" +
                                         _vm.post.id
                                     }
                                   },
@@ -57043,7 +57062,7 @@ var render = function() {
                                     attrs: {
                                       target: "_blank",
                                       href:
-                                        "https://twitter.com/intent/tweet?text=http%3A//127.0.0.1%3A8000/posts/postDetail/" +
+                                        "https://twitter.com/intent/tweet?text=http%3A//greenconversation.dx.am/posts/postDetail/" +
                                         _vm.post.id
                                     }
                                   },
@@ -57175,7 +57194,7 @@ var render = function() {
                 "div",
                 _vm._l(_vm.comts, function(comt) {
                   return _c("Comment", {
-                    key: "cc" + comt.id,
+                    key: "c" + comt.id,
                     attrs: { comt: comt, auth: _vm.auth },
                     on: { delItem: _vm.getDelItem }
                   })
@@ -69778,7 +69797,6 @@ var app = new Vue({
     },
     showAn: function showAn(ele) {
       if (document.querySelectorAll(ele).length > 0) {
-        console.log(document.querySelectorAll(ele));
         var time = 100;
         var observer = new IntersectionObserver(function (entries) {
           if (entries[0].isIntersecting === true) document.querySelectorAll(ele).forEach(function (item) {
@@ -70550,9 +70568,9 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\project\my-portfolio\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! D:\project\my-portfolio\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! D:\project\my-portfolio\resources\sass\admin.scss */"./resources/sass/admin.scss");
+__webpack_require__(/*! C:\coding\projects\porto-deploy\fk-portfolio\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\coding\projects\porto-deploy\fk-portfolio\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\coding\projects\porto-deploy\fk-portfolio\resources\sass\admin.scss */"./resources/sass/admin.scss");
 
 
 /***/ })

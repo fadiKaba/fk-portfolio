@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Mail;
 use App\Mail\SupportMail;
+use Auth;
 
 class MailsController extends Controller
 {   
@@ -20,6 +21,8 @@ class MailsController extends Controller
         ]);
 
         $detail = [
+            'name' => Auth::user()->name,
+            'email' => Auth::user()->email,
             'title' => $request->subject,
             'body'  => $request->message
         ];

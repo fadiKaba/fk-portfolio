@@ -40,7 +40,6 @@ const app = new Vue({
         },
         showAn: function(ele){
           if(document.querySelectorAll(ele).length > 0){
-            console.log(document.querySelectorAll(ele))
             let time = 100; 
             var observer = new IntersectionObserver(function(entries) {
               if(entries[0].isIntersecting === true)

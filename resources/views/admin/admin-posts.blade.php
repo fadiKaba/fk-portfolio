@@ -17,19 +17,22 @@
       </ul>
       <div class="tab-content" id="pills-tabContent">
         <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-          <div class="container overflow-auto px-0 px-md-5">
+          <div class="container-fluid overflow-auto px-0 px-md-5 mb-5">
+            <div class="row justify-content-center">
               @foreach($posts as $post)
-              <div class="card my-2">
-                @if($post->image->url ?? null)
-                <img src="{{asset('./images/'.$post->image->url)}}" class="card-img-top" alt="...">
-                @endif
-                <div class="card-body">
-                  <h5 class="card-title">{{$post->post_title}}</h5>
-                  <p class="card-text">{{$post->post_body}}</p>
-                  <a href="/admin/posts/{{$post->id}}/edit" class="card-link btn btn-link">Edit</a>
-                  <button type="button" class="card-link btn btn-link text-danger" data-toggle="modal" data-target="#p{{$post->id}}">
-                    Delete
-                  </button>
+              <div class="col-md-5 mx-md-2">
+                <div class="card my-2 ">
+                  @if($post->image->url ?? null)
+                  <img src="{{asset('./images/'.$post->image->url)}}" class="card-img-top" alt="...">
+                  @endif
+                  <div class="card-body">
+                    <h5 class="card-title">{{$post->post_title}}</h5>
+                    <p class="card-text">{{$post->post_body}}</p>
+                    <a href="/admin/posts/{{$post->id}}/edit" class="card-link btn btn-link">Edit</a>
+                    <button type="button" class="card-link btn btn-link text-danger" data-toggle="modal" data-target="#p{{$post->id}}">
+                      Delete
+                    </button>
+                  </div>
                 </div>
               </div>
               <!-- Modal -->
@@ -57,6 +60,7 @@
               </div>
               <!-- end modal -->
               @endforeach
+            </div>
           </div>
         </div>
         <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
@@ -80,7 +84,7 @@
                 </form>
             </div>
         </div>
-        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">xx</div>
+        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">Posts count: <span class="text-success">{{count($posts)}}</span></div>
       </div>
 </div>
 @endsection

@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+    'host' => 'smtp.gmail.com',
 
     /*
     |--------------------------------------------------------------------------
@@ -42,7 +42,7 @@ return [
     |
     */
 
-    'port' => env('MAIL_PORT', 587),
+    'port' => '587',
 
     /*
     |--------------------------------------------------------------------------
@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => 'f5d631f297-9a781d@inbox.mailtrap.io',
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => 'convegreenrsation@gmail.com',
+        'name' => 'Green Conversation',
     ],
 
     /*
@@ -84,9 +84,9 @@ return [
     |
     */
 
-    'username' => env('MAIL_USERNAME'),
+    'username' => 'convegreenrsation@gmail.com',
 
-    'password' => env('MAIL_PASSWORD'),
+    'password' => '4447195f',
 
     /*
     |--------------------------------------------------------------------------

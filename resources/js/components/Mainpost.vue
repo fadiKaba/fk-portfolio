@@ -11,7 +11,7 @@
                         <p class="card-text content-text" v-html="limitString(body,400, post.id)"></p>
                         <div class="d-flex mb-3 border-top pt-2">
                             <div class="">
-                                <p class="card-text"><Profilephoto :src="post.user.src" :cls="'d-inline'"></Profilephoto> {{post.user.name}}</p>
+                                <p class="card-text"><Profilephoto :src="post.user.src" :cls="'d-inline'"></Profilephoto> <a :href="'/profile/' + post.user.id">{{post.user.name}}</a></p>
                             </div>
                             <div class="ml-3"> 
                                 <small class="text-muted">{{moment.utc(post.created_at).fromNow()}}</small>
@@ -20,7 +20,10 @@
                         <div v-if="loged == true" class="btn-container">
                             <p class="text-muted text-right py-2">
                                 <span 
-                                v-if="comts.length > 0">{{comts.length}} Comment</span><span v-if="comts.length > 1">s</span><span class="ml-2"></span>  
+                                data-toggle="collapse" 
+                                :href="'#comment'+ post.id.toString()"
+                                v-if="comts.length > 0">{{comts.length}} Comment</span>
+                                <span v-if="comts.length > 1">s</span><span class="ml-2"></span>  
                                 <span v-if="likes > 0"
                                 class="like-span"
                                 data-toggle="popover"
@@ -53,11 +56,11 @@
                                     Share
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                        <a class="dropdown-item" target="_blank" :href="'https://www.facebook.com/sharer/sharer.php?u=http%3A//127.0.0.1%3A8000/posts/postDetail/'+post.id">
+                                        <a class="dropdown-item" target="_blank" :href="'https://www.facebook.com/sharer/sharer.php?u=http%3A//greenconversation.dx.am/posts/postDetail/'+post.id">
                                         <img src="/ico/facebook.svg" alt="facebook" width="25px">
                                         Facebook
                                         </a>
-                                        <a class="dropdown-item" target="_blank" :href="'https://twitter.com/intent/tweet?text=http%3A//127.0.0.1%3A8000/posts/postDetail/'+ post.id">
+                                        <a class="dropdown-item" target="_blank" :href="'https://twitter.com/intent/tweet?text=http%3A//greenconversation.dx.am/posts/postDetail/'+ post.id">
                                         <img src="/ico/twitter.svg" alt="twitter" width="25px">
                                         Twitte
                                         </a>
@@ -117,7 +120,7 @@
                     <div>
                         <Comment 
                         v-for="comt in comts" 
-                        :key="'cc'+comt.id" :comt="comt"
+                        :key="'c'+comt.id" :comt="comt"
                         :auth="auth"
                         v-on:delItem="getDelItem"
                         ></Comment>

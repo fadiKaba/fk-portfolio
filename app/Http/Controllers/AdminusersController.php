@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Hash;
 use App\User;
+use App\Comment;
 
 class AdminusersController extends Controller
 {
@@ -116,6 +117,19 @@ class AdminusersController extends Controller
     public function destroy($id)
     {   
         $user = User::findOrFail($id);
+        $comments = Comment::all();
+        foreach($comments as $comment){
+            $comArr = explode(',', $comment->likes);
+            $index = array_search(intval($id), $comArr);
+            if($index != false){
+                unset($comArr[$index]);
+                implode(',',$comArr);
+                dd($comArr); // here ! ! ! ! ! !!!!!!!!!!!!!!!!!!!!!!!!!
+            }
+            dd($index);
+            print_r($comArr);
+        }
+        dd($comments);
         $user->delete();
         return  redirect('/adminusers')->with('success',$user->name . ' ' .$user->email. " deleted successfully");
     }

@@ -5,6 +5,7 @@
     <p>Home blog</p>
     <h3>Blog</h3>
 </div>
+<hr class="my-3 d-md-none">
 <div class="container-fluid">
     <div class="row justify-content-center left-column-container">
         <div class="col-md-7 posts-container my-2 px-0 px-md-4">
