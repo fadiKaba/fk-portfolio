@@ -15,7 +15,7 @@
            <Search :url="same('/adminusers/search')" :res="same('/adminusers/gotosearch')">{{ csrf_field() }}</Search>
         </li>
       </ul>
-      <div class="tab-content" id="pills-tabContent">
+      <div class="tab-content mb-5" id="pills-tabContent">
           <!-- tab 1 -->
         <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
           <div class="overflow-auto table-container rounded-top mb-5">
@@ -123,7 +123,7 @@
         </div>
           <!-- end tab 1 -->
         <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-          <div class="container form-container p-md-5">
+          <div class="container form-container p-3 p-md-5">
             <h3 class="text-light">Add new user</h3>
             <form action="{{route('adminusers.store')}}" method="POST">
               <div class="form-group">

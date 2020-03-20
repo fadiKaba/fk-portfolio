@@ -16,6 +16,7 @@ import Mainpost from "./components/Mainpost";
 import Search from "./components/Search";
 import Modal from './components/Modal';
 import Profilephoto from './components/Profilephoto';
+import Clientsearch from './components/Clientsearch';
 
 
 $(function () {
@@ -24,7 +25,7 @@ $(function () {
 
 const app = new Vue({
     el: '#app',
-    components:{Mainlink,Cyrcle,Foot, Mainpost, Search, Modal, Profilephoto},
+    components:{Mainlink,Cyrcle,Foot, Mainpost, Search, Modal, Profilephoto, Clientsearch},
     mounted: function(){
       //  console.log($(window).width())
       $('#myCarousel').carousel({

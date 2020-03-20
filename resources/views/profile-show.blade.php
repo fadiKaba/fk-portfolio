@@ -15,15 +15,19 @@
     <div class="col-md-6 mt-2 py-2">
         <h3 class="font-weight-bold text-capitalize">{{$user->name}}</h3>
         <span class="font-weight-bold">Email</span><br>
-        <span class="text-muted">{{$user->email}}</span>         
+        <span class="text-muted">{{$user->email}}</span>
+             @if($user->bio != '' && $user->bio != null)       
             <div class="mt-3">
-                <span class="font-weight-bold">About {{$user->name}}</span><br>
-                <span>{{$user->bio}}</span>
+                <span class="font-weight-bold">About {{$user->name}}</span><br>                
+                <span>{{$user->bio}}</span>               
             </div>
+            @endif          
+            @if($user->location != '' && $user->location != null)
             <div class="mt-3">
                 <span class="font-weight-bold">Location</span><br>
                 <span>{{$user->location}}</span>
             </div>
+            @endif
     </div>    
 </div>
 

@@ -15,7 +15,7 @@
            <Search :url="same('/posts/search')" :res="same('/posts/gotosearch')">{{ csrf_field() }}</Search>
         </li>
       </ul>
-      <div class="tab-content" id="pills-tabContent">
+      <div class="tab-content mb-5" id="pills-tabContent">
         <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
           <div class="container-fluid overflow-auto px-0 px-md-5 mb-5">
             <div class="row justify-content-center">
@@ -64,7 +64,7 @@
           </div>
         </div>
         <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-            <div class="container form-container p-md-3">
+            <div class="container form-container p-3">
               <h3 class="text-light">Add new post</h3>
                 <form action="{{route('posts.store')}}" method="POST" enctype="multipart/form-data">
                     <div class="form-group">

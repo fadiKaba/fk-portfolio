@@ -2144,7 +2144,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Search',
@@ -2164,13 +2163,8 @@ __webpack_require__.r(__webpack_exports__);
       if (this.sVal != '') {
         axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(this.url + '/' + this.sVal).then(function (response) {
           _this.results = response.data;
-          console.log(_this.results);
-          console.log(document.querySelector('#search-result  option'));
         });
       }
-    },
-    goToRes: function goToRes(id) {
-      console.log(id);
     }
   }
 });
@@ -38606,7 +38600,6 @@ var render = function() {
             staticClass: "form-control",
             attrs: {
               autocomplete: "off",
-              list: "search-result",
               type: "search",
               placeholder: "Search",
               "aria-label": "Search",
@@ -38684,10 +38677,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "input-group-append" }, [
       _c(
         "button",
-        {
-          staticClass: "btn btn-outline-secondary",
-          attrs: { type: "submit", btn: "", "btn-outline-secondary": "" }
-        },
+        { staticClass: "btn btn-outline-secondary", attrs: { type: "submit" } },
         [_vm._v("Search")]
       )
     ])
@@ -51254,7 +51244,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\coding\projects\porto-deploy\fk-portfolio\resources\js\admin.js */"./resources/js/admin.js");
+module.exports = __webpack_require__(/*! D:\projects\fk-portfolio\resources\js\admin.js */"./resources/js/admin.js");
 
 
 /***/ })

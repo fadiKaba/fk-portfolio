@@ -43,7 +43,7 @@
                 </li>
                 @if(Auth::check() && Auth::user()->is_admin == 1)
                 <li class="nav-item">
-                    <a class="nav-link text-warning mr-md-4" href="admin/posts">Admin</a>
+                    <a class="nav-link text-warning mr-md-4" href="/admin/posts">Admin</a>
                 </li>
                 @endif
                 <li class="nav-item">
@@ -65,15 +65,17 @@
                         <a id="navbarDropdown" class="nav-link dropdown-toggle d-inline" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
-
+                        
                         <div class="dropdown-menu dropdown-menu-right text-center" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item text-dark" href="/pr/edit">Profile</a>
+                            <button type="button" class="dropdown-item text-dark" data-toggle="modal" data-target="#chat">
+                                Messages
+                            </button>
                             <a class="dropdown-item text-dark" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
                             </a>
-                            <a class="dropdown-item text-dark" href="/pr/edit">Profile</a>
-
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form>
@@ -84,3 +86,24 @@
         </div>
     </div>
 </nav>
+
+
+<!-- Modal -->
+<div class="modal fade bd-example-modal-xl" id="chat" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenterTitle">Messages</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <Clientsearch></Clientsearch>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+</div>

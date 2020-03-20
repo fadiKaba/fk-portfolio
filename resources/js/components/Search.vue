@@ -4,7 +4,6 @@
             <div class="input-group mb-1">
                 <input 
                 autocomplete="off" 
-                list="search-result" 
                 @keyup="startSearch(sVal)" 
                 v-model="sVal" 
                 class="form-control" 
@@ -14,7 +13,7 @@
                 aria-describedby="button-addon2"
                 name="sresult">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="submit" btn btn-outline-secondary>Search</button>
+                    <button class="btn btn-outline-secondary" type="submit">Search</button>
                 </div>                                
             </div>                           
             <slot></slot>            
@@ -52,14 +51,9 @@ export default {
                axios.get(this.url+ '/' +this.sVal).
                then((response)=>{
                     this.results = response.data;
-                    console.log(this.results)
-                    console.log(document.querySelector('#search-result  option'))
             })
             }
         },
-        goToRes(id){
-            console.log(id)
-        }
     }
 }
 </script>
