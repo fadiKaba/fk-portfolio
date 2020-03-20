@@ -86,4 +86,8 @@ class MessagesController extends Controller
         $users = User::where('email', 'LIKE', "%$val%")->get();
         return json_encode($users);
        }
+    public function contacts(){
+        $user= User::find(1);
+        return $user->to;
+    }
 }

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="input-group mb-3">
+        <div class="input-group mb-0">
             <input 
             type="text" 
             class="form-control" 
@@ -14,8 +14,14 @@
             </div>
         </div>
         <div>
-            <ul v-if="results.length > 0">
-                <li v-for="result in results" :key="'r'+result.id">{{result.email}}</li>
+            <ul class="list-group" v-if="results.length > 0">
+                <li class="list-group-item p-0" v-for="result in results" :key="'r'+result.id">
+                    <form method="POST">
+                    <input type="hidden" name="sresult" :value="result.email||result.name">
+                    <button class="btn" type="submit">{{result.name}} <span class="text-primary"> {{result.email}}</span></button>
+                    <slot></slot> 
+                    </form> 
+                </li>
             </ul>
         </div>
     </div>
@@ -35,10 +41,13 @@ export default {
     },
     methods:{
         search: function(str){
-        axios.post(`/clientsearch/${str}`)
-        .then((response)=>{
-        this.results = response.data;
-        })
+            if(this.val == ''){
+                this.results = '';
+            }
+            axios.post(`/clientsearch/${str}`)
+            .then((response)=>{
+            this.results = response.data;
+            })
         }
     }
 }

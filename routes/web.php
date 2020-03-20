@@ -47,6 +47,7 @@ Route::group(['middleware' => ['auth']], function(){
    Route::get('/pr/edit','ProfilesController@edit')->name('profileedit');
    //Route::resources('/chat','MessagesController');
    Route::post('/clientsearch/{str}','MessagesController@clientSearch');
+   Route::post('/contacts/cc','MessagesController@contacts');
 
    Route::group(['middleware' => ['owner']], function(){
            

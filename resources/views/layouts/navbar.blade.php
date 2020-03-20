@@ -89,6 +89,7 @@
 
 
 <!-- Modal -->
+@if(Auth::check())
 <div class="modal fade bd-example-modal-xl" id="chat" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content">
@@ -99,7 +100,14 @@
           </button>
         </div>
         <div class="modal-body">
-            <Clientsearch></Clientsearch>
+            <div class="row">
+                <div class="col-12">
+                    <Clientsearch>{{ csrf_field() }}</Clientsearch>
+                </div>
+                <div class="col-md-4">
+                    <Contacts></Contacts>
+                </div>
+            </div>           
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -107,3 +115,4 @@
       </div>
     </div>
 </div>
+@endif
