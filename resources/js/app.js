@@ -30,7 +30,7 @@ const app = new Vue({
     components:{Mainlink,Cyrcle,Foot, Mainpost, Search, Modal, Profilephoto, Clientsearch, Contacts, Messanger},
     data: function(){
          return{
-           userSender:''
+           userSender:'',
          }
     },
     mounted: function(){
@@ -63,9 +63,8 @@ const app = new Vue({
           }         
         },
         sendSenderAgain: function(val){
-          console.log('ssss');
         this.userSender = val
-        }
+        },
     },
     
 });

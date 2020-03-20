@@ -45,10 +45,10 @@ Route::group(['middleware' => ['auth']], function(){
    Route::get('/profile/{userId}', 'ProfilesController@show')->name('profileshow');
    Route::post('/mail/send', 'MailsController@send');
    Route::get('/pr/edit','ProfilesController@edit')->name('profileedit');
-   //Route::resources('/chat','MessagesController');
    Route::post('/clientsearch/{str}','MessagesController@clientSearch');
    Route::post('/contacts/{userId}','MessagesController@contacts');
-   Route::post('/getuserformessanger/{senderId}', 'MessagesController@getSederMessages');
+   Route::post('/message/new','MessagesController@store');
+   Route::post('/getuserformessanger/{senderId}', 'MessagesController@getSenderMessages');
 
    Route::group(['middleware' => ['owner']], function(){
            

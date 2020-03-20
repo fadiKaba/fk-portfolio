@@ -6,7 +6,7 @@
             class="form-control" 
             v-model="val"
             @keyup="search(val)"
-            placeholder="Recipient's username" 
+            placeholder="Search user" 
             aria-label="Recipient's username" 
             aria-describedby="button-addon2">
             <div class="input-group-append">
@@ -15,12 +15,12 @@
         </div>
         <div>
             <ul class="list-group" v-if="results.length > 0">
-                <li class="list-group-item p-0" v-for="result in results" :key="'r'+result.id">
-                    <form method="POST">
-                    <input type="hidden" name="sresult" :value="result.email||result.name">
-                    <button class="btn" type="submit">{{result.name}} <span class="text-primary"> {{result.email}}</span></button>
-                    <slot></slot> 
-                    </form> 
+                <li 
+                class="list-group-item py-2" 
+                v-for="result in results" 
+                :key="'r'+result.id" 
+                @click="sendSearch(result)">
+                   <a :href="'/profile/'+ result.id">{{result.name}} <span class="text-dark"> {{result.email}}</span></a> 
                 </li>
             </ul>
         </div>
@@ -43,11 +43,16 @@ export default {
         search: function(str){
             if(this.val == ''){
                 this.results = '';
-            }
-            axios.post(`/clientsearch/${str}`)
+            }else{
+               axios.post(`/clientsearch/${str}`)
             .then((response)=>{
             this.results = response.data;
-            })
+            }) 
+            }
+            
+        },
+        sendSearch: function(sender){
+        this.$emit('searchsender', sender)
         }
     }
 }
@@ -55,14 +60,10 @@ export default {
 <style lang="scss" scoped>
     ul.list-group{
       li{
-          form{
-             button{
-            &:hover{
-                color: #82AE46;
-            }
-        }
-          }
-        
+          cursor: pointer;
+        &:hover{
+            background-color: #F2F3F5;
+        }       
       }
   }
 </style>

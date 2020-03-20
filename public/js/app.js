@@ -1954,11 +1954,14 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.val == '') {
         this.results = '';
+      } else {
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/clientsearch/".concat(str)).then(function (response) {
+          _this.results = response.data;
+        });
       }
-
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/clientsearch/".concat(str)).then(function (response) {
-        _this.results = response.data;
-      });
+    },
+    sendSearch: function sendSearch(sender) {
+      this.$emit('searchsender', sender);
     }
   }
 });
@@ -2128,7 +2131,7 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     Profilephoto: _Profilephoto__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
-  props: ['auth'],
+  props: ['auth', 'senderFromApp'],
   data: function data() {
     return {
       contacts: []
@@ -2145,18 +2148,14 @@ __webpack_require__.r(__webpack_exports__);
         response.data.forEach(function (item) {
           if (_this.contacts.find(function (x) {
             return x.id == item.sender.id;
-          }) == undefined) {
+          }) == undefined && item.sender.id != _this.auth.id) {
             _this.contacts.push(item);
           }
         });
       });
     },
     sendSender: function sendSender(sender) {
-      this.$emit('snedsender', sender); // axios.post(`/getuserformessanger/${senderId}`)
-      // .then((response) => {
-      //     this.$emit('messageswithuser', response.data)
-      //     //console.log(response.data);
-      // })
+      this.$emit('snedsender', sender);
     }
   }
 });
@@ -2577,6 +2576,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Profilephoto__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Profilephoto */ "./resources/js/components/Profilephoto.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 //
 //
 //
@@ -2587,9 +2589,75 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Messanger',
-  props: ['auth', 'sender']
+  components: {
+    Profilephoto: _Profilephoto__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  props: ['auth', 'sender'],
+  data: function data() {
+    return {
+      messages: [],
+      newMsg: ''
+    };
+  },
+  methods: {
+    getSenderMessages: function getSenderMessages(senderId) {
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/getuserformessanger/".concat(senderId)).then(function (response) {
+        _this.messages = response.data;
+      });
+    },
+    newMessage: function newMessage(senderId, authId, message) {
+      var _this2 = this;
+
+      if (message != '') {
+        axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/message/new', {
+          'from': authId,
+          'to': senderId,
+          'message': message,
+          'is_read': 0
+        }).then(function (response) {
+          console.log(response);
+          _this2.newMsg = '';
+        });
+      }
+    }
+  },
+  watch: {
+    sender: function sender(newVal, oldVal) {
+      this.getSenderMessages(newVal.id);
+    }
+  }
 });
 
 /***/ }),
@@ -2655,7 +2723,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Profilephoto',
-  props: ['src', 'cls']
+  props: ['src', 'cls', 'size']
 });
 
 /***/ }),
@@ -7274,7 +7342,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "ul.list-group li form button[data-v-2fe890c4]:hover {\n  color: #82AE46;\n}", ""]);
+exports.push([module.i, "ul.list-group li[data-v-2fe890c4] {\n  cursor: pointer;\n}\nul.list-group li[data-v-2fe890c4]:hover {\n  background-color: #F2F3F5;\n}", ""]);
 
 // exports
 
@@ -7312,7 +7380,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".contacts-container .contacts-container-inner[data-v-6766143e] {\n  max-height: 60vh;\n  overflow-y: scroll;\n}", ""]);
+exports.push([module.i, ".contacts-container .contacts-container-inner[data-v-6766143e] {\n  max-height: 60vh;\n  overflow-y: scroll;\n}\n.contacts-container .contacts-container-inner div[data-v-6766143e] {\n  cursor: pointer;\n}\n.contacts-container .contacts-container-inner div p[data-v-6766143e] {\n  text-transform: capitalize;\n}", ""]);
 
 // exports
 
@@ -7407,7 +7475,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".messanger-container .content[data-v-306de7b4] {\n  max-height: 60vh;\n}", ""]);
+exports.push([module.i, ".messanger-container .top a[data-v-306de7b4] {\n  text-transform: capitalize;\n  font-size: 1.4rem;\n}\n.messanger-container .content[data-v-306de7b4] {\n  max-height: 60vh;\n}\n.messanger-container .content div p span[data-v-306de7b4] {\n  padding: 8px;\n  border-radius: 5px;\n}\n.grey[data-v-306de7b4] {\n  background-color: #F2F3F5;\n}\n.greeny[data-v-306de7b4] {\n  background-color: #82AE46;\n  color: #fff;\n}", ""]);
 
 // exports
 
@@ -56806,7 +56874,7 @@ var render = function() {
         staticClass: "form-control",
         attrs: {
           type: "text",
-          placeholder: "Recipient's username",
+          placeholder: "Search user",
           "aria-label": "Recipient's username",
           "aria-describedby": "button-addon2"
         },
@@ -56835,32 +56903,22 @@ var render = function() {
             _vm._l(_vm.results, function(result) {
               return _c(
                 "li",
-                { key: "r" + result.id, staticClass: "list-group-item p-0" },
+                {
+                  key: "r" + result.id,
+                  staticClass: "list-group-item py-2",
+                  on: {
+                    click: function($event) {
+                      return _vm.sendSearch(result)
+                    }
+                  }
+                },
                 [
-                  _c(
-                    "form",
-                    { attrs: { method: "POST" } },
-                    [
-                      _c("input", {
-                        attrs: { type: "hidden", name: "sresult" },
-                        domProps: { value: result.email || result.name }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        { staticClass: "btn", attrs: { type: "submit" } },
-                        [
-                          _vm._v(_vm._s(result.name) + " "),
-                          _c("span", { staticClass: "text-primary" }, [
-                            _vm._v(" " + _vm._s(result.email))
-                          ])
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _vm._t("default")
-                    ],
-                    2
-                  )
+                  _c("a", { attrs: { href: "/profile/" + result.id } }, [
+                    _vm._v(_vm._s(result.name) + " "),
+                    _c("span", { staticClass: "text-dark" }, [
+                      _vm._v(" " + _vm._s(result.email))
+                    ])
+                  ])
                 ]
               )
             }),
@@ -56919,7 +56977,9 @@ var render = function() {
               attrs: { href: "/profile/" + _vm.comt.user.id }
             },
             [
-              _c("Profilephoto", { attrs: { src: _vm.comt.user.src } }),
+              _c("Profilephoto", {
+                attrs: { src: _vm.comt.user.src, size: "25px" }
+              }),
               _vm._v(
                 "\n                    " +
                   _vm._s(_vm.comt.user.name) +
@@ -57055,7 +57115,7 @@ var render = function() {
           },
           [
             _c("Profilephoto", {
-              attrs: { src: contact.sender.src, cls: "mr-2" }
+              attrs: { src: contact.sender.src, cls: "mr-2", size: "25px" }
             }),
             _vm._v(" "),
             _c("p", { staticClass: "m-0" }, [
@@ -57358,7 +57418,11 @@ var render = function() {
                     { staticClass: "card-text" },
                     [
                       _c("Profilephoto", {
-                        attrs: { src: _vm.post.user.src, cls: "d-inline" }
+                        attrs: {
+                          src: _vm.post.user.src,
+                          cls: "d-inline",
+                          size: "25px"
+                        }
                       }),
                       _vm._v(" "),
                       _c(
@@ -57795,11 +57859,131 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "messanger-container" }, [
-    _c("div", { staticClass: "top" }, [_vm._v("img + name")]),
+    _c(
+      "div",
+      { staticClass: "top d-flex my-2" },
+      [
+        _c("Profilephoto", { attrs: { src: _vm.sender.src, size: "80px" } }),
+        _c(
+          "a",
+          {
+            staticClass: "ml-2 font-weight-bold",
+            attrs: { href: "/profile/" + _vm.sender.id }
+          },
+          [_vm._v(_vm._s(_vm.sender.name))]
+        )
+      ],
+      1
+    ),
     _vm._v(" "),
-    _c("div", { staticClass: "content border-top" }, [
-      _c("div", [_vm._v("\n            " + _vm._s(_vm.sender) + "\n        ")])
-    ])
+    _c(
+      "div",
+      { staticClass: "content border-top p-2 p-md-4" },
+      _vm._l(_vm.messages, function(message) {
+        return _c("div", { key: "mes" + message.id }, [
+          _c(
+            "p",
+            {
+              class:
+                message.sender.id == _vm.auth.id ? "text-right" : "text-left"
+            },
+            [
+              message.sender.id != _vm.auth.id &&
+              message.sender.src != null &&
+              message.sender.src != ""
+                ? _c("img", {
+                    staticClass: "rounded-circle",
+                    attrs: {
+                      src: "../photos/" + message.sender.src,
+                      alt: message.sender.name,
+                      width: "50px"
+                    }
+                  })
+                : (message.sender.id != _vm.auth.id &&
+                    message.sender.src == null) ||
+                  (message.sender.id != _vm.auth.id && _vm.src != "")
+                ? _c("img", {
+                    attrs: {
+                      src: "/wallpapers/default-user.png",
+                      alt: "profile photo",
+                      width: "50px"
+                    }
+                  })
+                : _vm._e(),
+              _vm._v(" "),
+              _c(
+                "span",
+                { class: message.sender.id == _vm.auth.id ? "greeny" : "grey" },
+                [_vm._v(_vm._s(message.message))]
+              )
+            ]
+          )
+        ])
+      }),
+      0
+    ),
+    _vm._v(" "),
+    _vm.messages.length > 0
+      ? _c("div", { staticClass: "messenger-input" }, [
+          _c("div", { staticClass: "input-group mb-3" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.newMsg,
+                  expression: "newMsg"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                type: "text",
+                placeholder: "Message",
+                "aria-label": "Write a message",
+                "aria-describedby": "button-addon2"
+              },
+              domProps: { value: _vm.newMsg },
+              on: {
+                keyup: function($event) {
+                  if (
+                    !$event.type.indexOf("key") &&
+                    _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                  ) {
+                    return null
+                  }
+                  return _vm.newMessage(_vm.sender.id, _vm.auth.id, _vm.newMsg)
+                },
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.newMsg = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "input-group-append" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-outline-secondary",
+                  attrs: { type: "button", id: "button-addon2" },
+                  on: {
+                    click: function($event) {
+                      return _vm.newMessage(
+                        _vm.sender.id,
+                        _vm.auth.id,
+                        _vm.newMsg
+                      )
+                    }
+                  }
+                },
+                [_vm._v("Send")]
+              )
+            ])
+          ])
+        ])
+      : _vm._e()
   ])
 }
 var staticRenderFns = []
@@ -57933,14 +58117,14 @@ var render = function() {
           attrs: {
             src: "/photos/" + _vm.src,
             alt: "profile photo",
-            width: "25px"
+            width: _vm.size
           }
         })
       : _c("img", {
           attrs: {
             src: "/wallpapers/default-user.png",
             alt: "profile photo",
-            width: "25px"
+            width: _vm.size
           }
         })
   ])
@@ -70323,7 +70507,6 @@ var app = new Vue({
       }
     },
     sendSenderAgain: function sendSenderAgain(val) {
-      console.log('ssss');
       this.userSender = val;
     }
   }

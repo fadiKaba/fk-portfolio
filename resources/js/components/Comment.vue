@@ -4,7 +4,7 @@
             <div class="comment-container">
                 <div class="p-1 p-md-2 m-0">
                     <a class="font-weight-bold d-block" :href="'/profile/' + comt.user.id">
-                        <Profilephoto :src="comt.user.src"></Profilephoto>
+                        <Profilephoto :src="comt.user.src" :size="'25px'"></Profilephoto>
                         {{comt.user.name}}
                     </a>
                     {{comt.body}}                    

@@ -11,7 +11,7 @@
                         <p class="card-text content-text" v-html="limitString(body,400, post.id)"></p>
                         <div class="d-flex mb-3 border-top pt-2">
                             <div class="">
-                                <p class="card-text"><Profilephoto :src="post.user.src" :cls="'d-inline'"></Profilephoto> <a :href="'/profile/' + post.user.id">{{post.user.name}}</a></p>
+                                <p class="card-text"><Profilephoto :src="post.user.src" :cls="'d-inline'" :size="'25px'"></Profilephoto> <a :href="'/profile/' + post.user.id">{{post.user.name}}</a></p>
                             </div>
                             <div class="ml-3"> 
                                 <small class="text-muted">{{moment.utc(post.created_at).fromNow()}}</small>

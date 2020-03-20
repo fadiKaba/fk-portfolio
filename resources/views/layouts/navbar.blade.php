@@ -61,7 +61,7 @@
                 @guest
                 @else
                     <li class="nav-item dropdown py-2">                        
-                        <Profilephoto :src="{{json_encode(Auth::user()->src)}}" :cls="same('d-inline')"></Profilephoto>
+                        <Profilephoto :src="{{json_encode(Auth::user()->src)}}" :cls="same('d-inline')" :size="'25px'"></Profilephoto>
                         <a id="navbarDropdown" class="nav-link dropdown-toggle d-inline" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
@@ -90,8 +90,8 @@
 
 <!-- Modal -->
 @if(Auth::check())
-<div class="modal fade bd-example-modal-xl" id="chat" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-xl" role="document">
+<div class="modal fade bd-example-modal-lg" id="chat" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header border-0">
           <h5 class="modal-title" id="exampleModalCenterTitle">Messages</h5>
@@ -107,14 +107,14 @@
                 <div class="col-md-9">
                     <Messanger :sender="userSender" :auth="{{json_encode(Auth::user())}}"></Messanger>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 border-left">
                     <Contacts v-on:snedsender="sendSenderAgain" :auth="{{json_encode(Auth::user())}}"></Contacts>
                 </div>
             </div>           
         </div>
-        <div class="modal-footer border-0">
+        {{-- <div class="modal-footer border-0">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
+        </div> --}}
       </div>
     </div>
 </div>

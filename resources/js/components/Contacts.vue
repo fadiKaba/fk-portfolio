@@ -6,7 +6,7 @@
         v-for="contact in contacts" 
         :key="'con' + contact.id"
         @click="sendSender(contact.sender)">
-            <Profilephoto :src="contact.sender.src" :cls="'mr-2'"></Profilephoto> 
+            <Profilephoto :src="contact.sender.src" :cls="'mr-2'" :size="'25px'"></Profilephoto> 
             <p class="m-0">{{contact.sender.name}}</p>                  
         </div>
     </div>
@@ -19,7 +19,7 @@ import Profilephoto from './Profilephoto';
 export default {
     name:'Contacts',
     components:{Profilephoto},
-    props:['auth'],
+    props:['auth','senderFromApp'],
     data: function(){
         return{
         contacts:[],
@@ -33,7 +33,7 @@ export default {
         axios.post(`/contacts/${this.auth.id}`)
         .then((response) =>{
             response.data.forEach((item) =>{                   
-                   if(this.contacts.find( x => x.id == item.sender.id) == undefined){
+                   if(this.contacts.find( x => x.id == item.sender.id) == undefined && item.sender.id != this.auth.id){
                       this.contacts.push(item); 
                    }
                 
@@ -42,15 +42,8 @@ export default {
         },
         sendSender: function(sender){
             this.$emit('snedsender', sender)
-
-            // axios.post(`/getuserformessanger/${senderId}`)
-            // .then((response) => {
-            //     this.$emit('messageswithuser', response.data)
-            //     //console.log(response.data);
-            // })
-
         }
-    }
+    },
 }
 </script>
 <style lang="scss" scoped>
@@ -58,6 +51,12 @@ export default {
     .contacts-container-inner{
         max-height: 60vh;
         overflow-y:scroll;
+        div{
+            cursor: pointer;
+            p{
+                text-transform: capitalize;
+            }
+        }
     }
 }
 </style>
