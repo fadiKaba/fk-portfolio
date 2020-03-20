@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Hash;
 use App\User;
 use App\Comment;
+use App\Post;
 
 class AdminusersController extends Controller
 {
@@ -123,13 +124,28 @@ class AdminusersController extends Controller
             $index = array_search(intval($id), $comArr);
             if($index != false){
                 unset($comArr[$index]);
-                implode(',',$comArr);
-                dd($comArr); // here ! ! ! ! ! !!!!!!!!!!!!!!!!!!!!!!!!!
+                $arrReady = implode(',',$comArr);
+                $comt = Comment::FindOrFail($comment->id);
+                $comt->update([
+                   'likes' => $arrReady,
+                ]);
             }
-            dd($index);
-            print_r($comArr);
         }
-        dd($comments);
+
+        $posts = Post::all();
+        foreach($posts as $post){
+            $posArr = explode(',', $post->likes);
+            $indexP = array_search(intval($id), $posArr);
+            if($indexP != false){
+                unset($posArr[$indexP]);
+                $arrPReady = implode(',',$comArr);
+                $pos = Post::FindOrFail($post->id);
+                $pos->update([
+                   'likes' => $arrPReady,
+                ]);
+            }
+        }
+
         $user->delete();
         return  redirect('/adminusers')->with('success',$user->name . ' ' .$user->email. " deleted successfully");
     }

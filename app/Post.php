@@ -8,7 +8,7 @@ use App\Image;
 use App\Comment;
 
 class Post extends Model
-{   protected $fillable = ['post_title', 'post_body','user_id'];
+{   protected $fillable = ['post_title', 'post_body','user_id', 'likes'];
 
     public function user(){
         return $this->belongsTo(User::class);

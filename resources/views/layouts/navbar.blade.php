@@ -93,7 +93,7 @@
 <div class="modal fade bd-example-modal-xl" id="chat" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header border-0">
           <h5 class="modal-title" id="exampleModalCenterTitle">Messages</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -104,12 +104,15 @@
                 <div class="col-12">
                     <Clientsearch>{{ csrf_field() }}</Clientsearch>
                 </div>
-                <div class="col-md-4">
-                    <Contacts></Contacts>
+                <div class="col-md-9">
+                    <Messanger :sender="userSender" :auth="{{json_encode(Auth::user())}}"></Messanger>
+                </div>
+                <div class="col-md-3">
+                    <Contacts v-on:snedsender="sendSenderAgain" :auth="{{json_encode(Auth::user())}}"></Contacts>
                 </div>
             </div>           
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer border-0">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </div>

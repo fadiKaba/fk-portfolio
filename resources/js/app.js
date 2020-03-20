@@ -18,6 +18,7 @@ import Modal from './components/Modal';
 import Profilephoto from './components/Profilephoto';
 import Clientsearch from './components/Clientsearch';
 import Contacts from './components/Contacts';
+import Messanger from './components/Messanger';
 
 
 $(function () {
@@ -26,7 +27,12 @@ $(function () {
 
 const app = new Vue({
     el: '#app',
-    components:{Mainlink,Cyrcle,Foot, Mainpost, Search, Modal, Profilephoto, Clientsearch, Contacts},
+    components:{Mainlink,Cyrcle,Foot, Mainpost, Search, Modal, Profilephoto, Clientsearch, Contacts, Messanger},
+    data: function(){
+         return{
+           userSender:''
+         }
+    },
     mounted: function(){
       //  console.log($(window).width())
       $('#myCarousel').carousel({
@@ -56,6 +62,10 @@ const app = new Vue({
             observer.observe(document.querySelector(ele));
           }         
         },
+        sendSenderAgain: function(val){
+          console.log('ssss');
+        this.userSender = val
+        }
     },
     
 });

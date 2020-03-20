@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Message;
 
 class MessagesController extends Controller
 {
@@ -86,8 +87,12 @@ class MessagesController extends Controller
         $users = User::where('email', 'LIKE', "%$val%")->get();
         return json_encode($users);
        }
-    public function contacts(){
-        $user= User::find(1);
-        return $user->to;
+    public function contacts($userId){
+        $messages= Message::where('from', $userId)->orWhere('to', $userId)->with('sender')->get();
+        return $messages;
+    }
+    public function getSederMessages($senderId){
+        $msgs = Message::where('from', $senderId)->orWhere('to', $senderId)->with('sender')->get();
+        return json_encode($msgs);
     }
 }

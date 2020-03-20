@@ -8,7 +8,7 @@ use App\User;
 
 class Comment extends Model
 {
-    protected $fillable=['user_id', 'post_id', 'body'];
+    protected $fillable=['user_id', 'post_id', 'body', 'likes'];
 
     public function post(){
         return $this.belongsTo(Post::class);
