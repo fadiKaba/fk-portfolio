@@ -24,7 +24,7 @@ import Messanger from './components/Messanger';
 $(function () {
     $('[data-toggle="popover"]').popover()
   })
-
+  
 const app = new Vue({
     el: '#app',
     components:{Mainlink,Cyrcle,Foot, Mainpost, Search, Modal, Profilephoto, Clientsearch, Contacts, Messanger},

@@ -38,6 +38,16 @@
 
 import Profilephoto from './Profilephoto';
 import axios from 'axios';
+import Pusher from "pusher-js"
+
+
+//Pusher.logToConsole = true;
+
+  var pusher = new Pusher('ce9cf9df89f713cf17d6', {
+    cluster: 'ap2',
+    forceTLS: true
+  });
+
 
 export default {
     name:'Messanger',
@@ -48,6 +58,12 @@ export default {
           messages:[],
           newMsg:'',
          }
+    },
+    mounted: function(){
+    var channel = pusher.subscribe('green');
+    channel.bind('MessangerEvent', function(data) {
+        console.log(data);
+    }); 
     },
     methods:{
         getSenderMessages(senderId){
@@ -64,7 +80,6 @@ export default {
                 'message': message,
                 'is_read': 0
                 }).then( (response) => {
-                    console.log(response)
                     this.newMsg = '';
                 } )
             }           

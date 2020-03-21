@@ -10,6 +10,8 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
+    <script src="https://js.pusher.com/5.1/pusher.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" defer></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
@@ -27,6 +29,8 @@
             @yield('content')
         </main>
         <Foot></Foot>
-    </div>  
+    </div> 
+    <script src="https://js.pusher.com/5.1/pusher.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> 
 </body>
 </html>

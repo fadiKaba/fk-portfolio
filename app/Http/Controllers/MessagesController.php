@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Message;
+use App\Events\MessangerEvent;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 
 class MessagesController extends Controller
 {
@@ -14,16 +16,17 @@ class MessagesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
-        $request->validate([
-            'message' => ''
-        ]);
-        $msg = Message::create([
-            'to' => $request->to,
-            'from' => $request->from,
-            'message' => $request->message,
-            'is_read' => 0
-        ]);
-       return $msg;
+        // $request->validate([
+        //     'message' => ''
+        // ]);
+        // $msg = Message::create([
+        //     'to' => $request->to,
+        //     'from' => $request->from,
+        //     'message' => $request->message,
+        //     'is_read' => 0
+        // ]);
+        event(new MessangerEvent('hello world'));
+      // return $msg;
     }
     public function clientSearch($val){
         $users = User::where('email', 'LIKE', "%$val%")->get();
