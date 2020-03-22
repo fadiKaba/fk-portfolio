@@ -15,6 +15,7 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
+        'App\Events\MessengerEvent' => ['App\Handlers\MessengerEventHandler'],
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],

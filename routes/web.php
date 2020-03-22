@@ -46,7 +46,7 @@ Route::group(['middleware' => ['auth']], function(){
    Route::post('/mail/send', 'MailsController@send');
    Route::get('/pr/edit','ProfilesController@edit')->name('profileedit');
    Route::post('/clientsearch/{str}','MessagesController@clientSearch');
-   Route::post('/contacts/{userId}','MessagesController@contacts');
+   Route::post('/contacts','MessagesController@contacts');
    Route::post('/message/new','MessagesController@store');
    Route::post('/getuserformessanger/{senderId}', 'MessagesController@getSenderMessages');
 

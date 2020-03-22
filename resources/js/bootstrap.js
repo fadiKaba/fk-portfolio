@@ -13,14 +13,6 @@ try {
     require('bootstrap');
 } catch (e) {}
 
-/**
- * We'll load the axios HTTP library which allows us to easily issue requests
- * to our Laravel back-end. This library automatically handles sending the
- * CSRF token as a header based on the value of the "XSRF" token cookie.
- */
-
-window.axios = require('axios');
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
@@ -28,13 +20,35 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  * allows your team to easily build robust real-time web applications.
  */
 
-// import Echo from 'laravel-echo';
+ import Echo from 'laravel-echo';
 
-// window.Pusher = require('pusher-js');
+ window.Pusher = require('pusher-js');
 
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: process.env.MIX_PUSHER_APP_KEY,
-//     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-//     encrypted: true
+ Pusher.logToConsole = true;
+
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: 'd4fd417b7e3040ccb4d1',
+    cluster: 'mt1',
+    encrypted: true
+});
+
+// window.Echo.channel('green')
+// .listen('MessengerEvent', (e)=>{
+//     console.log(e)
+// })
+
+// window.Echo.listen('green', 'messenger-event', (e) => {
+//     console.log(e);
+//     console.log(e);
 // });
+
+var pusher = new Pusher('d4fd417b7e3040ccb4d1', {
+    cluster: 'mt1',
+    forceTLS: true
+  });
+
+var channel = pusher.subscribe('green');
+channel.bind('MessengerEvent', function(data) {
+  console.log(data);
+});

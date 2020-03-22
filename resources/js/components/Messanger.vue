@@ -3,14 +3,14 @@
         <div class="top d-flex my-2"><Profilephoto :src="sender.src" :size="'80px'"></Profilephoto><a :href="'/profile/'+sender.id" class="ml-2 font-weight-bold">{{sender.name}}</a></div>
         <div class="content border-top p-2 p-md-4">
             <div v-for="message in messages" :key="'mes' + message.id">
-                    <p :class="message.sender.id == auth.id ? 'text-right': 'text-left'">
+                    <p :class="message.senderId == auth.id ? 'text-right': 'text-left'">
                         <img 
                         class="rounded-circle"
-                        v-if="message.sender.id != auth.id && message.sender.src != null && message.sender.src != ''" 
-                        :src="'../photos/'+message.sender.src" 
-                        :alt="message.sender.name" width="50px">
-                        <img v-else-if="message.sender.id != auth.id && message.sender.src == null || message.sender.id != auth.id && src != ''" src="/wallpapers/default-user.png" alt="profile photo" width="50px">
-                        <span :class="message.sender.id == auth.id ? 'greeny': 'grey'" >{{message.message}}</span> 
+                        v-if="message.senderId != auth.id && message.senderPhoto != null && message.senderPhoto != ''" 
+                        :src="'../photos/'+message.senderPhoto" 
+                        :alt="message.senderName" width="50px">
+                        <img v-else-if="message.senderId != auth.id && message.senderPhoto == null || message.senderId != auth.id && src != ''" src="/wallpapers/default-user.png" alt="profile photo" width="50px">
+                        <span :class="message.senderId == auth.id ? 'greeny': 'grey'" >{{message.message}}</span> 
                     </p>                                                 
             </div>
         </div>
@@ -38,15 +38,9 @@
 
 import Profilephoto from './Profilephoto';
 import axios from 'axios';
-import Pusher from "pusher-js"
 
 
-//Pusher.logToConsole = true;
 
-  var pusher = new Pusher('ce9cf9df89f713cf17d6', {
-    cluster: 'ap2',
-    forceTLS: true
-  });
 
 
 export default {
@@ -55,21 +49,30 @@ export default {
     props:['auth','sender'],
     data: function(){
          return{
+          fullData:[],
           messages:[],
           newMsg:'',
          }
     },
     mounted: function(){
-    var channel = pusher.subscribe('green');
-    channel.bind('MessangerEvent', function(data) {
-        console.log(data);
-    }); 
+
     },
     methods:{
         getSenderMessages(senderId){
             axios.post(`/getuserformessanger/${senderId}`)
             .then((response) => {
-                this.messages = response.data
+                //console.log(response.data);
+                this.fullData = response.data;
+                this.messages = [];
+                response.data.forEach((item)=>{
+                   this.messages.push({
+                       id: item.id,
+                       senderId: item.sender.id,
+                       senderName:item.sender.name,
+                       senderPhoto: item.sender.src,
+                       message:item.message,
+                   });
+                });
             })
         },
         newMessage(senderId, authId, message){
@@ -87,7 +90,7 @@ export default {
     },
     watch:{
         sender:function(newVal, oldVal){
-         this.getSenderMessages(newVal.id)
+        this.getSenderMessages(newVal.id) //this.getSenderMessages(newVal.id)
         }
     }
 }

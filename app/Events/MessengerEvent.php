@@ -10,8 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-
-class MessangerEvent
+class MessengerEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
     public $message;
@@ -31,11 +30,8 @@ class MessangerEvent
      * @return \Illuminate\Broadcasting\Channel|array
      */
     public function broadcastOn()
-    {
-        return new PrivateChannel('green');
+    {  
+        return ['green'] ;//new PrivateChannel('green');
     }
-    public function broadcastAs()
-  {
-      return 'MessangerEvent';
-  }
+   
 }
