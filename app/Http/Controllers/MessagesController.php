@@ -20,13 +20,15 @@ class MessagesController extends Controller
         $request->validate([
             'message' => ''
         ]);
-        // $msg = Message::create([
-        //     'to' => $request->to,
-        //     'from' => $request->from,
-        //     'message' => $request->message,
-        //     'is_read' => 0
-        // ]);
-        event(new MessengerEvent('hello world'));
+        $msg = Message::create([
+            'to' => $request->to,
+            'from' => $request->from,
+            'message' => $request->message,
+            'is_read' => 0
+        ]);
+        $message = Message::findOrFail($msg->id);
+        $sender = User::findOrFail($message->from);
+        event(new MessengerEvent($message, $sender->name, $sender->src));
       // return $msg;
     }
     public function clientSearch($val){

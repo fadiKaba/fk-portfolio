@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
+Broadcast::routes(['middleware' => 'auth']);
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/posts/postDetail/{postId}', 'PostsController@postDetail');
 Route::get('/posts/usersearch/{str}','HomeController@search');
@@ -36,7 +36,6 @@ Route::group(['middleware' => ['admin']], function(){
 });
 
 Route::group(['middleware' => ['auth']], function(){
-
    Route::post('/posts/like/{userId}/{postId}','PostsController@like')->name('plike');
    Route::post('/comments/add/{userId}/{post_id}','CommentsController@store')->name('newcomment');
    Route::delete('/comment/destroy/{userId}/{commentId}','CommentsController@destroy')->name('deletecomment');
@@ -49,6 +48,7 @@ Route::group(['middleware' => ['auth']], function(){
    Route::post('/contacts','MessagesController@contacts');
    Route::post('/message/new','MessagesController@store');
    Route::post('/getuserformessanger/{senderId}', 'MessagesController@getSenderMessages');
+   
 
    Route::group(['middleware' => ['owner']], function(){
            

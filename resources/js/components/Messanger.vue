@@ -38,10 +38,20 @@
 
 import Profilephoto from './Profilephoto';
 import axios from 'axios';
+import Echo from 'laravel-echo';
+
+window.Pusher = require('pusher-js');
+
+Pusher.logToConsole = true;
 
 
-
-
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: 'd4fd417b7e3040ccb4d1',
+    cluster: 'mt1',
+    encrypted: true,
+    authEndpoint: '/broadcasting/auth'
+});
 
 export default {
     name:'Messanger',
@@ -55,7 +65,17 @@ export default {
          }
     },
     mounted: function(){
-
+    
+     window.Echo.private('green.'+this.auth.id)
+                    .listen('MessengerEvent', (e)=>{
+                        this.messages.push({
+                        id: e.message.id,
+                        senderId: e.message.from,
+                        senderName:e.name,
+                        senderPhoto: e.src,
+                        message:e.message.message,
+                   });
+                    })
     },
     methods:{
         getSenderMessages(senderId){
@@ -104,7 +124,9 @@ export default {
         }
      }
      .content{
-         max-height: 60vh;
+         max-height: 70vh;
+         overflow-y:scroll;
+         margin-bottom: 5px;
          div{
              p{
                  span{

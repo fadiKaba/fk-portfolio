@@ -2584,6 +2584,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Profilephoto__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Profilephoto */ "./resources/js/components/Profilephoto.vue");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var laravel_echo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! laravel-echo */ "./node_modules/laravel-echo/dist/echo.js");
 //
 //
 //
@@ -2622,6 +2623,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 
+
+window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
+Pusher.logToConsole = true;
+window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_2__["default"]({
+  broadcaster: 'pusher',
+  key: 'd4fd417b7e3040ccb4d1',
+  cluster: 'mt1',
+  encrypted: true,
+  authEndpoint: '/broadcasting/auth'
+});
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Messanger',
   components: {
@@ -2635,17 +2646,29 @@ __webpack_require__.r(__webpack_exports__);
       newMsg: ''
     };
   },
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    var _this = this;
+
+    window.Echo["private"]('green.' + this.auth.id).listen('MessengerEvent', function (e) {
+      _this.messages.push({
+        id: e.message.id,
+        senderId: e.message.from,
+        senderName: e.name,
+        senderPhoto: e.src,
+        message: e.message.message
+      });
+    });
+  },
   methods: {
     getSenderMessages: function getSenderMessages(senderId) {
-      var _this = this;
+      var _this2 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/getuserformessanger/".concat(senderId)).then(function (response) {
         //console.log(response.data);
-        _this.fullData = response.data;
-        _this.messages = [];
+        _this2.fullData = response.data;
+        _this2.messages = [];
         response.data.forEach(function (item) {
-          _this.messages.push({
+          _this2.messages.push({
             id: item.id,
             senderId: item.sender.id,
             senderName: item.sender.name,
@@ -2656,7 +2679,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     newMessage: function newMessage(senderId, authId, message) {
-      var _this2 = this;
+      var _this3 = this;
 
       if (message != '') {
         axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/message/new', {
@@ -2665,7 +2688,7 @@ __webpack_require__.r(__webpack_exports__);
           'message': message,
           'is_read': 0
         }).then(function (response) {
-          _this2.newMsg = '';
+          _this3.newMsg = '';
         });
       }
     }
@@ -9458,7 +9481,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".messanger-container .top a[data-v-306de7b4] {\n  text-transform: capitalize;\n  font-size: 1.4rem;\n}\n.messanger-container .content[data-v-306de7b4] {\n  max-height: 60vh;\n}\n.messanger-container .content div p span[data-v-306de7b4] {\n  padding: 8px;\n  border-radius: 5px;\n}\n.grey[data-v-306de7b4] {\n  background-color: #F2F3F5;\n}\n.greeny[data-v-306de7b4] {\n  background-color: #82AE46;\n  color: #fff;\n}", ""]);
+exports.push([module.i, ".messanger-container .top a[data-v-306de7b4] {\n  text-transform: capitalize;\n  font-size: 1.4rem;\n}\n.messanger-container .content[data-v-306de7b4] {\n  max-height: 70vh;\n  overflow-y: scroll;\n  margin-bottom: 5px;\n}\n.messanger-container .content div p span[data-v-306de7b4] {\n  padding: 8px;\n  border-radius: 5px;\n}\n.grey[data-v-306de7b4] {\n  background-color: #F2F3F5;\n}\n.greeny[data-v-306de7b4] {\n  background-color: #82AE46;\n  color: #fff;\n}", ""]);
 
 // exports
 
@@ -80439,12 +80462,9 @@ var app = new Vue({
 /*!***********************************!*\
   !*** ./resources/js/bootstrap.js ***!
   \***********************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var laravel_echo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! laravel-echo */ "./node_modules/laravel-echo/dist/echo.js");
 window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -80463,17 +80483,14 @@ try {
  * for events that are broadcast by Laravel. Echo and event broadcasting
  * allows your team to easily build robust real-time web applications.
  */
-
-
-
-window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
-Pusher.logToConsole = true;
-window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
-  broadcaster: 'pusher',
-  key: 'd4fd417b7e3040ccb4d1',
-  cluster: 'mt1',
-  encrypted: true
-}); // window.Echo.channel('green')
+//  import Echo from 'laravel-echo';
+// window.Echo = new Echo({
+//     broadcaster: 'pusher',
+//     key: 'd4fd417b7e3040ccb4d1',
+//     cluster: 'mt1',
+//     encrypted: true
+// });
+// window.Echo.channel('green')
 // .listen('MessengerEvent', (e)=>{
 //     console.log(e)
 // })
@@ -80481,15 +80498,6 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
 //     console.log(e);
 //     console.log(e);
 // });
-
-var pusher = new Pusher('d4fd417b7e3040ccb4d1', {
-  cluster: 'mt1',
-  forceTLS: true
-});
-var channel = pusher.subscribe('green');
-channel.bind('MessengerEvent', function (data) {
-  console.log(data);
-});
 
 /***/ }),
 
@@ -81461,9 +81469,9 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\project\my-portfolio\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! D:\project\my-portfolio\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! D:\project\my-portfolio\resources\sass\admin.scss */"./resources/sass/admin.scss");
+__webpack_require__(/*! C:\coding\projects\porto-deploy\fk-portfolio\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\coding\projects\porto-deploy\fk-portfolio\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\coding\projects\porto-deploy\fk-portfolio\resources\sass\admin.scss */"./resources/sass/admin.scss");
 
 
 /***/ })

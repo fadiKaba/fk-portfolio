@@ -20,18 +20,15 @@ try {
  * allows your team to easily build robust real-time web applications.
  */
 
- import Echo from 'laravel-echo';
+//  import Echo from 'laravel-echo';
 
- window.Pusher = require('pusher-js');
 
- Pusher.logToConsole = true;
-
-window.Echo = new Echo({
-    broadcaster: 'pusher',
-    key: 'd4fd417b7e3040ccb4d1',
-    cluster: 'mt1',
-    encrypted: true
-});
+// window.Echo = new Echo({
+//     broadcaster: 'pusher',
+//     key: 'd4fd417b7e3040ccb4d1',
+//     cluster: 'mt1',
+//     encrypted: true
+// });
 
 // window.Echo.channel('green')
 // .listen('MessengerEvent', (e)=>{
@@ -43,12 +40,3 @@ window.Echo = new Echo({
 //     console.log(e);
 // });
 
-var pusher = new Pusher('d4fd417b7e3040ccb4d1', {
-    cluster: 'mt1',
-    forceTLS: true
-  });
-
-var channel = pusher.subscribe('green');
-channel.bind('MessengerEvent', function(data) {
-  console.log(data);
-});
