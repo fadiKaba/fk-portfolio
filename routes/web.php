@@ -17,6 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 Broadcast::routes(['middleware' => 'auth']);
+
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/posts/postDetail/{postId}', 'PostsController@postDetail');
 Route::get('/posts/usersearch/{str}','HomeController@search');
@@ -47,6 +48,7 @@ Route::group(['middleware' => ['auth']], function(){
    Route::post('/clientsearch/{str}','MessagesController@clientSearch');
    Route::post('/contacts','MessagesController@contacts');
    Route::post('/message/new','MessagesController@store');
+   Route::post('/message/singlemessage','MessagesController@storeSingleMessage');
    Route::post('/getuserformessanger/{senderId}', 'MessagesController@getSenderMessages');
    
 

@@ -29,10 +29,24 @@ class MessagesController extends Controller
         $message = Message::findOrFail($msg->id);
         $sender = User::findOrFail($message->from);
         event(new MessengerEvent($message, $sender->name, $sender->src));
-      // return $msg;
+       return $message;
+    }
+    public function storeSingleMessage(Request $request){
+        $request->validate([
+            'message' => ''
+        ]);
+        $msg = Message::create([
+            'to' => $request->to,
+            'from' => Auth::id(),
+            'message' => $request->message,
+            'is_read' => 0
+        ]);
+        $user = User::findOrFail($msg->to);
+       return back()->with('success', 'Your message has been sent successfully to '.$user->name);
     }
     public function clientSearch($val){
-        $users = User::where('email', 'LIKE', "%$val%")->get();
+        $authId = Auth::id();
+        $users = User::where('email', 'LIKE', "%$val%")->where('id', '!=', $authId)->get();
         return json_encode($users);
        }
     public function contacts(){

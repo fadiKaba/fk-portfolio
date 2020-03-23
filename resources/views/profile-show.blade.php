@@ -28,8 +28,25 @@
                 <span>{{$user->location}}</span>
             </div>
             @endif
-    </div>    
+            <div class="mt-3">
+                <button class="btn green" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Send message</button> 
+                <div class="collapse mt-2" id="collapseExample">
+                    <div class="card card-body">
+                        <form action="/message/singlemessage" method="POST"> 
+                            <input type="hidden" name="to" value="{{$user->id}}">
+                            <div class="form-group">
+                               <textarea class="form-control" name="message" cols="30" rows="2" placeholder="Write a message to {{$user->name}}"></textarea>
+                            </div>                           
+                            <button class="btn green">Send</button>
+                            @csrf
+                        </form>
+                    </div>
+                </div>
+            </div>
+                                 
+    </div>       
 </div>
+                  
 
 
 @endsection

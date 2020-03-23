@@ -60,7 +60,8 @@
                 </li>
                 @guest
                 @else
-                    <li class="nav-item dropdown py-2">                        
+                    <li class="nav-item dropdown py-2">  
+                        <span class="badge badge-info text-light" v-if="newMsg == true">!</span>                      
                         <Profilephoto :src="{{json_encode(Auth::user()->src)}}" :cls="same('d-inline')" :size="'25px'"></Profilephoto>
                         <a id="navbarDropdown" class="nav-link dropdown-toggle d-inline" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }} <span class="caret"></span>
@@ -69,7 +70,7 @@
                         <div class="dropdown-menu dropdown-menu-right text-center" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item text-dark" href="/pr/edit">Profile</a>
                             <button type="button" class="dropdown-item text-dark" data-toggle="modal" data-target="#chat">
-                                Messages
+                                <span class="badge badge-info text-light" v-if="newMsg == true">!</span> Messages
                             </button>
                             <a class="dropdown-item text-dark" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
@@ -105,7 +106,7 @@
                     <Clientsearch>{{ csrf_field() }}</Clientsearch>
                 </div>
                 <div class="col-md-9">
-                    <Messanger :sender="userSender" :auth="{{json_encode(Auth::user())}}"></Messanger>
+                    <Messanger v-on:newmessage="newmessage" :sender="userSender" :auth="{{json_encode(Auth::user())}}"></Messanger>
                 </div>
                 <div class="col-md-3 border-left">
                     <Contacts v-on:snedsender="sendSenderAgain" :auth="{{json_encode(Auth::user())}}"></Contacts>

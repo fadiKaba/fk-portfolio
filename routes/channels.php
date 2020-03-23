@@ -12,6 +12,6 @@
 */
 
 Broadcast::channel('green.{id}', function ($user, $id) {
-  //  echo $user;
-    return ((int) $user->id === (int) $id);
+
+    return (int) $user->id === (int) $id;
 });

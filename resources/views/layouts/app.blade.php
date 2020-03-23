@@ -30,7 +30,7 @@
         </main>
         <Foot></Foot>
     </div> 
-    <script src="https://js.pusher.com/5.1/pusher.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> 
+    {{-- <script src="https://js.pusher.com/5.1/pusher.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>  --}}
 </body>
 </html>

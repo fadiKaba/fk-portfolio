@@ -53,6 +53,7 @@ export default {
     .contacts-container-inner{
         max-height: 60vh;
         overflow-y:scroll;
+        scrollbar-width: thin;
         div{
             cursor: pointer;
             p{

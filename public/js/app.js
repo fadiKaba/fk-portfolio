@@ -2585,6 +2585,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var laravel_echo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! laravel-echo */ "./node_modules/laravel-echo/dist/echo.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var vue_chat_scroll__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-chat-scroll */ "./node_modules/vue-chat-scroll/dist/vue-chat-scroll.js");
+/* harmony import */ var vue_chat_scroll__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vue_chat_scroll__WEBPACK_IMPORTED_MODULE_4__);
+//
+//
 //
 //
 //
@@ -2624,15 +2630,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+vue__WEBPACK_IMPORTED_MODULE_3___default.a.use(vue_chat_scroll__WEBPACK_IMPORTED_MODULE_4___default.a);
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
 Pusher.logToConsole = true;
-window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_2__["default"]({
-  broadcaster: 'pusher',
-  key: 'd4fd417b7e3040ccb4d1',
-  cluster: 'mt1',
-  encrypted: true,
-  authEndpoint: '/broadcasting/auth'
-});
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Messanger',
   components: {
@@ -2649,15 +2651,28 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_2__["default"]({
   mounted: function mounted() {
     var _this = this;
 
-    window.Echo["private"]('green.' + this.auth.id).listen('MessengerEvent', function (e) {
-      _this.messages.push({
-        id: e.message.id,
-        senderId: e.message.from,
-        senderName: e.name,
-        senderPhoto: e.src,
-        message: e.message.message
+    if (this.auth != null) {
+      window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_2__["default"]({
+        broadcaster: 'pusher',
+        key: 'efced963ebdfef1133e1',
+        cluster: 'eu',
+        encrypted: true,
+        authEndpoint: '/broadcasting/auth'
       });
-    });
+      window.Echo["private"]('green.' + this.auth.id).listen('MessengerEvent', function (e) {
+        if (_this.fullData.length > 0) {
+          _this.messages.push({
+            id: e.message.id,
+            senderId: e.message.from,
+            senderName: e.name,
+            senderPhoto: e.src,
+            message: e.message.message
+          });
+        }
+
+        _this.$emit('newmessage', 'true');
+      });
+    }
   },
   methods: {
     getSenderMessages: function getSenderMessages(senderId) {
@@ -2676,6 +2691,9 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_2__["default"]({
             message: item.message
           });
         });
+      }).then(function (e) {
+        var messageBody = document.querySelector('.content');
+        messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
       });
     },
     newMessage: function newMessage(senderId, authId, message) {
@@ -2689,13 +2707,21 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_2__["default"]({
           'is_read': 0
         }).then(function (response) {
           _this3.newMsg = '';
+
+          _this3.messages.push({
+            id: response.data.id,
+            senderId: _this3.auth.id,
+            senderName: _this3.auth.name,
+            senderPhoto: '',
+            message: response.data.message
+          });
         });
       }
     }
   },
   watch: {
     sender: function sender(newVal, oldVal) {
-      this.getSenderMessages(newVal.id); //this.getSenderMessages(newVal.id)
+      this.getSenderMessages(newVal.id);
     }
   }
 });
@@ -9348,7 +9374,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "ul.list-group li[data-v-2fe890c4] {\n  cursor: pointer;\n}\nul.list-group li[data-v-2fe890c4]:hover {\n  background-color: #F2F3F5;\n}", ""]);
+exports.push([module.i, ".main-search-container .search-result-container ul.list-group[data-v-2fe890c4] {\n  position: absolute;\n  z-index: 2;\n  max-height: 30vh;\n  overflow-y: scroll;\n  scrollbar-width: thin;\n}\n.main-search-container .search-result-container ul.list-group li[data-v-2fe890c4] {\n  cursor: pointer;\n}\n.main-search-container .search-result-container ul.list-group li[data-v-2fe890c4]:hover {\n  background-color: #f4f4f4;\n}", ""]);
 
 // exports
 
@@ -9386,7 +9412,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".contacts-container .contacts-container-inner[data-v-6766143e] {\n  max-height: 60vh;\n  overflow-y: scroll;\n}\n.contacts-container .contacts-container-inner div[data-v-6766143e] {\n  cursor: pointer;\n}\n.contacts-container .contacts-container-inner div p[data-v-6766143e] {\n  text-transform: capitalize;\n}", ""]);
+exports.push([module.i, ".contacts-container .contacts-container-inner[data-v-6766143e] {\n  max-height: 60vh;\n  overflow-y: scroll;\n  scrollbar-width: thin;\n}\n.contacts-container .contacts-container-inner div[data-v-6766143e] {\n  cursor: pointer;\n}\n.contacts-container .contacts-container-inner div p[data-v-6766143e] {\n  text-transform: capitalize;\n}", ""]);
 
 // exports
 
@@ -9481,7 +9507,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".messanger-container .top a[data-v-306de7b4] {\n  text-transform: capitalize;\n  font-size: 1.4rem;\n}\n.messanger-container .content[data-v-306de7b4] {\n  max-height: 70vh;\n  overflow-y: scroll;\n  margin-bottom: 5px;\n}\n.messanger-container .content div p span[data-v-306de7b4] {\n  padding: 8px;\n  border-radius: 5px;\n}\n.grey[data-v-306de7b4] {\n  background-color: #F2F3F5;\n}\n.greeny[data-v-306de7b4] {\n  background-color: #82AE46;\n  color: #fff;\n}", ""]);
+exports.push([module.i, ".messanger-container .top a[data-v-306de7b4] {\n  text-transform: capitalize;\n  font-size: 1.4rem;\n}\n.messanger-container .content[data-v-306de7b4] {\n  max-height: 50vh;\n  overflow-y: scroll;\n  scrollbar-width: thin;\n  margin-bottom: 5px;\n}\n.messanger-container .content ul[data-v-306de7b4] {\n  list-style: none;\n}\n.messanger-container .content ul li p span[data-v-306de7b4] {\n  max-width: 50%;\n  padding: 8px;\n  border-radius: 5px;\n  display: inline-block;\n  word-wrap: break-word;\n}\n.grey[data-v-306de7b4] {\n  background-color: #F2F3F5;\n}\n.greeny[data-v-306de7b4] {\n  background-color: #82AE46;\n  color: #fff;\n}", ""]);
 
 // exports
 
@@ -66791,6 +66817,94 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
+/***/ "./node_modules/vue-chat-scroll/dist/vue-chat-scroll.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/vue-chat-scroll/dist/vue-chat-scroll.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+(function (global, factory) {
+	 true ? module.exports = factory() :
+	undefined;
+}(this, (function () { 'use strict';
+
+/**
+* @name VueJS vChatScroll (vue-chat-scroll)
+* @description Monitors an element and scrolls to the bottom if a new child is added
+* @author Theodore Messinezis <theo@theomessin.com>
+* @file v-chat-scroll  directive definition
+*/
+
+var scrollToBottom = function scrollToBottom(el, smooth) {
+  if (typeof el.scroll === "function") {
+    el.scroll({
+      top: el.scrollHeight,
+      behavior: smooth ? 'smooth' : 'instant'
+    });
+  } else {
+    el.scrollTop = el.scrollHeight;
+  }
+};
+
+var vChatScroll = {
+  bind: function bind(el, binding) {
+    var scrolled = false;
+
+    el.addEventListener('scroll', function (e) {
+      scrolled = el.scrollTop + el.clientHeight + 1 < el.scrollHeight;
+    });
+
+    new MutationObserver(function (e) {
+      var config = binding.value || {};
+      var pause = config.always === false && scrolled;
+      var addedNodes = e[e.length - 1].addedNodes.length;
+      var removedNodes = e[e.length - 1].removedNodes.length;
+
+      if (config.scrollonremoved) {
+        if (pause || addedNodes != 1 && removedNodes != 1) return;
+      } else {
+        if (pause || addedNodes != 1) return;
+      }
+
+      var smooth = config.smooth;
+      var loadingRemoved = !addedNodes && removedNodes === 1;
+      if (loadingRemoved && config.scrollonremoved && 'smoothonremoved' in config) {
+        smooth = config.smoothonremoved;
+      }
+      scrollToBottom(el, smooth);
+    }).observe(el, { childList: true, subtree: true });
+  },
+  inserted: function inserted(el, binding) {
+    var config = binding.value || {};
+    scrollToBottom(el, config.smooth);
+  }
+};
+
+/**
+* @name VueJS vChatScroll (vue-chat-scroll)
+* @description Monitors an element and scrolls to the bottom if a new child is added
+* @author Theodore Messinezis <theo@theomessin.com>
+* @file vue-chat-scroll plugin definition
+*/
+
+var VueChatScroll = {
+  install: function install(Vue, options) {
+    Vue.directive('chat-scroll', vChatScroll);
+  }
+};
+
+if (typeof window !== 'undefined' && window.Vue) {
+  window.Vue.use(VueChatScroll);
+}
+
+return VueChatScroll;
+
+})));
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Clientsearch.vue?vue&type=template&id=2fe890c4&scoped=true&":
 /*!***************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Clientsearch.vue?vue&type=template&id=2fe890c4&scoped=true& ***!
@@ -66806,7 +66920,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "main-search-container" }, [
     _c("div", { staticClass: "input-group mb-0" }, [
       _c("input", {
         directives: [
@@ -66820,7 +66934,7 @@ var render = function() {
         staticClass: "form-control",
         attrs: {
           type: "text",
-          placeholder: "Search user",
+          placeholder: "Search e-mail",
           "aria-label": "Recipient's username",
           "aria-describedby": "button-addon2"
         },
@@ -66841,7 +66955,7 @@ var render = function() {
       _vm._m(0)
     ]),
     _vm._v(" "),
-    _c("div", [
+    _c("div", { staticClass: "search-result-container" }, [
       _vm.results.length > 0
         ? _c(
             "ul",
@@ -67822,49 +67936,75 @@ var render = function() {
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: "content border-top p-2 p-md-4" },
-      _vm._l(_vm.messages, function(message) {
-        return _c("div", { key: "mes" + message.id }, [
-          _c(
-            "p",
-            {
-              class:
-                message.senderId == _vm.auth.id ? "text-right" : "text-left"
-            },
-            [
-              message.senderId != _vm.auth.id &&
-              message.senderPhoto != null &&
-              message.senderPhoto != ""
-                ? _c("img", {
-                    staticClass: "rounded-circle",
-                    attrs: {
-                      src: "../photos/" + message.senderPhoto,
-                      alt: message.senderName,
-                      width: "50px"
-                    }
-                  })
-                : (message.senderId != _vm.auth.id &&
-                    message.senderPhoto == null) ||
-                  (message.senderId != _vm.auth.id && _vm.src != "")
-                ? _c("img", {
-                    attrs: {
-                      src: "/wallpapers/default-user.png",
-                      alt: "profile photo",
-                      width: "50px"
-                    }
-                  })
-                : _vm._e(),
-              _vm._v(" "),
-              _c(
-                "span",
-                { class: message.senderId == _vm.auth.id ? "greeny" : "grey" },
-                [_vm._v(_vm._s(message.message))]
-              )
-            ]
-          )
-        ])
-      }),
-      0
+      {
+        directives: [
+          {
+            name: "chat-scroll",
+            rawName: "v-chat-scroll",
+            value: { always: false, smooth: true, smoothonremoved: false },
+            expression: "{always: false, smooth: true, smoothonremoved: false}"
+          }
+        ],
+        staticClass: "content border-top p-2 p-md-4"
+      },
+      [
+        _c(
+          "ul",
+          { staticClass: "p-0" },
+          _vm._l(_vm.messages, function(message) {
+            return _c(
+              "li",
+              { key: "mes" + message.id, staticClass: "message" },
+              [
+                _c(
+                  "p",
+                  {
+                    class:
+                      message.senderId == _vm.auth.id
+                        ? "text-right"
+                        : "text-left"
+                  },
+                  [
+                    message.senderId != _vm.auth.id &&
+                    message.senderPhoto != null &&
+                    message.senderPhoto != ""
+                      ? _c("img", {
+                          staticClass: "rounded-circle",
+                          attrs: {
+                            src: "../photos/" + message.senderPhoto,
+                            alt: message.senderName,
+                            width: "50px"
+                          }
+                        })
+                      : (message.senderId != _vm.auth.id &&
+                          message.senderPhoto == null) ||
+                        (message.senderId != _vm.auth.id &&
+                          message.senderPhoto != "")
+                      ? _c("img", {
+                          attrs: {
+                            src: "/wallpapers/default-user.png",
+                            alt: "profile photo",
+                            width: "50px"
+                          }
+                        })
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c(
+                      "span",
+                      {
+                        class:
+                          message.senderId == _vm.auth.id ? "greeny" : "grey"
+                      },
+                      [_vm._v(_vm._s(message.message))]
+                    )
+                  ]
+                )
+              ]
+            )
+          }),
+          0
+        )
+      ]
     ),
     _vm._v(" "),
     _vm.messages.length > 0
@@ -80418,7 +80558,8 @@ var app = new Vue({
   },
   data: function data() {
     return {
-      userSender: ''
+      userSender: '',
+      newMsg: false
     };
   },
   mounted: function mounted() {
@@ -80452,6 +80593,10 @@ var app = new Vue({
     },
     sendSenderAgain: function sendSenderAgain(val) {
       this.userSender = val;
+    },
+    newmessage: function newmessage() {
+      this.newMsg = true;
+      console.log('newmessage');
     }
   }
 });
@@ -81469,9 +81614,9 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\coding\projects\porto-deploy\fk-portfolio\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\coding\projects\porto-deploy\fk-portfolio\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\coding\projects\porto-deploy\fk-portfolio\resources\sass\admin.scss */"./resources/sass/admin.scss");
+__webpack_require__(/*! D:\project\my-portfolio\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! D:\project\my-portfolio\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! D:\project\my-portfolio\resources\sass\admin.scss */"./resources/sass/admin.scss");
 
 
 /***/ })
