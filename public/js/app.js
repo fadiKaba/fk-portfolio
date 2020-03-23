@@ -2124,6 +2124,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2150,6 +2151,10 @@ __webpack_require__.r(__webpack_exports__);
           if (_this.contacts.find(function (x) {
             return x.id == item.sender.id;
           }) == undefined && item.sender.id != _this.auth.id) {
+            if (item.is_read == 0) {
+              item.sender.nouvau = true;
+            }
+
             _this.contacts.push(item.sender);
           } else if (_this.contacts.find(function (x) {
             return x.id == item.reciever.id;
@@ -2161,6 +2166,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     sendSender: function sendSender(sender) {
       this.$emit('snedsender', sender);
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/message/makeread/".concat(sender.id));
     }
   }
 });
@@ -2633,8 +2639,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 vue__WEBPACK_IMPORTED_MODULE_3___default.a.use(vue_chat_scroll__WEBPACK_IMPORTED_MODULE_4___default.a);
-window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
-Pusher.logToConsole = true;
+window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js"); //Pusher.logToConsole = true;
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Messanger',
   components: {
@@ -67178,7 +67184,9 @@ var render = function() {
               attrs: { src: contact.src, cls: "mr-2", size: "25px" }
             }),
             _vm._v(" "),
-            _c("p", { staticClass: "m-0" }, [_vm._v(_vm._s(contact.name))])
+            _c("p", { staticClass: "m-0" }, [
+              _vm._v(" " + _vm._s(contact.name) + " ")
+            ])
           ],
           1
         )
@@ -81614,9 +81622,9 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\project\my-portfolio\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! D:\project\my-portfolio\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! D:\project\my-portfolio\resources\sass\admin.scss */"./resources/sass/admin.scss");
+__webpack_require__(/*! C:\coding\projects\porto-deploy\fk-portfolio\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\coding\projects\porto-deploy\fk-portfolio\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\coding\projects\porto-deploy\fk-portfolio\resources\sass\admin.scss */"./resources/sass/admin.scss");
 
 
 /***/ })

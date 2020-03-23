@@ -50,6 +50,7 @@ Route::group(['middleware' => ['auth']], function(){
    Route::post('/message/new','MessagesController@store');
    Route::post('/message/singlemessage','MessagesController@storeSingleMessage');
    Route::post('/getuserformessanger/{senderId}', 'MessagesController@getSenderMessages');
+   Route::post('/message/makeread/{senderId}', 'MessagesController@makeRead');
    
 
    Route::group(['middleware' => ['owner']], function(){

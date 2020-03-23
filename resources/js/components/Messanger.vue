@@ -48,7 +48,7 @@ Vue.use(VueChatScroll)
 
 window.Pusher = require('pusher-js');
 
-Pusher.logToConsole = true;
+//Pusher.logToConsole = true;
 
 
 
@@ -82,7 +82,7 @@ export default {
                     senderName:e.name,
                     senderPhoto: e.src,
                     message:e.message.message,
-                   }); 
+                   });                  
                 }               
             this.$emit('newmessage','true');
             })

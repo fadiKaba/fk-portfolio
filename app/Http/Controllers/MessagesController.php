@@ -59,4 +59,12 @@ class MessagesController extends Controller
        // dd($msgs);
         return json_encode($msgs);
     }
+    public function makeRead($senderId){
+        $messages = Message::where('to', Auth::id())->where('from', $senderId)->get();
+        foreach($messages as $message){
+            $message->update([
+                'is_read' => '1'
+            ]);
+        }
+    }
 }
