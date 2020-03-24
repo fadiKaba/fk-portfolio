@@ -42,6 +42,7 @@ const app = new Vue({
       }); 
       this.showAn('div.fruits-inner-container > div');
       this.showAn('.advice-container > div > div:nth-child(2)');
+      $('.tt').tab('contact');
     },
     methods:{
         same: function(input){

@@ -31,7 +31,10 @@
                     @endif
                 </div>
                 @else
-                <div>Login Or register to contact us</div>
+                <div class="text-muted font-weight-bold text-center">
+                    <img src="/ico/contact.svg" alt="mail" width="50%">
+                   <p><a href="/login">Login</a> Or <a href="/register">register</a>  to contact us</p> 
+                </div>
                 @endif
             </div>
         </div>       

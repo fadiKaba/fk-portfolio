@@ -69,9 +69,12 @@
                         
                         <div class="dropdown-menu dropdown-menu-right text-center" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item text-dark" href="/pr/edit">Profile</a>
-                            <button v-on:click="newMsg = false" type="button" class="dropdown-item text-dark" data-toggle="modal" data-target="#chat">
+                            <button v-on:click="newMsg = false" type="button" class="dropdown-item text-dark d-none d-md-block" data-toggle="modal" data-target="#chat">
                                 <span class="badge badge-info text-light" v-if="newMsg == true">!</span> Messages
                             </button>
+                            <a v-on:click="newMsg = false" href="/messengermobile" class="dropdown-item text-dark d-md-none">
+                                <span class="badge badge-info text-light" v-if="newMsg == true">!</span> Messages
+                            </a>
                             <a class="dropdown-item text-dark" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
@@ -98,6 +101,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
+
         <div class="modal-body">
             <div class="row">
                 <div class="col-12">
@@ -111,9 +115,7 @@
                 </div>
             </div>           
         </div>
-        {{-- <div class="modal-footer border-0">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div> --}}
+
       </div>
     </div>
 </div>

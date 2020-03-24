@@ -9,14 +9,11 @@
             placeholder="Search e-mail" 
             aria-label="Recipient's username" 
             aria-describedby="button-addon2">
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary rounded-0" type="button" id="button-addon2">Search</button>
-            </div>
         </div>
         <div class="search-result-container">
             <ul class="list-group" v-if="results.length > 0">
                 <li 
-                class="list-group-item py-2" 
+                class="list-group-item py-2 border-0" 
                 v-for="result in results" 
                 :key="'r'+result.id" 
                 @click="sendSearch(result)">

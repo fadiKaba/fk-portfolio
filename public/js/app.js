@@ -1936,9 +1936,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Clientsearch',
@@ -2143,7 +2140,7 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     Profilephoto: _Profilephoto__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
-  props: ['auth', 'senderFromApp'],
+  props: ['auth', 'senderFromApp', 'small'],
   data: function data() {
     return {
       fullData: [],
@@ -67035,9 +67032,7 @@ var render = function() {
             _vm.val = $event.target.value
           }
         }
-      }),
-      _vm._v(" "),
-      _vm._m(0)
+      })
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "search-result-container" }, [
@@ -67050,7 +67045,7 @@ var render = function() {
                 "li",
                 {
                   key: "r" + result.id,
-                  staticClass: "list-group-item py-2",
+                  staticClass: "list-group-item py-2 border-0",
                   on: {
                     click: function($event) {
                       return _vm.sendSearch(result)
@@ -67073,23 +67068,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "input-group-append" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-outline-secondary rounded-0",
-          attrs: { type: "button", id: "button-addon2" }
-        },
-        [_vm._v("Search")]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -67246,7 +67225,7 @@ var render = function() {
     _vm.contacts.length > 0
       ? _c(
           "div",
-          { staticClass: "my-2 border contacts-container-inner" },
+          { staticClass: "my-2 contacts-container-inner" },
           _vm._l(_vm.contacts, function(contact) {
             return _c(
               "div",
@@ -67268,7 +67247,12 @@ var render = function() {
                 _c(
                   "div",
                   {
-                    staticClass: "d-flex ",
+                    staticClass: "d-flex",
+                    attrs: {
+                      "data-toggle": _vm.small == true ? "modal" : "",
+                      "data-target":
+                        _vm.small == true ? "#mobile-messenger" : ""
+                    },
                     on: {
                       click: function($event) {
                         return _vm.sendSender(contact, "co" + contact.id)
@@ -80728,6 +80712,7 @@ var app = new Vue({
     });
     this.showAn('div.fruits-inner-container > div');
     this.showAn('.advice-container > div > div:nth-child(2)');
+    $('.tt').tab('contact');
   },
   methods: {
     same: function same(input) {

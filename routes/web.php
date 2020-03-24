@@ -47,6 +47,7 @@ Route::group(['middleware' => ['auth']], function(){
    Route::get('/pr/edit','ProfilesController@edit')->name('profileedit');
    Route::post('/clientsearch/{str}','MessagesController@clientSearch');
    Route::post('/contacts','MessagesController@contacts');
+   Route::get('/messengermobile', function (){ return view('chat-mobile');});
    Route::post('/message/new','MessagesController@store');
    Route::post('/message/singlemessage','MessagesController@storeSingleMessage');
    Route::post('/getuserformessanger/{senderId}', 'MessagesController@getSenderMessages');

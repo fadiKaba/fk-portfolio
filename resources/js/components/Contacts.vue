@@ -1,6 +1,6 @@
 <template>
    <div class="contacts-container">
-    <div v-if="contacts.length > 0" class="my-2 border contacts-container-inner">
+    <div v-if="contacts.length > 0" class="my-2 contacts-container-inner">
         <div 
         class="d-flex align-items-center p-2 selected-contact contact" 
         v-for="contact in contacts" 
@@ -9,7 +9,7 @@
         > 
         <!-- deleteContact(contact.id, contact.name) -->
         <span class="badge badge-info text-light mr-1" v-if="contact.nouvau == true">!</span>
-        <div class="d-flex " @click="sendSender(contact, 'co'+contact.id)">        
+        <div class="d-flex" @click="sendSender(contact, 'co'+contact.id)" :data-toggle="small == true ? 'modal': ''" :data-target="small == true ? '#mobile-messenger': ''">        
             <Profilephoto :src="contact.src" :cls="'mr-2'" :size="'25px'"></Profilephoto> 
             <p class="m-0"> {{contact.name.slice(0,9)}} </p> 
         </div>                 
@@ -31,7 +31,7 @@ import Profilephoto from './Profilephoto';
 export default {
     name:'Contacts',
     components:{Profilephoto},
-    props:['auth','senderFromApp'],
+    props:['auth','senderFromApp','small'],
     data: function(){
         return{
         fullData:[],
