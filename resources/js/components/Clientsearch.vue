@@ -3,14 +3,14 @@
         <div class="input-group mb-0">
             <input 
             type="text" 
-            class="form-control" 
+            class="form-control rounded-0" 
             v-model="val"
             @keyup="search(val)"
             placeholder="Search e-mail" 
             aria-label="Recipient's username" 
             aria-describedby="button-addon2">
             <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
+                <button class="btn btn-outline-secondary rounded-0" type="button" id="button-addon2">Search</button>
             </div>
         </div>
         <div class="search-result-container">

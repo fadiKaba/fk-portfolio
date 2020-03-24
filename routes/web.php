@@ -51,6 +51,7 @@ Route::group(['middleware' => ['auth']], function(){
    Route::post('/message/singlemessage','MessagesController@storeSingleMessage');
    Route::post('/getuserformessanger/{senderId}', 'MessagesController@getSenderMessages');
    Route::post('/message/makeread/{senderId}', 'MessagesController@makeRead');
+   Route::delete('/messages/destroy/{senderId}', 'MessagesController@destroy');
    
 
    Route::group(['middleware' => ['owner']], function(){

@@ -2125,6 +2125,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2147,26 +2158,63 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/contacts").then(function (response) {
-        response.data.forEach(function (item) {
+        _this.fullData = response.data;
+
+        _this.fullData.forEach(function (item) {
+          if (item.is_read == 0 && item.sender.id != _this.auth.id && _this.auth.id != item.deleted) {
+            item.sender.nouvau = true;
+
+            _this.$emit('newmessage', true);
+          }
+        });
+
+        _this.fullData.forEach(function (item) {
+          if (item.sender.nouvau == true && _this.contacts.find(function (x) {
+            return x.id == item.sender.id;
+          }) == undefined && item.sender.id != _this.auth.id && _this.auth.id != item.deleted) {
+            _this.contacts.push(item.sender);
+          }
+
+          if (_this.contacts.find(function (x) {
+            return x.id == item.reciever.id;
+          }) == undefined && item.reciever.id != _this.auth.id && _this.auth.id != item.deleted) {
+            _this.contacts.push(item.reciever);
+          }
+        });
+
+        _this.fullData.forEach(function (item) {
           if (_this.contacts.find(function (x) {
             return x.id == item.sender.id;
-          }) == undefined && item.sender.id != _this.auth.id) {
-            if (item.is_read == 0) {
-              item.sender.nouvau = true;
-            }
-
+          }) == undefined && item.sender.id != _this.auth.id && _this.auth.id != item.deleted) {
             _this.contacts.push(item.sender);
-          } else if (_this.contacts.find(function (x) {
-            return x.id == item.reciever.id;
-          }) == undefined && item.reciever.id != _this.auth.id) {
-            _this.contacts.push(item.reciever);
           }
         });
       });
     },
-    sendSender: function sendSender(sender) {
+    sendSender: function sendSender(sender, id) {
       this.$emit('snedsender', sender);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/message/makeread/".concat(sender.id));
+      document.querySelectorAll('.contact').forEach(function (item) {
+        return item.setAttribute('style', 'background-color: #fff; color: #000;');
+      });
+      document.querySelector("#".concat(id)).setAttribute('style', 'background-color: #82AE46; color: #fff;');
+    },
+    deleteContact: function deleteContact(senderId, name) {
+      var _this2 = this;
+
+      var confirmDelete = confirm('Are you sure to delete your conversation with ' + name);
+
+      if (confirmDelete) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("/messages/destroy/".concat(senderId)).then(function (response) {
+          for (var i = 0; i < _this2.contacts.length; i++) {
+            if (_this2.contacts[i].name == name) {
+              _this2.contacts.splice(i, 1);
+            }
+          }
+
+          _this2.$emit('clearmessenger', senderId);
+        });
+      }
     }
   }
 });
@@ -2633,6 +2681,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2646,12 +2702,14 @@ window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/d
   components: {
     Profilephoto: _Profilephoto__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  props: ['auth', 'sender'],
+  props: ['auth', 'sender', 'clear'],
   data: function data() {
     return {
       fullData: [],
       messages: [],
-      newMsg: ''
+      newMsg: '',
+      senr: this.sender,
+      err: ''
     };
   },
   mounted: function mounted() {
@@ -2679,13 +2737,20 @@ window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/d
         _this.$emit('newmessage', 'true');
       });
     }
+
+    ;
+    setInterval(function () {
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/').then(function (response) {
+        return document.querySelector('.err-spiner').style.display = 'none';
+      });
+    }, 5000);
   },
   methods: {
     getSenderMessages: function getSenderMessages(senderId) {
       var _this2 = this;
 
+      document.querySelector('.loding-spiner').style.display = 'block';
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/getuserformessanger/".concat(senderId)).then(function (response) {
-        //console.log(response.data);
         _this2.fullData = response.data;
         _this2.messages = [];
         response.data.forEach(function (item) {
@@ -2700,6 +2765,8 @@ window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/d
       }).then(function (e) {
         var messageBody = document.querySelector('.content');
         messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
+        document.querySelector('.loding-spiner').style.display = 'none';
+        document.querySelector('.err-spiner').style.display = 'none';
       });
     },
     newMessage: function newMessage(senderId, authId, message) {
@@ -2721,6 +2788,13 @@ window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/d
             senderPhoto: '',
             message: response.data.message
           });
+
+          document.querySelector('.err-spiner').style.display = 'none';
+        })["catch"](function (err) {
+          if (err.request) {
+            _this3.err = 'Connection Error';
+            document.querySelector('.err-spiner').style.display = 'block';
+          }
         });
       }
     }
@@ -2728,6 +2802,11 @@ window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/d
   watch: {
     sender: function sender(newVal, oldVal) {
       this.getSenderMessages(newVal.id);
+      this.senr = this.sender;
+    },
+    clear: function clear(newVal, oldVal) {
+      this.messages = [];
+      this.senr = '';
     }
   }
 });
@@ -9513,7 +9592,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".messanger-container .top a[data-v-306de7b4] {\n  text-transform: capitalize;\n  font-size: 1.4rem;\n}\n.messanger-container .content[data-v-306de7b4] {\n  max-height: 50vh;\n  overflow-y: scroll;\n  scrollbar-width: thin;\n  margin-bottom: 5px;\n}\n.messanger-container .content ul[data-v-306de7b4] {\n  list-style: none;\n}\n.messanger-container .content ul li p span[data-v-306de7b4] {\n  max-width: 50%;\n  padding: 8px;\n  border-radius: 5px;\n  display: inline-block;\n  word-wrap: break-word;\n}\n.grey[data-v-306de7b4] {\n  background-color: #F2F3F5;\n}\n.greeny[data-v-306de7b4] {\n  background-color: #82AE46;\n  color: #fff;\n}", ""]);
+exports.push([module.i, ".messanger-container .top a[data-v-306de7b4] {\n  text-transform: capitalize;\n  font-size: 1.4rem;\n}\n.messanger-container .content[data-v-306de7b4] {\n  max-height: 50vh;\n  overflow-y: scroll;\n  scrollbar-width: thin;\n  margin-bottom: 5px;\n}\n.messanger-container .content ul[data-v-306de7b4] {\n  list-style: none;\n}\n.messanger-container .content ul li p span[data-v-306de7b4] {\n  max-width: 50%;\n  padding: 8px;\n  border-radius: 5px;\n  display: inline-block;\n  word-wrap: break-word;\n}\n.loding-spiner[data-v-306de7b4] {\n  display: none;\n}\n.err-spiner[data-v-306de7b4] {\n  display: none;\n}\n.grey[data-v-306de7b4] {\n  background-color: #F2F3F5;\n}\n.greeny[data-v-306de7b4] {\n  background-color: #82AE46;\n  color: #fff;\n}", ""]);
 
 // exports
 
@@ -66937,7 +67016,7 @@ var render = function() {
             expression: "val"
           }
         ],
-        staticClass: "form-control",
+        staticClass: "form-control rounded-0",
         attrs: {
           type: "text",
           placeholder: "Search e-mail",
@@ -67003,7 +67082,7 @@ var staticRenderFns = [
       _c(
         "button",
         {
-          staticClass: "btn btn-outline-secondary",
+          staticClass: "btn btn-outline-secondary rounded-0",
           attrs: { type: "button", id: "button-addon2" }
         },
         [_vm._v("Search")]
@@ -67164,35 +67243,77 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "contacts-container" }, [
-    _c(
-      "div",
-      { staticClass: "my-2 border contacts-container-inner" },
-      _vm._l(_vm.contacts, function(contact) {
-        return _c(
+    _vm.contacts.length > 0
+      ? _c(
           "div",
-          {
-            key: "con" + contact.id,
-            staticClass: "d-flex align-items-center border-bottom p-2",
-            on: {
-              click: function($event) {
-                return _vm.sendSender(contact)
-              }
-            }
-          },
-          [
-            _c("Profilephoto", {
-              attrs: { src: contact.src, cls: "mr-2", size: "25px" }
-            }),
-            _vm._v(" "),
-            _c("p", { staticClass: "m-0" }, [
-              _vm._v(" " + _vm._s(contact.name) + " ")
-            ])
-          ],
-          1
+          { staticClass: "my-2 border contacts-container-inner" },
+          _vm._l(_vm.contacts, function(contact) {
+            return _c(
+              "div",
+              {
+                key: "con" + contact.id,
+                staticClass:
+                  "d-flex align-items-center p-2 selected-contact contact",
+                attrs: { id: "co" + contact.id }
+              },
+              [
+                contact.nouvau == true
+                  ? _c(
+                      "span",
+                      { staticClass: "badge badge-info text-light mr-1" },
+                      [_vm._v("!")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "d-flex ",
+                    on: {
+                      click: function($event) {
+                        return _vm.sendSender(contact, "co" + contact.id)
+                      }
+                    }
+                  },
+                  [
+                    _c("Profilephoto", {
+                      attrs: { src: contact.src, cls: "mr-2", size: "25px" }
+                    }),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "m-0" }, [
+                      _vm._v(" " + _vm._s(contact.name.slice(0, 9)) + " ")
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "close ml-auto",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.deleteContact(contact.id, contact.name)
+                      }
+                    }
+                  },
+                  [
+                    _c("span", { attrs: { "aria-hidden": "true" } }, [
+                      _vm._v("×")
+                    ])
+                  ]
+                )
+              ]
+            )
+          }),
+          0
         )
-      }),
-      0
-    )
+      : _c("div", { staticClass: "text-muted mt-3 text-center" }, [
+          _c("img", { attrs: { src: "/ico/qa.svg", alt: "", width: "50%" } }),
+          _vm._v(" "),
+          _c("p", { staticClass: "mt-2" }, [_vm._v("No opened conversations")])
+        ])
   ])
 }
 var staticRenderFns = []
@@ -67929,15 +68050,23 @@ var render = function() {
       "div",
       { staticClass: "top d-flex my-2" },
       [
-        _c("Profilephoto", { attrs: { src: _vm.sender.src, size: "80px" } }),
+        _c("Profilephoto", { attrs: { src: _vm.senr.src, size: "80px" } }),
+        _vm._v(" "),
         _c(
           "a",
           {
             staticClass: "ml-2 font-weight-bold",
-            attrs: { href: "/profile/" + _vm.sender.id }
+            attrs: { href: "/profile/" + _vm.senr.id }
           },
-          [_vm._v(_vm._s(_vm.sender.name))]
-        )
+          [_vm._v(_vm._s(_vm.senr.name))]
+        ),
+        _vm._v(" "),
+        _vm._m(0),
+        _vm._v(" "),
+        _c("span", {
+          staticClass: "spinner-border loding-spiner text-primary ml-auto",
+          attrs: { role: "status", "aria-hidden": "true" }
+        })
       ],
       1
     ),
@@ -68027,7 +68156,7 @@ var render = function() {
                   expression: "newMsg"
                 }
               ],
-              staticClass: "form-control",
+              staticClass: "form-control rounded-0",
               attrs: {
                 type: "text",
                 placeholder: "Message",
@@ -68043,7 +68172,7 @@ var render = function() {
                   ) {
                     return null
                   }
-                  return _vm.newMessage(_vm.sender.id, _vm.auth.id, _vm.newMsg)
+                  return _vm.newMessage(_vm.senr.id, _vm.auth.id, _vm.newMsg)
                 },
                 input: function($event) {
                   if ($event.target.composing) {
@@ -68058,12 +68187,12 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "btn btn-outline-secondary",
+                  staticClass: "btn btn-outline-secondary rounded-0",
                   attrs: { type: "button", id: "button-addon2" },
                   on: {
                     click: function($event) {
                       return _vm.newMessage(
-                        _vm.sender.id,
+                        _vm.senr.id,
                         _vm.auth.id,
                         _vm.newMsg
                       )
@@ -68078,7 +68207,27 @@ var render = function() {
       : _vm._e()
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "btn text-danger err-spiner m-auto",
+        attrs: { type: "button", disabled: "" }
+      },
+      [
+        _c("span", {
+          staticClass: "spinner-border spinner-border",
+          attrs: { role: "status", "aria-hidden": "true" }
+        }),
+        _vm._v("\n            Connecting...\n        ")
+      ]
+    )
+  }
+]
 render._withStripped = true
 
 
@@ -68213,6 +68362,7 @@ var render = function() {
           }
         })
       : _c("img", {
+          staticClass: "rounded-circle",
           attrs: {
             src: "/wallpapers/default-user.png",
             alt: "profile photo",
@@ -80567,11 +80717,11 @@ var app = new Vue({
   data: function data() {
     return {
       userSender: '',
-      newMsg: false
+      newMsg: false,
+      clearm: ''
     };
   },
   mounted: function mounted() {
-    //  console.log($(window).width())
     $('#myCarousel').carousel({
       interval: 3000,
       cycle: true
@@ -80604,7 +80754,9 @@ var app = new Vue({
     },
     newmessage: function newmessage() {
       this.newMsg = true;
-      console.log('newmessage');
+    },
+    clearmessenger: function clearmessenger(val) {
+      this.clearm = val;
     }
   }
 });

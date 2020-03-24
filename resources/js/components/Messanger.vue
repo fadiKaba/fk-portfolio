@@ -1,6 +1,14 @@
 <template>
     <div class="messanger-container">
-        <div class="top d-flex my-2"><Profilephoto :src="sender.src" :size="'80px'"></Profilephoto><a :href="'/profile/'+sender.id" class="ml-2 font-weight-bold">{{sender.name}}</a></div>
+        <div class="top d-flex my-2">
+            <Profilephoto :src="senr.src" :size="'80px'"></Profilephoto>
+            <a :href="'/profile/'+senr.id" class="ml-2 font-weight-bold">{{senr.name}}</a>
+            <button class="btn text-danger err-spiner m-auto" type="button" disabled>
+                <span class="spinner-border spinner-border" role="status" aria-hidden="true"></span>
+                Connecting...
+            </button>
+            <span class="spinner-border loding-spiner text-primary ml-auto" role="status" aria-hidden="true"></span>
+        </div>
         <div class="content border-top p-2 p-md-4" v-chat-scroll="{always: false, smooth: true, smoothonremoved: false}">
             <ul class="p-0">
             <li  v-for="message in messages" class="message" :key="'mes' + message.id">
@@ -19,18 +27,18 @@
         <div class="messenger-input" v-if="messages.length > 0">
             <div class="input-group mb-3">
                 <input type="text" 
-                class="form-control" 
+                class="form-control rounded-0" 
                 placeholder="Message" 
                 aria-label="Write a message" 
                 aria-describedby="button-addon2"
-                @keyup.enter="newMessage(sender.id, auth.id, newMsg)"
+                @keyup.enter="newMessage(senr.id, auth.id, newMsg)"
                 v-model="newMsg">
                 <div class="input-group-append">
                     <button 
-                    class="btn btn-outline-secondary" 
+                    class="btn btn-outline-secondary rounded-0" 
                     type="button" 
                     id="button-addon2"
-                    @click="newMessage(sender.id, auth.id, newMsg)">Send</button>
+                    @click="newMessage(senr.id, auth.id, newMsg)">Send</button>
                 </div>
             </div>
         </div>
@@ -56,12 +64,14 @@ window.Pusher = require('pusher-js');
 export default {
     name:'Messanger',
     components:{Profilephoto},
-    props:['auth','sender'],
+    props:['auth','sender', 'clear'],
     data: function(){
          return{
           fullData:[],
           messages:[],
           newMsg:'',
+          senr:this.sender,
+          err:''
          }
     },
     mounted: function(){      
@@ -83,17 +93,21 @@ export default {
                     senderPhoto: e.src,
                     message:e.message.message,
                    });                  
-                }               
+                }           
             this.$emit('newmessage','true');
             })
-        }
+        };
+        setInterval(function(){
+           axios.get('/').then(response => document.querySelector('.err-spiner').style.display = 'none' ) 
+        },5000)
+        
     
     },
     methods:{
         getSenderMessages(senderId){
+            document.querySelector('.loding-spiner').style.display = 'block';
             axios.post(`/getuserformessanger/${senderId}`)
             .then((response) => {
-                //console.log(response.data);
                 this.fullData = response.data;
                 this.messages = [];
                 response.data.forEach((item)=>{
@@ -108,11 +122,13 @@ export default {
             }).then((e) => {
                    var messageBody = document.querySelector('.content');
                    messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
+                   document.querySelector('.loding-spiner').style.display = 'none';
+                   document.querySelector('.err-spiner').style.display = 'none';
             })
         },
         newMessage(senderId, authId, message){          
             if(message != ''){
-                 axios.post('/message/new', {
+                   axios.post('/message/new', {
                 'from': authId,
                 'to': senderId,
                 'message': message,
@@ -126,13 +142,24 @@ export default {
                        senderPhoto: '',
                        message:response.data.message,
                    });
-                } )
+                   document.querySelector('.err-spiner').style.display = 'none';
+                } ).catch((err) => {
+                   if(err.request){
+                       this.err = 'Connection Error';
+                       document.querySelector('.err-spiner').style.display = 'block';
+                   }
+                })                 
             }           
         }
     },
     watch:{
         sender:function(newVal, oldVal){
-        this.getSenderMessages(newVal.id)      
+        this.getSenderMessages(newVal.id) 
+        this.senr = this.sender;     
+        },
+        clear: function(newVal, oldVal){
+            this.messages=[];
+            this.senr = '';
         }        
     }
 }
@@ -168,7 +195,12 @@ export default {
      }
  }
 
-
+.loding-spiner{
+    display: none;
+}
+.err-spiner{
+    display: none;
+}
  .grey{
      background-color: #F2F3F5;
  }

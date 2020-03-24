@@ -11262,6 +11262,10 @@ body #app .pagination-nav ul li .act {
   flex-direction: column;
 }
 
+.notification-badge {
+  cursor: pointer;
+}
+
 .green {
   background-color: #82AE46;
   color: #fff;

@@ -31,11 +31,11 @@ const app = new Vue({
     data: function(){
          return{
            userSender:'',
-           newMsg:false
+           newMsg:false,
+           clearm:'',
          }
     },
     mounted: function(){
-      //  console.log($(window).width())
       $('#myCarousel').carousel({
         interval: 3000,
         cycle: true
@@ -68,7 +68,9 @@ const app = new Vue({
         },
         newmessage: function(){
           this.newMsg = true;
-          console.log('newmessage')
+        },
+        clearmessenger: function (val){
+         this.clearm = val;
         }
     },
     
