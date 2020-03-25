@@ -31,7 +31,7 @@ import Profilephoto from './Profilephoto';
 export default {
     name:'Contacts',
     components:{Profilephoto},
-    props:['auth','senderFromApp','small'],
+    props:['auth','senderFromApp','small', 'senderNew'],
     data: function(){
         return{
         fullData:[],
@@ -91,6 +91,23 @@ export default {
             }          
         },
     },
+    watch:{
+        senderNew: function(newVal, oldVal){
+            if(newVal != true){
+
+                if(this.contacts.find( x => x.id == newVal) == undefined){
+                        axios.post(`/messages/getsender/${newVal}`)
+                        .then((response)=> {                   
+                            this.contacts.push(response.data);
+                        })
+
+                    }
+
+                
+            }
+            
+        }
+    }
 }
 </script>
 <style lang="scss" scoped>

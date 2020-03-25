@@ -2140,7 +2140,7 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     Profilephoto: _Profilephoto__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
-  props: ['auth', 'senderFromApp', 'small'],
+  props: ['auth', 'senderFromApp', 'small', 'senderNew'],
   data: function data() {
     return {
       fullData: [],
@@ -2211,6 +2211,21 @@ __webpack_require__.r(__webpack_exports__);
 
           _this2.$emit('clearmessenger', senderId);
         });
+      }
+    }
+  },
+  watch: {
+    senderNew: function senderNew(newVal, oldVal) {
+      var _this3 = this;
+
+      if (newVal != true) {
+        if (this.contacts.find(function (x) {
+          return x.id == newVal;
+        }) == undefined) {
+          axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/messages/getsender/".concat(newVal)).then(function (response) {
+            _this3.contacts.push(response.data);
+          });
+        }
       }
     }
   }
@@ -2737,7 +2752,7 @@ window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/d
           });
         }
 
-        _this.$emit('newmessage', 'true');
+        _this.$emit('newmessage', e.message.from);
       });
     }
 
@@ -80720,7 +80735,8 @@ var app = new Vue({
     return {
       userSender: '',
       newMsg: false,
-      clearm: ''
+      clearm: '',
+      senderNew: ''
     };
   },
   mounted: function mounted() {
@@ -80755,7 +80771,8 @@ var app = new Vue({
     sendSenderAgain: function sendSenderAgain(val) {
       this.userSender = val;
     },
-    newmessage: function newmessage() {
+    newmessage: function newmessage(val) {
+      this.senderNew = val;
       this.newMsg = true;
     },
     clearmessenger: function clearmessenger(val) {

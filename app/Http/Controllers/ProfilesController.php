@@ -22,7 +22,6 @@ class ProfilesController extends Controller
         return "error";
     }
     public function update(Request $request, $id){
-        
         $request->validate([
             'name' => 'required|min:3',
             'img' => 'image|max:2000',
@@ -33,7 +32,8 @@ class ProfilesController extends Controller
         $user->update([
             'name' => $request->name,
             'bio' => $request->bio,
-            'location' => $request->location
+            'location' => $request->location,
+            'hide_email' => $request->hide_email == 'on' ? '1' : null
         ]);       
         if($request->file('img') != null){
             if(File::exists('photos/'.$user->src)){

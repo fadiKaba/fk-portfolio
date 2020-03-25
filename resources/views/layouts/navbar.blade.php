@@ -62,7 +62,7 @@
                 @guest
                 @else
                     <li class="nav-item dropdown py-2">  
-                        <span v-on:click="newMsg = false" class="badge badge-info text-light notification-badge" v-if="newMsg == true" data-toggle="modal" data-target="#chat">!</span>                      
+                        <span v-on:click="newMsg = false" class="badge badge-danger text-light notification-badge" v-if="newMsg == true" data-toggle="modal" data-target="#chat">!</span>                      
                         <Profilephoto :src="{{json_encode(Auth::user()->src)}}" :cls="same('d-inline')" :size="'25px'"></Profilephoto>
                         <a id="navbarDropdown" class="nav-link dropdown-toggle d-inline" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }} <span class="caret"></span>
@@ -71,10 +71,10 @@
                         <div class="dropdown-menu dropdown-menu-right text-center" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item text-dark" href="/pr/edit">Profile</a>
                             <button v-on:click="newMsg = false" type="button" class="dropdown-item text-dark d-none d-md-block" data-toggle="modal" data-target="#chat">
-                                <span class="badge badge-info text-light" v-if="newMsg == true">!</span> Messages
+                                <span class="badge badge-danger text-light" v-if="newMsg == true">!</span> Messages
                             </button>
                             <a v-on:click="newMsg = false" href="/messengermobile" class="dropdown-item text-dark d-md-none">
-                                <span class="badge badge-info text-light" v-if="newMsg == true">!</span> Messages
+                                <span class="badge badge-danger text-light" v-if="newMsg == true">!</span> Messages
                             </a>
                             <a class="dropdown-item text-dark" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
@@ -112,7 +112,7 @@
                     <Messanger :clear="clearm" v-on:newmessage="newmessage" :sender="userSender" :auth="{{json_encode(Auth::user())}}"></Messanger>
                 </div>
                 <div class="col-md-3 border-left">
-                    <Contacts v-on:clearmessenger="clearmessenger" v-on:newmessage="newmessage" v-on:snedsender="sendSenderAgain" :auth="{{json_encode(Auth::user())}}"></Contacts>
+                    <Contacts :sender-new="senderNew" v-on:clearmessenger="clearmessenger" v-on:newmessage="newmessage" v-on:snedsender="sendSenderAgain" :auth="{{json_encode(Auth::user())}}"></Contacts>
                 </div>
             </div>           
         </div>

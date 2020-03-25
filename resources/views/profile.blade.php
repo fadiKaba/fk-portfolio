@@ -21,10 +21,20 @@
         </form>
         @endif
     </div>
-    <div class="col-md-6">
-        <p class="font-weight-bold">EMAIL</p>
-        <p class="text-muted">{{$userAuth->email}}</p>
-        <form action="{{route('updateprofile', Auth::id())}}" enctype="multipart/form-data" method="POST">           
+    <div class="col-md-6">                
+        <form action="{{route('updateprofile', Auth::id())}}" enctype="multipart/form-data" method="POST"> 
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="font-weight-bold">EMAIL</p>
+                    <p class="text-muted">{{$userAuth->email}}</p>
+                </div>
+                <div class="col-md-6">
+                    <div class="custom-control custom-switch mb-3">
+                        <input type="checkbox" name="hide_email" @if($userAuth->hide_email == '1') checked @endif class="custom-control-input" id="customSwitch1">
+                        <label class="custom-control-label" for="customSwitch1">Hide your email</label>
+                    </div>
+                </div>
+            </div>          
             <div class="form-group">
                 <label for="name" class="font-weight-bold">DISPALY NAME</label>
                 <input 

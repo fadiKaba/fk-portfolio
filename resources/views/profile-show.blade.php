@@ -17,8 +17,10 @@
     </div>
     <div class="col-md-6 mt-2 py-2">
         <h3 class="font-weight-bold text-capitalize">{{$user->name}}</h3>
+        @if($user->hide_email != 1)
         <span class="font-weight-bold">Email</span><br>
         <span class="text-muted">{{$user->email}}</span>
+        @endif
              @if($user->bio != '' && $user->bio != null)       
             <div class="mt-3">
                 <span class="font-weight-bold">About {{$user->name}}</span><br>                

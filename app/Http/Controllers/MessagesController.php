@@ -72,6 +72,12 @@ class MessagesController extends Controller
             ]);
         }
     }
+
+    public function getSender($senderId){
+      $sender = User::findOrFail($senderId);
+      return $sender;
+    }
+
     public function destroy($senderId){
        $messages = Message::where('to', Auth::id())->where('from', $senderId)->orWhere('to', $senderId)->where('from', Auth::id())->get();
        foreach($messages as $message){

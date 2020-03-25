@@ -33,6 +33,7 @@ const app = new Vue({
            userSender:'',
            newMsg:false,
            clearm:'',
+           senderNew:'',
          }
     },
     mounted: function(){
@@ -67,7 +68,8 @@ const app = new Vue({
         sendSenderAgain: function(val){
         this.userSender = val
         },
-        newmessage: function(){
+        newmessage: function(val){
+          this.senderNew = val;
           this.newMsg = true;
         },
         clearmessenger: function (val){

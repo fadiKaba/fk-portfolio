@@ -78,14 +78,14 @@ export default {
     mounted: function(){     
         if(this.auth != null){
             window.Echo = new Echo({
-        broadcaster: 'pusher',
-        key: 'efced963ebdfef1133e1',
-        cluster: 'eu',
-        encrypted: true,
-        authEndpoint: '/broadcasting/auth',
-        headers: {
-            'X-CSRF-Token': this.token,
-            Authorization: `Bearer ${this.token}`
+            broadcaster: 'pusher',
+            key: 'efced963ebdfef1133e1',
+            cluster: 'eu',
+            encrypted: true,
+            authEndpoint: '/broadcasting/auth',
+            headers: {
+                'X-CSRF-Token': this.token,
+                Authorization: `Bearer ${this.token}`
             }
         });
         window.Echo.private('green.'+this.auth.id)        
@@ -99,7 +99,7 @@ export default {
                     message:e.message.message,
                    });                  
                 }           
-            this.$emit('newmessage','true');
+            this.$emit('newmessage', e.message.from);
             })
         };
         setInterval(function(){
