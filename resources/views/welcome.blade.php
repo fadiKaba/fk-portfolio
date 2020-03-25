@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon"  href="./ico/logo.png">
         <link rel="stylesheet" href="{{asset('./css/app.css')}}">
-        <title>GreenConversation</title>
+        <title>BetterLife</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Amatic+SC|Poppins&display=swap" rel="stylesheet">  
@@ -43,8 +43,8 @@
                 <div class="row px-md-5 pt-md-4 justify-content-center mx-2">
                     <div class="col-md-5 col1 px-5 pb-4 pt-3 mt-5">
                         <div class="row pt-md-3">
-                            <div class="col-md-3 text-center"><img src="./ico/logo.png" alt="logo" width="100px"></div>
-                            <div class="col-md-9"><h1 class="text-center text-md-left mt-3 mt-md-0">GREEN<br>CONVERSATION</h1></div>
+                            <div class="col-md-3 text-center mb-md-2"><img src="./ico/logo.png" alt="logo" width="100px"></div>
+                            <div class="col-md-9"><h1 class="text-center text-md-left mt-3 mt-md-0">Better Life</h1></div>
                         </div>                       
                         <p class="pb-3">
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem praesentium reiciendis iure rerum suscipit 

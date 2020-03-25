@@ -38494,7 +38494,7 @@ var staticRenderFns = [
           _c("div", { staticClass: "col-md-4" }, [
             _c("ul", [
               _c("li", { staticClass: "mb-3 font-weight-bold title" }, [
-                _vm._v("Green Conversation")
+                _vm._v("Better Life")
               ]),
               _vm._v(" "),
               _c("li", [
@@ -38565,7 +38565,7 @@ var staticRenderFns = [
         ]
       ),
       _vm._v(" "),
-      _c("p", [_vm._v("Green Conversation Allright reserved © 2020")])
+      _c("p", [_vm._v("Better Life Allright reserved © 2020")])
     ])
   }
 ]

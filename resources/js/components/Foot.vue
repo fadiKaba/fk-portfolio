@@ -7,7 +7,7 @@
            <div class="row jusify-content-center container m-auto py-3">
                <div class="col-md-4">
                    <ul>
-                       <li class="mb-3 font-weight-bold title">Green Conversation</li>
+                       <li class="mb-3 font-weight-bold title">Better Life</li>
                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
                            Quam quod doloribus laborum neque provident eligendi!
                         </li>
@@ -36,7 +36,7 @@
                    </ul>
                </div>
             </div>
-           <p>Green Conversation Allright reserved &copy; 2020</p>
+           <p>Better Life Allright reserved &copy; 2020</p>
         </footer>
     </div>
 </template>

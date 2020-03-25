@@ -2,20 +2,20 @@
    <div class="contacts-container">
     <div v-if="contacts.length > 0" class="my-2 contacts-container-inner">
         <div 
-        class="d-flex align-items-center p-2 selected-contact contact" 
+        class="d-flex align-items-center p-2 contact" 
         v-for="contact in contacts" 
         :key="'con' + contact.id"
         :id="'co'+contact.id"
         > 
-        <!-- deleteContact(contact.id, contact.name) -->
-        <span class="badge badge-info text-light mr-1" v-if="contact.nouvau == true">!</span>
-        <div class="d-flex" @click="sendSender(contact, 'co'+contact.id)" :data-toggle="small == true ? 'modal': ''" :data-target="small == true ? '#mobile-messenger': ''">        
-            <Profilephoto :src="contact.src" :cls="'mr-2'" :size="'25px'"></Profilephoto> 
-            <p class="m-0"> {{contact.name.slice(0,9)}} </p> 
-        </div>                 
-            <button  @click="deleteContact(contact.id, contact.name)" type="button" class="close ml-auto">
-                <span aria-hidden="true">&times;</span>
-            </button>                            
+            <!-- deleteContact(contact.id, contact.name) -->
+            <span class="badge badge-info text-light mr-1" v-if="contact.nouvau == true">!</span>
+            <div class="d-flex" @click="sendSender(contact, 'co'+contact.id)" :data-toggle="small == true ? 'modal': ''" :data-target="small == true ? '#mobile-messenger': ''">        
+                <Profilephoto :src="contact.src" :cls="'mr-2'" :size="'25px'"></Profilephoto> 
+                <p class="m-0"> {{contact.name.slice(0,9)}} </p> 
+            </div>                 
+                <button  @click="deleteContact(contact.id, contact.name)" type="button" class="close ml-auto">
+                    <span aria-hidden="true">&times;</span>
+                </button>                            
         </div>
     </div>
     <div v-else class="text-muted mt-3 text-center">
@@ -100,10 +100,17 @@ export default {
         overflow-y:scroll;
         scrollbar-width: thin;
         div{
-            cursor: pointer;
+            div{
+               transition: 0.2s;
+               cursor: pointer;
+                &:hover{
+                    transform: scale(1.1);
+                }
             p{
                 text-transform: capitalize;
+            } 
             }
+            
         }
     }
 }

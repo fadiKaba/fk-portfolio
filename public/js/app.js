@@ -9495,7 +9495,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".contacts-container .contacts-container-inner[data-v-6766143e] {\n  max-height: 60vh;\n  overflow-y: scroll;\n  scrollbar-width: thin;\n}\n.contacts-container .contacts-container-inner div[data-v-6766143e] {\n  cursor: pointer;\n}\n.contacts-container .contacts-container-inner div p[data-v-6766143e] {\n  text-transform: capitalize;\n}", ""]);
+exports.push([module.i, ".contacts-container .contacts-container-inner[data-v-6766143e] {\n  max-height: 60vh;\n  overflow-y: scroll;\n  scrollbar-width: thin;\n}\n.contacts-container .contacts-container-inner div div[data-v-6766143e] {\n  transition: 0.2s;\n  cursor: pointer;\n}\n.contacts-container .contacts-container-inner div div[data-v-6766143e]:hover {\n  transform: scale(1.1);\n}\n.contacts-container .contacts-container-inner div div p[data-v-6766143e] {\n  text-transform: capitalize;\n}", ""]);
 
 // exports
 
@@ -67232,8 +67232,7 @@ var render = function() {
               "div",
               {
                 key: "con" + contact.id,
-                staticClass:
-                  "d-flex align-items-center p-2 selected-contact contact",
+                staticClass: "d-flex align-items-center p-2 contact",
                 attrs: { id: "co" + contact.id }
               },
               [
@@ -67425,7 +67424,7 @@ var staticRenderFns = [
           _c("div", { staticClass: "col-md-4" }, [
             _c("ul", [
               _c("li", { staticClass: "mb-3 font-weight-bold title" }, [
-                _vm._v("Green Conversation")
+                _vm._v("Better Life")
               ]),
               _vm._v(" "),
               _c("li", [
@@ -67496,7 +67495,7 @@ var staticRenderFns = [
         ]
       ),
       _vm._v(" "),
-      _c("p", [_vm._v("Green Conversation Allright reserved © 2020")])
+      _c("p", [_vm._v("Better Life Allright reserved © 2020")])
     ])
   }
 ]

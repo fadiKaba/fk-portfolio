@@ -23,7 +23,7 @@
     <div class="container">
         <a class="navbar-brand" id="brand" href="{{ url('/') }}">
             <img src="/ico/main-logo.png" width="35px">
-            GREEN CONVERSATION 
+            Better Life 
             {{-- {{ config('app.name', 'Green') }} --}}
         </a>
         <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">

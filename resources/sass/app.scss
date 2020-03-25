@@ -27,15 +27,33 @@ body{
         nav{
             background-color: $color1;
             a{
+                transition: 0.3s;
                 color:#000;
                 &.navbar-brand{
                 color: $color2;
                 font-weight: bold;
+                    &:hover{
+                        background-color: #fff;
+                        color:$color2;
+                    }
+                
                 }
                 &.active{
                     background-color: $color2;
                     color: #fff;
                 }
+                &:hover{
+                    background-color: lighten($color2, $amount: 10);
+                    color: #fff;
+                }
+            }
+            .dropdown-menu{
+                a{
+                    &:hover{
+                    background-color: #f4f4f4;
+                    color: #000;
+                    }
+                }           
             }
         }
         .left-column-container{

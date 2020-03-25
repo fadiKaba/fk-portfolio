@@ -11066,6 +11066,7 @@ body #app nav {
 }
 
 body #app nav a {
+  transition: 0.3s;
   color: #000;
 }
 
@@ -11074,9 +11075,24 @@ body #app nav a.navbar-brand {
   font-weight: bold;
 }
 
+body #app nav a.navbar-brand:hover {
+  background-color: #fff;
+  color: #82AE46;
+}
+
 body #app nav a.active {
   background-color: #82AE46;
   color: #fff;
+}
+
+body #app nav a:hover {
+  background-color: #9bc166;
+  color: #fff;
+}
+
+body #app nav .dropdown-menu a:hover {
+  background-color: #f4f4f4;
+  color: #000;
 }
 
 body #app .left-column-container {

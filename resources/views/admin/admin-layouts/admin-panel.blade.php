@@ -21,7 +21,7 @@
             <!-- navbar -->
             <nav class="navbar navbar-expand-lg fixed-top main-nav p-0">
               <div class="container">
-                <a class="navbar-brand text-light" href="/home">Green Conversation</a>
+                <a class="navbar-brand text-light" href="/home">Better Life</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                   <img src="{{asset('ico/menu-light.svg')}}" alt="Menu" width="30px">
                 </button>
