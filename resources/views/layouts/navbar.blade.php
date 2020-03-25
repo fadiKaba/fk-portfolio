@@ -21,7 +21,8 @@
 @endif
 <nav class="navbar navbar-expand-md shadow-sm sticky-top">           
     <div class="container">
-        <a class="navbar-brand" href="{{ url('/') }}">
+        <a class="navbar-brand" id="brand" href="{{ url('/') }}">
+            <img src="/ico/main-logo.png" width="35px">
             GREEN CONVERSATION 
             {{-- {{ config('app.name', 'Green') }} --}}
         </a>
@@ -47,16 +48,16 @@
                 </li>
                 @endif
                 <li class="nav-item">
-                    <a class="nav-link mr-md-4" href="/">Home</a>
+                    <a class="nav-link mr-md-4 @if(isset($page))@if($page == 'welcome') active @endif @endif" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link mr-md-4" href="/home">Blog</a>
+                    <a class="nav-link mr-md-4 @if(isset($page))@if($page == 'blog') active @endif @endif" href="/home">Blog</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link mr-md-4" href="/about">About</a>
+                    <a class="nav-link mr-md-4 @if(isset($page))@if($page == 'about') active @endif @endif" href="/about">About</a>
                 </li>
                 <li class="nav-item mr-md-4">
-                    <a class="nav-link mr-md-4" href="/contact">Contact</a>
+                    <a class="nav-link mr-md-4 @if(isset($page))@if($page == 'contact') active @endif @endif" href="/contact">Contact</a>
                 </li>
                 @guest
                 @else

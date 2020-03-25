@@ -11074,6 +11074,11 @@ body #app nav a.navbar-brand {
   font-weight: bold;
 }
 
+body #app nav a.active {
+  background-color: #82AE46;
+  color: #fff;
+}
+
 body #app .left-column-container {
   position: relative;
 }
@@ -11277,6 +11282,10 @@ body #app .pagination-nav ul li .act {
 }
 
 @media screen and (max-width: 600px) {
+  body #app nav #brand {
+    font-size: 1rem;
+  }
+
   body #app .posts-container {
     height: auto;
   }

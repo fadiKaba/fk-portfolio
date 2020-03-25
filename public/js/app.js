@@ -2317,6 +2317,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Foot',
   mounted: function mounted() {
@@ -9532,7 +9533,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".main-container[data-v-89c0c74e] {\n  width: 100%;\n  color: #000;\n  background-color: #F7F6F2;\n}\n.main-container .arrow-container[data-v-89c0c74e] {\n  margin-top: -65px;\n}\n.main-container .arrow-container a[data-v-89c0c74e] {\n  background-color: #82AE46;\n  padding: 20px 10px;\n  border-radius: 50%;\n}\n.main-container .arrow-container a img[data-v-89c0c74e] {\n  -webkit-animation: moveUp-data-v-89c0c74e 1s infinite linear;\n          animation: moveUp-data-v-89c0c74e 1s infinite linear;\n}\n.main-container footer ul[data-v-89c0c74e] {\n  list-style-type: none;\n}\n.main-container footer ul li a img[data-v-89c0c74e] {\n  opacity: 0;\n}\n.main-container footer ul li.title[data-v-89c0c74e] {\n  font-size: 1.2;\n}\n.main-container footer p[data-v-89c0c74e] {\n  font-weight: 700;\n  text-align: center;\n  padding: 20px 0px;\n  margin-bottom: 0;\n}\n.d-opacity[data-v-89c0c74e] {\n  -webkit-animation: opacity-data-v-89c0c74e 0.3s ease-in;\n          animation: opacity-data-v-89c0c74e 0.3s ease-in;\n  -webkit-animation-fill-mode: forwards;\n          animation-fill-mode: forwards;\n}\n@-webkit-keyframes opacity-data-v-89c0c74e {\n0% {\n    opacity: 0;\n    transform: translate(0, 20px);\n}\n100% {\n    opacity: 1;\n    transform: translate(0, 0px);\n}\n}\n@keyframes opacity-data-v-89c0c74e {\n0% {\n    opacity: 0;\n    transform: translate(0, 20px);\n}\n100% {\n    opacity: 1;\n    transform: translate(0, 0px);\n}\n}\n@-webkit-keyframes moveUp-data-v-89c0c74e {\n0% {\n    transform: translate(0);\n}\n100% {\n    transform: translate(0, -10px);\n}\n}\n@keyframes moveUp-data-v-89c0c74e {\n0% {\n    transform: translate(0);\n}\n100% {\n    transform: translate(0, -10px);\n}\n}", ""]);
+exports.push([module.i, ".main-container[data-v-89c0c74e] {\n  width: 100%;\n  color: #000;\n  background-color: #F7F6F2;\n}\n.main-container .arrow-container[data-v-89c0c74e] {\n  margin-top: -65px;\n}\n.main-container .arrow-container a[data-v-89c0c74e] {\n  background-color: #82AE46;\n  padding: 20px 10px;\n  border-radius: 50%;\n}\n.main-container .arrow-container a img[data-v-89c0c74e] {\n  -webkit-animation: moveUp-data-v-89c0c74e 1s infinite linear;\n          animation: moveUp-data-v-89c0c74e 1s infinite linear;\n}\n.main-container footer ul[data-v-89c0c74e] {\n  list-style-type: none;\n}\n.main-container footer ul li a[data-v-89c0c74e] {\n  color: #000;\n}\n.main-container footer ul li a img[data-v-89c0c74e] {\n  opacity: 0;\n}\n.main-container footer ul li.title[data-v-89c0c74e] {\n  font-size: 1.2;\n}\n.main-container footer p[data-v-89c0c74e] {\n  font-weight: 700;\n  text-align: center;\n  padding: 20px 0px;\n  margin-bottom: 0;\n}\n.d-opacity[data-v-89c0c74e] {\n  -webkit-animation: opacity-data-v-89c0c74e 0.3s ease-in;\n          animation: opacity-data-v-89c0c74e 0.3s ease-in;\n  -webkit-animation-fill-mode: forwards;\n          animation-fill-mode: forwards;\n}\n@-webkit-keyframes opacity-data-v-89c0c74e {\n0% {\n    opacity: 0;\n    transform: translate(0, 20px);\n}\n100% {\n    opacity: 1;\n    transform: translate(0, 0px);\n}\n}\n@keyframes opacity-data-v-89c0c74e {\n0% {\n    opacity: 0;\n    transform: translate(0, 20px);\n}\n100% {\n    opacity: 1;\n    transform: translate(0, 0px);\n}\n}\n@-webkit-keyframes moveUp-data-v-89c0c74e {\n0% {\n    transform: translate(0);\n}\n100% {\n    transform: translate(0, -10px);\n}\n}\n@keyframes moveUp-data-v-89c0c74e {\n0% {\n    transform: translate(0);\n}\n100% {\n    transform: translate(0, -10px);\n}\n}", ""]);
 
 // exports
 
@@ -9608,7 +9609,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "ul.list-group li form button[data-v-5026ffd3]:hover {\n  color: #82AE46;\n}", ""]);
+exports.push([module.i, "ul.list-group[data-v-5026ffd3] {\n  position: absolute;\n  z-index: 2;\n  max-height: 30vh;\n  overflow-y: scroll;\n  scrollbar-width: thin;\n}\nul.list-group li form button[data-v-5026ffd3] {\n  background-color: #fff;\n}\nul.list-group li form button[data-v-5026ffd3]:hover {\n  color: #82AE46;\n}", ""]);
 
 // exports
 
@@ -67463,7 +67464,9 @@ var staticRenderFns = [
               _vm._v(" "),
               _c("li", [_vm._v("Privicy policy")]),
               _vm._v(" "),
-              _c("li", [_vm._v("Contact")]),
+              _c("li", [
+                _c("a", { attrs: { href: "/contact" } }, [_vm._v("Contact")])
+              ]),
               _vm._v(" "),
               _c("li", [_vm._v("Terms & Condition")])
             ])
@@ -67475,11 +67478,19 @@ var staticRenderFns = [
                 _vm._v("Menu")
               ]),
               _vm._v(" "),
-              _c("li", [_vm._v("Blog")]),
+              _c("li", [_c("a", { attrs: { href: "/" } }, [_vm._v("Home")])]),
               _vm._v(" "),
-              _c("li", [_vm._v("About")]),
+              _c("li", [
+                _c("a", { attrs: { href: "/home" } }, [_vm._v("Blog")])
+              ]),
               _vm._v(" "),
-              _c("li", [_vm._v("Contact")])
+              _c("li", [
+                _c("a", { attrs: { href: "/about" } }, [_vm._v("About")])
+              ]),
+              _vm._v(" "),
+              _c("li", [
+                _c("a", { attrs: { href: "/contact" } }, [_vm._v("Contact")])
+              ])
             ])
           ])
         ]
@@ -68395,7 +68406,7 @@ var render = function() {
                 expression: "sVal"
               }
             ],
-            staticClass: "form-control",
+            staticClass: "form-control rounded-0",
             attrs: {
               autocomplete: "off",
               type: "search",
@@ -68430,11 +68441,11 @@ var render = function() {
       _vm.results.length > 0
         ? _c(
             "ul",
-            { staticClass: "list-group" },
+            { staticClass: "list-group border" },
             _vm._l(_vm.results, function(result) {
               return _c(
                 "li",
-                { key: result.id, staticClass: "list-group-item p-0" },
+                { key: result.id, staticClass: "list-group-item p-0 border-0" },
                 [
                   _c(
                     "form",
@@ -68447,7 +68458,7 @@ var render = function() {
                       _vm._v(" "),
                       _c(
                         "button",
-                        { staticClass: "btn", attrs: { type: "submit" } },
+                        { staticClass: "border-0", attrs: { type: "submit" } },
                         [
                           _vm._v(_vm._s(result.email || result.post_title)),
                           _c("span", [_vm._v(_vm._s(result.name))])
@@ -68472,10 +68483,13 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "input-group-append" }, [
+    return _c("div", { staticClass: "input-group-append " }, [
       _c(
         "button",
-        { staticClass: "btn btn-outline-secondary", attrs: { type: "submit" } },
+        {
+          staticClass: "btn btn-outline-secondary rounded-0",
+          attrs: { type: "submit" }
+        },
         [_vm._v("Search")]
       )
     ])

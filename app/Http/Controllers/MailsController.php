@@ -10,7 +10,8 @@ use Auth;
 class MailsController extends Controller
 {   
     public function index(){
-        return view('contact');
+        $page = 'contact';
+        return view('contact')->with('page', 'contact');
     }
 
     public function send(Request $request){

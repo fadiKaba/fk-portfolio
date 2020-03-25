@@ -6,24 +6,24 @@
                 autocomplete="off" 
                 @keyup="startSearch(sVal)" 
                 v-model="sVal" 
-                class="form-control" 
+                class="form-control rounded-0" 
                 type="search" 
                 placeholder="Search" 
                 aria-label="Search"
                 aria-describedby="button-addon2"
                 name="sresult">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="submit">Search</button>
+                <div class="input-group-append ">
+                    <button class="btn btn-outline-secondary rounded-0" type="submit">Search</button>
                 </div>                                
             </div>                           
             <slot></slot>            
         </form>
         <div>              
-            <ul class="list-group" v-if="results.length > 0">
-                <li class="list-group-item p-0" v-for="result in results" :key="result.id">
+            <ul class="list-group border" v-if="results.length > 0">
+                <li class="list-group-item p-0 border-0" v-for="result in results" :key="result.id">
                     <form :action="res" method="POST">
                     <input type="hidden" name="sresult" :value="result.email||result.post_title">
-                    <button class="btn" type="submit">{{result.email || result.post_title}}<span>{{result.name}}</span></button>
+                    <button class="border-0" type="submit">{{result.email || result.post_title}}<span>{{result.name}}</span></button>
                     <slot></slot> 
                     </form> 
                 </li>
@@ -59,11 +59,18 @@ export default {
 </script>
 <style lang="scss" scoped>
   ul.list-group{
+      position: absolute;
+          z-index: 2;
+          max-height: 30vh;
+          overflow-y: scroll;
+          scrollbar-width: thin;
       li{
           form{
              button{
+                 background-color: #fff;
             &:hover{
                 color: #82AE46;
+                
             }
         }
           }

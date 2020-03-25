@@ -22,16 +22,17 @@
                    <ul>
                        <li class="mb-3 font-weight-bold title">Help</li>
                        <li>Privicy policy</li>
-                       <li>Contact</li>
+                       <li><a href="/contact">Contact</a></li>
                        <li>Terms & Condition</li>
                    </ul>
                </div>
                <div class="col-md-4">
                    <ul>
                        <li class="mb-3 font-weight-bold title">Menu</li>
-                       <li>Blog</li>
-                       <li>About</li>
-                       <li>Contact</li>
+                       <li><a href="/">Home</a></li>
+                       <li><a href="/home">Blog</a></li>
+                       <li><a href="/about">About</a></li>
+                       <li><a href="/contact">Contact</a></li>
                    </ul>
                </div>
             </div>
@@ -88,8 +89,9 @@ $color2:#82AE46;
                 list-style-type: none;
                 li{
                     a{
+                        color: #000;
                         img{
-                            opacity:0;
+                            opacity:0;                            
                         }
                     }
                     &.title{

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'Blog')
 @section('content')
 <div class="blog-showcase">
     <p>Home blog</p>

@@ -32,6 +32,10 @@ body{
                 color: $color2;
                 font-weight: bold;
                 }
+                &.active{
+                    background-color: $color2;
+                    color: #fff;
+                }
             }
         }
         .left-column-container{
@@ -251,6 +255,11 @@ body{
 @media screen and (max-width:600px){
    body {
        #app{
+           nav{
+               #brand{
+                   font-size: 1rem;
+               }
+           }
            .posts-container{
             height: auto;
            }

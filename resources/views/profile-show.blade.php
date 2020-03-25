@@ -1,4 +1,7 @@
 @extends('layouts/app')
+
+@section('title', 'Profile')
+
 @section('content')
 
 <div class="container row mt-3 mb-5 mx-auto bg-light p-md-4">

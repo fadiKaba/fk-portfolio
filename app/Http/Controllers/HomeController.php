@@ -26,7 +26,8 @@ class HomeController extends Controller
     public function index()
     {   
         $posts = Post::orderBy('created_at','desc')->with('user')->paginate(6);
-        return view('home')->with(compact('posts'));
+        $page = 'blog';
+        return view('home')->with(compact('posts', 'page'));
     }
     public function search(Request $request){
 
@@ -39,6 +40,7 @@ class HomeController extends Controller
      return view('home')->with(compact('posts'));
     }
     public function about(){
-        return view('about');
+        $page = 'about';
+        return view('about')->with('page', 'about');
     }
 }
