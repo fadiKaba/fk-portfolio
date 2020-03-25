@@ -71,17 +71,22 @@ export default {
           messages:[],
           newMsg:'',
           senr:this.sender,
-          err:''
+          err:'',
+          token: $('meta[name="csrf-token"]').attr('content'),
          }
     },
-    mounted: function(){      
+    mounted: function(){     
         if(this.auth != null){
             window.Echo = new Echo({
         broadcaster: 'pusher',
         key: 'efced963ebdfef1133e1',
         cluster: 'eu',
         encrypted: true,
-        authEndpoint: '/broadcasting/auth'
+        authEndpoint: '/broadcasting/auth',
+        headers: {
+            'X-CSRF-Token': this.token,
+            Authorization: `Bearer ${this.token}`
+            }
         });
         window.Echo.private('green.'+this.auth.id)        
             .listen('MessengerEvent', (e)=>{

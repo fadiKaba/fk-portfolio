@@ -2707,7 +2707,8 @@ window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/d
       messages: [],
       newMsg: '',
       senr: this.sender,
-      err: ''
+      err: '',
+      token: $('meta[name="csrf-token"]').attr('content')
     };
   },
   mounted: function mounted() {
@@ -2719,7 +2720,11 @@ window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/d
         key: 'efced963ebdfef1133e1',
         cluster: 'eu',
         encrypted: true,
-        authEndpoint: '/broadcasting/auth'
+        authEndpoint: '/broadcasting/auth',
+        headers: {
+          'X-CSRF-Token': this.token,
+          Authorization: "Bearer ".concat(this.token)
+        }
       });
       window.Echo["private"]('green.' + this.auth.id).listen('MessengerEvent', function (e) {
         if (_this.fullData.length > 0) {
@@ -81772,9 +81777,9 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\coding\projects\porto-deploy\fk-portfolio\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\coding\projects\porto-deploy\fk-portfolio\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\coding\projects\porto-deploy\fk-portfolio\resources\sass\admin.scss */"./resources/sass/admin.scss");
+__webpack_require__(/*! D:\projects\fk-portfolio\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! D:\projects\fk-portfolio\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! D:\projects\fk-portfolio\resources\sass\admin.scss */"./resources/sass/admin.scss");
 
 
 /***/ })

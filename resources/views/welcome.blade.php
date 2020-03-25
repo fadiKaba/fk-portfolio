@@ -25,14 +25,14 @@
                     <img src="./wallpapers/bg_1.jpg" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>Be a part of our comunity</h5>
-                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                        <p>Join us to make the world a better world and life a better life</p>
                     </div>                  
                   </div>
                   <div class="carousel-item">
                     <img src="./wallpapers/bg_2.jpg" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>Be a part of our comunity</h5>
-                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                        <p>Join us to make the world a better world and life a better life</p>
                     </div>
                   </div>
                 </div>
@@ -46,10 +46,9 @@
                             <div class="col-md-3 text-center mb-md-2"><img src="./ico/logo.png" alt="logo" width="100px"></div>
                             <div class="col-md-9"><h1 class="text-center text-md-left mt-3 mt-md-0">Better Life</h1></div>
                         </div>                       
-                        <p class="pb-3">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem praesentium reiciendis iure rerum suscipit 
-                            maxime velit perspiciatis maiores magnam ullam ut odio, deserunt dicta culpa, cumque consequuntur, atque 
-                        </p>                       
+                        <p class="pb-3 p-md-4">
+                            Nature is the best teacher. Nature teaches us through its universal laws. All what we are longing to achieve on 
+                            our planet earth is related to the Nature. Let us be friends of the Nature. Go Green, green and green.
                     </div>
                     <div class="col-md-6 col2">
                         <img src="./wallpapers/tm.jpg" alt="" width="100%">
@@ -57,24 +56,24 @@
                 </div>
             </div>
             <div class="fruits-container py-md-5">
-                <h4>Awsome Food</h4>
-                <p class="text-center text-muted font-weight-bold">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quia, provident?</p>
+                <h4>Healthy Foods </h4>
+                <p class="text-center text-muted font-weight-bold">All vitamins exist in fruits and vegetables.</p>
                 <div class="row m-4 mb-5 px-md-5 justify-content-center fruits-inner-container">
                     <div class="col-md-2 mx-md-3">
                         <img src="/wallpapers/product-1.jpg" alt="" width="100%">
-                        <p>For Vitamin C</p>
-                    </div>
-                    <div class="col-md-2 mx-md-3">
-                        <img src="/wallpapers/product-5.jpg" alt="" width="100%">
-                        <p>For Vitamin D</p>
-                    </div>
-                    <div class="col-md-2 mx-md-3">
-                        <img src="/wallpapers/product-10.jpg" alt="" width="100%">
                         <p>Vitamin C</p>
                     </div>
                     <div class="col-md-2 mx-md-3">
+                        <img src="/wallpapers/product-5.jpg" alt="" width="100%">
+                        <p> Vitamin D</p>
+                    </div>
+                    <div class="col-md-2 mx-md-3">
+                        <img src="/wallpapers/product-10.jpg" alt="" width="100%">
+                        <p>Vitamin D</p>
+                    </div>
+                    <div class="col-md-2 mx-md-3">
                         <img src="/wallpapers/product-12.jpg" alt="" width="100%">
-                        <p>So hot</p>
+                        <p>Vitamin C + A + antibiotics</p>
                     </div>
                 </div>
             </div>
@@ -82,10 +81,15 @@
                 <div class="row container-fluid">
                     <div class="col-md-6"></div>
                     <div class="col-md-6 pt-md-5">
-                        <span>Start your day</span>
-                        <p class="adv-title">Advice of the day</p>
-                        <p class="adv">Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
-                        Aliquid nemo et quidem quis laudantium odit autem a doloremque nihil possimus.
+                        <span>Start your day with </span>
+                        <p class="adv-title">a good thought </p>
+                        <p class="adv">You are what you eat. Take care of what you eat
+                             because you are taking care of your health.
+
+                             Thenafter your health will take care of your body and mind.
+
+                             Living healthy is enjoying life at the full. 
+
                         </p>
                     </div>
                 </div>

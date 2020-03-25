@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('BROADCAST_DRIVER', 'null'),
+    'default' => 'pusher',
 
     /*
     |--------------------------------------------------------------------------
@@ -37,7 +37,7 @@ return [
             'app_id' => '967900',
             'options' => [
                 'cluster' => 'eu',
-               // 'useTLS' => true,
+                 'useTLS' => true,
             ],
         ],
 
