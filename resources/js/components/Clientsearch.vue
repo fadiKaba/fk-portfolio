@@ -16,8 +16,13 @@
                 class="list-group-item py-2 border-0" 
                 v-for="result in results" 
                 :key="'r'+result.id" 
-                @click="sendSearch(result)">
-                   <a :href="'/profile/'+ result.id">{{result.name}} <span class="text-dark"> {{result.email}}</span></a> 
+                >
+                   <a :href="'/profile/'+ result.id">
+                   <img class="rounded-circle" v-if="result.src != null && result.src != ''" :src="'/photos/' + result.src" alt="profile photo" width="25px">
+                   <img class="rounded-circle" v-else src="/wallpapers/default-user.png" alt="profile photo" width="25px">
+                   <span> {{result.name}} </span>
+                   <span class="text-dark" v-if="result.hide_email != '1'">{{result.email}}</span></a> 
+                   | <button class="btn" @click="sendSearch(result)">Open conversation</button>
                 </li>
             </ul>
         </div>
@@ -49,7 +54,9 @@ export default {
             
         },
         sendSearch: function(sender){
-        this.$emit('searchsender', sender)
+        this.$emit('newconversation', sender);
+        this.val= '';
+        this.results = '';
         }
     }
 }
@@ -67,6 +74,13 @@ export default {
           cursor: pointer;
         &:hover{
             background-color: #f4f4f4;
+        }
+        button{
+            color:#82AE46;
+            &:hover{
+                background-color: #82AE46;
+                color:#f4f4f4;
+            }
         }       
       }
     } 

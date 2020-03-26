@@ -106,13 +106,13 @@
         <div class="modal-body">
             <div class="row">
                 <div class="col-12">
-                    <Clientsearch>{{ csrf_field() }}</Clientsearch>
+                    <Clientsearch v-on:newconversation="newconversation">{{ csrf_field() }}</Clientsearch>
                 </div>
                 <div class="col-md-9">
                     <Messanger :clear="clearm" v-on:newmessage="newmessage" :sender="userSender" :auth="{{json_encode(Auth::user())}}"></Messanger>
                 </div>
                 <div class="col-md-3 border-left">
-                    <Contacts :sender-new="senderNew" v-on:clearmessenger="clearmessenger" v-on:newmessage="newmessage" v-on:snedsender="sendSenderAgain" :auth="{{json_encode(Auth::user())}}"></Contacts>
+                    <Contacts :open-conversation="conversationWith" :sender-new="senderNew" v-on:clearmessenger="clearmessenger" v-on:newmessage="newmessage" v-on:snedsender="sendSenderAgain" :auth="{{json_encode(Auth::user())}}"></Contacts>
                 </div>
             </div>           
         </div>

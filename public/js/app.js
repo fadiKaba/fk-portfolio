@@ -1936,6 +1936,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Clientsearch',
@@ -1958,7 +1963,9 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     sendSearch: function sendSearch(sender) {
-      this.$emit('searchsender', sender);
+      this.$emit('newconversation', sender);
+      this.val = '';
+      this.results = '';
     }
   }
 });
@@ -2140,7 +2147,7 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     Profilephoto: _Profilephoto__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
-  props: ['auth', 'senderFromApp', 'small', 'senderNew'],
+  props: ['auth', 'senderFromApp', 'small', 'senderNew', 'openConversation'],
   data: function data() {
     return {
       fullData: [],
@@ -2194,7 +2201,10 @@ __webpack_require__.r(__webpack_exports__);
       document.querySelectorAll('.contact').forEach(function (item) {
         return item.setAttribute('style', 'background-color: #fff; color: #000;');
       });
-      document.querySelector("#".concat(id)).setAttribute('style', 'background-color: #82AE46; color: #fff;');
+
+      if (document.querySelector("#".concat(id)) != null) {
+        document.querySelector("#".concat(id)).setAttribute('style', 'background-color: #82AE46; color: #fff;');
+      }
     },
     deleteContact: function deleteContact(senderId, name) {
       var _this2 = this;
@@ -2218,14 +2228,25 @@ __webpack_require__.r(__webpack_exports__);
     senderNew: function senderNew(newVal, oldVal) {
       var _this3 = this;
 
-      if (newVal != true) {
-        if (this.contacts.find(function (x) {
-          return x.id == newVal;
-        }) == undefined) {
-          axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/messages/getsender/".concat(newVal)).then(function (response) {
-            _this3.contacts.push(response.data);
-          });
-        }
+      if (this.contacts.find(function (x) {
+        return x.id == newVal;
+      }) == undefined) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/messages/getsender/".concat(newVal)).then(function (response) {
+          var contact = response.data;
+          contact.nouvau = true;
+
+          _this3.contacts.push(contact);
+        });
+      }
+    },
+    openConversation: function openConversation(newVal, oldVal) {
+      if (this.contacts.find(function (x) {
+        return x.id == newVal.id;
+      }) == undefined) {
+        this.contacts.push(newVal);
+        this.sendSender(newVal, 'co' + newVal.id);
+      } else {
+        this.sendSender(newVal, 'co' + newVal.id);
       }
     }
   }
@@ -9477,7 +9498,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".main-search-container .search-result-container ul.list-group[data-v-2fe890c4] {\n  position: absolute;\n  z-index: 2;\n  max-height: 30vh;\n  overflow-y: scroll;\n  scrollbar-width: thin;\n}\n.main-search-container .search-result-container ul.list-group li[data-v-2fe890c4] {\n  cursor: pointer;\n}\n.main-search-container .search-result-container ul.list-group li[data-v-2fe890c4]:hover {\n  background-color: #f4f4f4;\n}", ""]);
+exports.push([module.i, ".main-search-container .search-result-container ul.list-group[data-v-2fe890c4] {\n  position: absolute;\n  z-index: 2;\n  max-height: 30vh;\n  overflow-y: scroll;\n  scrollbar-width: thin;\n}\n.main-search-container .search-result-container ul.list-group li[data-v-2fe890c4] {\n  cursor: pointer;\n}\n.main-search-container .search-result-container ul.list-group li[data-v-2fe890c4]:hover {\n  background-color: #f4f4f4;\n}\n.main-search-container .search-result-container ul.list-group li button[data-v-2fe890c4] {\n  color: #82AE46;\n}\n.main-search-container .search-result-container ul.list-group li button[data-v-2fe890c4]:hover {\n  background-color: #82AE46;\n  color: #f4f4f4;\n}", ""]);
 
 // exports
 
@@ -67066,20 +67087,49 @@ var render = function() {
                 "li",
                 {
                   key: "r" + result.id,
-                  staticClass: "list-group-item py-2 border-0",
-                  on: {
-                    click: function($event) {
-                      return _vm.sendSearch(result)
-                    }
-                  }
+                  staticClass: "list-group-item py-2 border-0"
                 },
                 [
                   _c("a", { attrs: { href: "/profile/" + result.id } }, [
-                    _vm._v(_vm._s(result.name) + " "),
-                    _c("span", { staticClass: "text-dark" }, [
-                      _vm._v(" " + _vm._s(result.email))
-                    ])
-                  ])
+                    result.src != null && result.src != ""
+                      ? _c("img", {
+                          staticClass: "rounded-circle",
+                          attrs: {
+                            src: "/photos/" + result.src,
+                            alt: "profile photo",
+                            width: "25px"
+                          }
+                        })
+                      : _c("img", {
+                          staticClass: "rounded-circle",
+                          attrs: {
+                            src: "/wallpapers/default-user.png",
+                            alt: "profile photo",
+                            width: "25px"
+                          }
+                        }),
+                    _vm._v(" "),
+                    _c("span", [_vm._v(" " + _vm._s(result.name) + " ")]),
+                    _vm._v(" "),
+                    result.hide_email != "1"
+                      ? _c("span", { staticClass: "text-dark" }, [
+                          _vm._v(_vm._s(result.email))
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" \n               | "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn",
+                      on: {
+                        click: function($event) {
+                          return _vm.sendSearch(result)
+                        }
+                      }
+                    },
+                    [_vm._v("Open conversation")]
+                  )
                 ]
               )
             }),
@@ -68158,7 +68208,7 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _vm.messages.length > 0
+    _vm.senr != ""
       ? _c("div", { staticClass: "messenger-input" }, [
           _c("div", { staticClass: "input-group mb-3" }, [
             _c("input", {
@@ -80736,7 +80786,8 @@ var app = new Vue({
       userSender: '',
       newMsg: false,
       clearm: '',
-      senderNew: ''
+      senderNew: '',
+      conversationWith: ''
     };
   },
   mounted: function mounted() {
@@ -80777,6 +80828,9 @@ var app = new Vue({
     },
     clearmessenger: function clearmessenger(val) {
       this.clearm = val;
+    },
+    newconversation: function newconversation(val) {
+      this.conversationWith = val;
     }
   }
 });
@@ -81794,9 +81848,9 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\projects\fk-portfolio\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! D:\projects\fk-portfolio\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! D:\projects\fk-portfolio\resources\sass\admin.scss */"./resources/sass/admin.scss");
+__webpack_require__(/*! C:\coding\projects\porto-deploy\fk-portfolio\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\coding\projects\porto-deploy\fk-portfolio\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\coding\projects\porto-deploy\fk-portfolio\resources\sass\admin.scss */"./resources/sass/admin.scss");
 
 
 /***/ })

@@ -31,7 +31,7 @@ import Profilephoto from './Profilephoto';
 export default {
     name:'Contacts',
     components:{Profilephoto},
-    props:['auth','senderFromApp','small', 'senderNew'],
+    props:['auth','senderFromApp','small', 'senderNew', 'openConversation'],
     data: function(){
         return{
         fullData:[],
@@ -73,8 +73,10 @@ export default {
         sendSender: function(sender, id){
             this.$emit('snedsender', sender);
             axios.post(`/message/makeread/${sender.id}`);
-            document.querySelectorAll('.contact').forEach(item => item.setAttribute('style', 'background-color: #fff; color: #000;'));
+           document.querySelectorAll('.contact').forEach(item => item.setAttribute('style', 'background-color: #fff; color: #000;'));
+        if(document.querySelector(`#${id}`) != null){
             document.querySelector(`#${id}`).setAttribute('style', 'background-color: #82AE46; color: #fff;');
+        }           
         },
         deleteContact: function(senderId, name){
             let confirmDelete = confirm('Are you sure to delete your conversation with '+ name);
@@ -93,19 +95,24 @@ export default {
     },
     watch:{
         senderNew: function(newVal, oldVal){
-            if(newVal != true){
-
                 if(this.contacts.find( x => x.id == newVal) == undefined){
                         axios.post(`/messages/getsender/${newVal}`)
-                        .then((response)=> {                   
-                            this.contacts.push(response.data);
+                        .then((response)=> {  
+                            let contact = response.data;
+                            contact.nouvau = true;
+                            this.contacts.push(contact);
                         })
 
-                    }
-
-                
-            }
+                    }               
             
+        },
+        openConversation: function(newVal, oldVal){
+           if(this.contacts.find( x => x.id == newVal.id) == undefined){               
+               this.contacts.push(newVal);
+               this.sendSender(newVal,'co'+ newVal.id)
+           }else{
+               this.sendSender(newVal, 'co' + newVal.id)
+           }
         }
     }
 }

@@ -34,6 +34,7 @@ const app = new Vue({
            newMsg:false,
            clearm:'',
            senderNew:'',
+           conversationWith:'',
          }
     },
     mounted: function(){
@@ -74,6 +75,9 @@ const app = new Vue({
         },
         clearmessenger: function (val){
          this.clearm = val;
+        },
+        newconversation: function(val){
+          this.conversationWith = val;
         }
     },
     

@@ -24,7 +24,7 @@
             </li>
             </ul>
         </div>
-        <div class="messenger-input" v-if="messages.length > 0">
+        <div class="messenger-input" v-if="senr != ''">
             <div class="input-group mb-3">
                 <input type="text" 
                 class="form-control rounded-0" 

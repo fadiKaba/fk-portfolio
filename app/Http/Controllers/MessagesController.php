@@ -48,7 +48,8 @@ class MessagesController extends Controller
 
     public function clientSearch($val){
         $authId = Auth::id();
-        $users = User::where('email', 'LIKE', "%$val%")->where('id', '!=', $authId)->get();
+        $users = User::where('email', 'LIKE', "%$val%")->where('id', '!=', $authId)->where('hide_email', '!=', '1')
+        ->orWhere('name', 'Like', "%$val%")->get();
         return json_encode($users);
        }
 
